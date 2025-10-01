@@ -20,14 +20,13 @@ While this POC focuses on the `java.util.Properties` API, here's a comparison of
 | Properties | ⭐⭐ | ❌ | ❌ | ✅ | ❌ | ✅ Native | Simple configs, legacy apps |
 | XML | ⭐⭐ | ❌ | ✅ | ✅ | ✅ | ✅ Native | Enterprise, Maven, validation |
 | JSON | ⭐⭐⭐ | ❌ | ✅ | ❌ | ✅ (JSON Schema) | ❌ Requires library | APIs, modern apps, web services |
-| YAML | ⭐⭐⭐⭐ | ❌ | ✅ | ✅ | ❌ | ❌ Requires library | Spring Boot, Kubernetes, complex configs |
+| YAML | ⭐⭐⭐⭐ | ❌ | ✅ | ✅ | ✅ (JSON Schema, Yamale) | ❌ Requires library | Spring Boot, Kubernetes, complex configs |
 | TOML | ⭐⭐⭐⭐ | ❌ | ✅ | ✅ | ❌ | ❌ Requires library | Rust-style projects, clear configs |
 | HOCON | ⭐⭐⭐ | ❌ | ✅ | ✅ | ❌ | ❌ Requires library | Akka, Play Framework, Lightbend apps |
 | Environment Variables | ⭐⭐ | ❌ | ❌ | ❌ | ❌ | ❌ System.getenv() | Docker, Cloud-native, 12-factor apps |
 | Java Records | ⭐⭐⭐ | ✅ | ✅ | ❌ | ✅ (compile-time) | ❌ Code-based | Type-safe configs, modern Java |
 | Preferences API | ⭐⭐ | ❌ | ✅ | ❌ | ❌ | ❌ java.util.prefs | User/system preferences, GUI apps |
-| INI | ⭐⭐⭐ | ❌ | ⭐ (sections) | ✅ | ❌ | ❌ Requires library | Windows apps, simple sections |
-
+| INI | ⭐⭐⭐ | ❌ | ✅ | ✅ | ❌ | ❌ Requires library | Windows apps, simple sections |
 **Legend:**
 - ⭐ = Star rating (more stars = better)
 - ✅ = Supported/Available
