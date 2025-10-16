@@ -218,6 +218,6 @@ public class Main {
         personCountField.setAccessible(true); // Bypass private access
         System.out.println("Before modification: " + Person.getPersonCount());
         personCountField.set(null, 100); // Static field, so instance is null
-        System.out.println("After modification via " + modifiers + " static field 'personCount': " + Person.getPersonCount());
+        System.out.println("After modification via " + modifiers + " field 'personCount': " + Person.getPersonCount());
     }
 }

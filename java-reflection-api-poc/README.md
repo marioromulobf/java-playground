@@ -23,7 +23,7 @@ mvn exec:java
 
 Or run directly:
 ```bash
-java -cp target/classes com.mariofernandes.javapocs.Main
+java -cp target/classes com.mariofernandes.javapoc.reflection.Main
 ```
 
 ### What it demonstrates
