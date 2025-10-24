@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== Java Functional Interfaces POC ===\n");
         System.out.println("  1. Predicate<T>");
+        PredicateExamples.basic();
         System.out.println("  2. Function<T, R>");
         System.out.println("  3. Consumer<T>");
         System.out.println("  4. Supplier<T>");
