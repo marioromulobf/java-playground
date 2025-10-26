@@ -83,4 +83,16 @@ public class PredicateExamples {
         System.out.println("complexDoublePredicate.test(-1.0) = " + complexDoublePredicate.test(-1.0));
         System.out.println(" --- --- - --- --- ");
     }
+
+    public static void biPredicate() {
+        System.out.println(" --- BiPredicate Example --- ");
+
+        System.out.println(" --- --- - --- --- ");
+    }
+
+    public static void whyDoNotWe() {
+        System.out.println(" --- Suggestions --- ");
+
+        System.out.println(" --- --- - --- --- ");
+    }
 }
