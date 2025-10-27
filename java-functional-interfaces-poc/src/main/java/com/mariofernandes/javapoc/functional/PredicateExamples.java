@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.function.BiPredicate;
 import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;
 import java.util.function.LongPredicate;
@@ -86,7 +87,16 @@ public class PredicateExamples {
 
     public static void biPredicate() {
         System.out.println(" --- BiPredicate Example --- ");
-
+        BiPredicate<String, Integer> isLongerThan = (s, len) -> s.length() > len;
+        BiPredicate<Integer, Integer> isMultipleOf = (num, factor) -> num % factor == 0;
+        BiPredicate<Integer, Integer> isInRange = (num, range) -> num >= 0 && num <= range;
+        BiPredicate<String, String> startsWith = (s, prefix) -> s.startsWith(prefix);
+        BiPredicate<String, String> endsWith = (s, suffix) -> s.endsWith(suffix);
+        BiPredicate<String, String> contains = (s, sub) -> s.contains(sub);
+        BiPredicate<String, String> equalsIgnoreCase = (s1, s2) -> s1.equalsIgnoreCase(s2);
+        BiPredicate<String, String> equals = String::equals;
+        BiPredicate<String, String> complexStringBiPredicate = equals.negate().and(startsWith).and(endsWith).or(contains);
+        complexStringBiPredicate.test("a", "a");
         System.out.println(" --- --- - --- --- ");
     }
 
