@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.DoublePredicate;
 import java.util.function.IntPredicate;
@@ -87,22 +88,47 @@ public class PredicateExamples {
 
     public static void biPredicate() {
         System.out.println(" --- BiPredicate Example --- ");
-        BiPredicate<String, Integer> isLongerThan = (s, len) -> s.length() > len;
-        BiPredicate<Integer, Integer> isMultipleOf = (num, factor) -> num % factor == 0;
-        BiPredicate<Integer, Integer> isInRange = (num, range) -> num >= 0 && num <= range;
-        BiPredicate<String, String> startsWith = (s, prefix) -> s.startsWith(prefix);
-        BiPredicate<String, String> endsWith = (s, suffix) -> s.endsWith(suffix);
-        BiPredicate<String, String> contains = (s, sub) -> s.contains(sub);
-        BiPredicate<String, String> equalsIgnoreCase = (s1, s2) -> s1.equalsIgnoreCase(s2);
-        BiPredicate<String, String> equals = String::equals;
-        BiPredicate<String, String> complexStringBiPredicate = equals.negate().and(startsWith).and(endsWith).or(contains);
-        complexStringBiPredicate.test("a", "a");
+        BiPredicate<String, String> startsWith = String::startsWith;
+        BiPredicate<String, String> endsWith = String::endsWith;
+        BiPredicate<String, String> contains = String::contains;
+        BiPredicate<String, String> equalsIgnoreCase = String::equalsIgnoreCase;
+        BiPredicate<String, String> complexStringBiPredicate = equalsIgnoreCase.negate().and(contains).or(startsWith).and(endsWith);
+        System.out.println("complexStringBiPredicate = equalsIgnoreCase.negate().and(contains).or(statsWith).and(endsWith)");
+        System.out.println("complexStringBiPredicate.test(\"aba\", \"ba\") = " + complexStringBiPredicate.test("aba", "ba"));
+        System.out.println("complexStringBiPredicate.test(\"aA\", \"aA\") = " + complexStringBiPredicate.test("aA", "aA"));
+        System.out.println("complexStringBiPredicate.test(\"ba\", \"aba\") = " + complexStringBiPredicate.test("ba", "aba"));
         System.out.println(" --- --- - --- --- ");
     }
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        List<Person> people = List.of(
+                new Person("Mario", 30, "Brazil"),
+                new Person("Anne", 25, "USA"),
+                new Person("Joao", 15, "Brazil"),
+                new Person("Maria", 70, "Portugal")
+        );
+        Predicate<Person> isAdult = p -> p.getAge() >= 18;
+        Predicate<Person> isFromBrazil = p -> p.getCountry().equalsIgnoreCase("Brazil");
+        Predicate<Person> nameStartsWithM = p -> p.getName().startsWith("M");
 
+        System.out.println("People:");
+        people.forEach(System.out::println);
+
+        List<Person> adultsFromBrazilNameStartsWithM = people.stream()
+                .filter(isAdult.and(isFromBrazil).and(nameStartsWithM))
+                .toList();
+        System.out.println("Adults from Brazil with names starting with 'M': " + adultsFromBrazilNameStartsWithM);
+
+        BiPredicate<Person, String> isFromCountry = (p, country) -> p.getCountry().equalsIgnoreCase(country);
+        BiPredicate<Person, String> nameStartsWith = (p, prefix) -> p.getName().startsWith(prefix);
+        BiPredicate<Person, Integer> isOlderThan = (p, age) -> p.getAge() > age;
+        List<Person> suggestedPeople = people.stream()
+                .filter(p -> isFromCountry.negate().test(p, "Brazil") &&
+                        nameStartsWith.test(p, "M") &&
+                        isOlderThan.test(p, 20))
+                .toList();
+        System.out.println("Suggested People (not from Brazil, name starts with 'M', older than 20): " + suggestedPeople);
         System.out.println(" --- --- - --- --- ");
     }
 }
