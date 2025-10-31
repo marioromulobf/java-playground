@@ -8,11 +8,13 @@ public class Main {
         PredicateExamples.basic();
         PredicateExamples.biPredicate();
         PredicateExamples.whyDoNotWe();
-        System.out.println("  2. Function<T, R>");
+
+        System.out.println("\n  2. Function<T, R>");
         FunctionExamples.basic();
         FunctionExamples.biFunction();
         FunctionExamples.whyDoNotWe();
-        System.out.println("  3. Consumer<T>");
+
+        System.out.println("\n  3. Consumer<T>");
         System.out.println("  4. Supplier<T>");
         System.out.println("  5. BiFunction<T, U, R>");
         System.out.println("  6. UnaryOperator<T>");
