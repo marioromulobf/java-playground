@@ -10,6 +10,9 @@ import java.util.function.IntToLongFunction;
 import java.util.function.LongFunction;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 public class FunctionExamples {
 
@@ -22,14 +25,17 @@ public class FunctionExamples {
         IntFunction<String> fromIntToString = value -> "Integer value: " + value;
         IntToLongFunction fromIntToLong = Long::valueOf;
         IntToDoubleFunction fromIntToDouble = Double::valueOf;
+        ToIntFunction<String> parseInt = Integer::parseInt;
 
         LongFunction<String> fromLongToString = value -> "Long value: " + value;
         LongToIntFunction halfLongToIntOrThrow = value -> Math.toIntExact(value / 2);
         LongToDoubleFunction fromLongToDouble = Double::valueOf;
+        ToLongFunction<String> parseLong = Long::parseLong;
 
         DoubleFunction<String> fromDoubleToString = value -> "Double value: " + value;
         DoubleToIntFunction halfDoubleToIntOrThrow = value -> Math.toIntExact(Math.round(value / 2));
         DoubleToLongFunction halfDoubleToLong = value -> Math.round(value / 2);
+        ToDoubleFunction<String> parseDouble = Double::parseDouble;
 
         System.out.println("stringLength.apply(\"Mario\") = " + stringLength.apply("Mario"));
         System.out.println("square.apply(10) = " + square.apply(10));
@@ -43,6 +49,9 @@ public class FunctionExamples {
         System.out.println(" ---> IntToDoubleFunction ");
         System.out.println("fromIntToDouble.applyAsDouble(10) = " + fromIntToDouble.applyAsDouble(10));
 
+        System.out.println(" ---> ToIntFunction ");
+        System.out.println("parseInt.applyAsInt(\"10\") = " + parseInt.applyAsInt("10"));
+
         System.out.println(" ---> LongFunction ");
         System.out.println("fromLongToString.apply(10L) = " + fromLongToString.apply(10L));
 
@@ -52,6 +61,9 @@ public class FunctionExamples {
         System.out.println(" ---> LongToDoubleFunction ");
         System.out.println("fromLongToDouble.applyAsDouble(10L) = " + fromLongToDouble.applyAsDouble(10L));
 
+        System.out.println(" ---> ToLongFunction ");
+        System.out.println("parseLong.applyAsLong(\"+10\") = " + parseLong.applyAsLong("+10"));
+
         System.out.println(" ---> DoubleFunction ");
         System.out.println("fromDoubleToString.apply(10.0) = " + fromDoubleToString.apply(10.0));
 
@@ -60,6 +72,9 @@ public class FunctionExamples {
 
         System.out.println(" ---> DoubleToLongFunction ");
         System.out.println("halfDoubleToLong.applyAsLong(10.0) = " + halfDoubleToLong.applyAsLong(10.0));
+
+        System.out.println(" ---> ToDoubleFunction ");
+        System.out.println("parseDouble.applyAsDouble(\"10.0\") = " + parseDouble.applyAsDouble("10.0"));
         System.out.println(" --- --- - --- --- ");
     }
 
