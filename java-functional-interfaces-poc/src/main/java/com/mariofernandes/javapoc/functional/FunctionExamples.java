@@ -21,6 +21,7 @@ public class FunctionExamples {
 
         Function<String, Integer> stringLength = String::length;
         Function<Integer, Integer> square = value -> value * value;
+        Function<Integer, Integer> identity = Function.identity();
 
         IntFunction<String> fromIntToString = value -> "Integer value: " + value;
         IntToLongFunction fromIntToLong = Long::valueOf;
@@ -39,6 +40,9 @@ public class FunctionExamples {
 
         System.out.println("stringLength.apply(\"Mario\") = " + stringLength.apply("Mario"));
         System.out.println("square.apply(10) = " + square.apply(10));
+        System.out.println(" ---> Function andThen|compose|identify ");
+        System.out.println("stringLength.andThen(square).apply(\"andThen\") = " + stringLength.andThen(square).apply("andThen"));
+        System.out.println("square.compose(stringLength).apply(\"compose\") = " + square.compose(stringLength).apply("compose"));
 
         System.out.println(" ---> IntFunction ");
         System.out.println("fromIntToString.apply(10) = " + fromIntToString.apply(10));
