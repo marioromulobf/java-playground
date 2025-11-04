@@ -1,5 +1,9 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.BiFunction;
 import java.util.function.DoubleFunction;
 import java.util.function.DoubleToIntFunction;
 import java.util.function.DoubleToLongFunction;
@@ -10,8 +14,11 @@ import java.util.function.IntToLongFunction;
 import java.util.function.LongFunction;
 import java.util.function.LongToDoubleFunction;
 import java.util.function.LongToIntFunction;
+import java.util.function.ToDoubleBiFunction;
 import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntBiFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongBiFunction;
 import java.util.function.ToLongFunction;
 
 public class FunctionExamples {
@@ -85,11 +92,47 @@ public class FunctionExamples {
 
     public static void biFunction() {
         System.out.println(" --- BiFunction Example --- ");
+        Function<Integer, String> compareWith10 = i -> {
+            if (i > 10) return i + " is grater than 10";
+            if (i < 10) return i + " is smaller than 10";
+            return i + " is equal to 10";
+        };
+
+        BiFunction<Integer, Integer, Integer> sum = Integer::sum;
+        BiFunction<Integer, Integer, String> compareInteger = (a, b) -> {
+            if (a > b) return a + " is greater";
+            if (b > a) return b + " is greater";
+            return a + " and " + b + " are equal";
+        };
+
+        ToIntBiFunction<String, String> sumLength = (a, b) -> a.length() + b.length();
+
+        ToLongBiFunction<String, String> multiplyLengthAndDecrement = (a, b) -> Math.decrementExact(a.length() * b.length());
+
+        ToDoubleBiFunction<String, String> multiplyLengthAndCos = (a, b) -> Math.cos(a.length() * b.length());
+
+        System.out.println("sum.apply(3, 5) = " + sum.apply(3, 5));
+        System.out.println("compareInteger.apply(7, 7) = " + compareInteger.apply(7, 7));
+
+        System.out.println(" ---> BiFunction andThen( Function ) ");
+        System.out.println("sum.andThen(compareWith10).apply(3, 5) = " + sum.andThen(compareWith10).apply(3, 5));
+
+        System.out.println(" ---> ToIntBiFunction ");
+        System.out.println("sumLength.applyAsInt(\"Mario\", \"Romulo\") = " + sumLength.applyAsInt("Mario", "Romulo"));
+
+        System.out.println(" ---> ToLongBiFunction ");
+        System.out.println("multiplayLengthAndDecrement.applyAsLong(\"Mario\", \"Romulo\") = " + multiplyLengthAndDecrement.applyAsLong("Mario", "Romulo"));
+
+        System.out.println(" ---> ToDoubleBiFunction ");
+        System.out.println("multiplyLengthAndCos.applyAsDouble(\"Mario\", \"Romulo\") = " + multiplyLengthAndCos.applyAsDouble("Mario", "Romulo"));
         System.out.println(" --- --- - --- --- ");
     }
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        BiFunction<String, Integer, Function<String, Person>> createFactory = (country, age) -> name -> new Person(name, age, country);
+
+        System.out.println("createFactory.apply(\"Brazil\", 40).apply(\"Mario\")) = " + createFactory.apply("Brazil", 40).apply("Mario"));
         System.out.println(" --- --- - --- --- ");
     }
 }

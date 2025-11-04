@@ -5,6 +5,11 @@ public class Person {
     private int age;
     private String country;
 
+    public Person(String name, String country) {
+        this.name = name;
+        this.country = country;
+    }
+
     public Person(String name, int age, String country) {
         this.name = name;
         this.age = age;
@@ -21,6 +26,10 @@ public class Person {
 
     public String getCountry() {
         return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     @Override
