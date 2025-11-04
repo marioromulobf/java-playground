@@ -15,7 +15,11 @@ public class Main {
         FunctionExamples.whyDoNotWe();
 
         System.out.println("\n  3. Consumer<T>");
-        System.out.println("  4. Supplier<T>");
+        ConsumerExamples.basic();
+        ConsumerExamples.biConsumer();
+        ConsumerExamples.whyDoNotWe();
+
+        System.out.println("\n  4. Supplier<T>");
         System.out.println("  5. BiFunction<T, U, R>");
         System.out.println("  6. UnaryOperator<T>");
         System.out.println("  7. BinaryOperator<T>");
