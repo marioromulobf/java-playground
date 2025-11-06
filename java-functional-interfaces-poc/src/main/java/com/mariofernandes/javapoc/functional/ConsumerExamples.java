@@ -1,9 +1,13 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.function.Consumer;
+
 public class ConsumerExamples {
 
     public static void basic() {
         System.out.println(" --- Basic Consumer --- ");
+        StringBuilder builder = new StringBuilder();
+        Consumer<String> appendToBuilder = s -> builder.append(s).append(" ");
         System.out.println(" --- --- - --- --- ");
     }
 
