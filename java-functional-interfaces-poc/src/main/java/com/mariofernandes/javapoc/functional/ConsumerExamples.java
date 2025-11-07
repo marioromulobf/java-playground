@@ -8,6 +8,16 @@ public class ConsumerExamples {
         System.out.println(" --- Basic Consumer --- ");
         StringBuilder builder = new StringBuilder();
         Consumer<String> appendToBuilder = s -> builder.append(s).append(" ");
+        Consumer<String> print = System.out::println;
+
+        System.out.println("appendTobBuilder.accept(\"It's\")");
+        appendToBuilder.accept("It's");
+        System.out.println("appendTobBuilder.accept(\"me\")");
+        appendToBuilder.accept("me");
+        System.out.println("appendTobBuilder.accept(\"Mario\")");
+        appendToBuilder.accept("Mario");
+        System.out.println("print.accept(builder.toString())");
+        print.accept(builder.toString());
         System.out.println(" --- --- - --- --- ");
     }
 
