@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
 
 public class ConsumerExamples {
 
@@ -23,11 +24,14 @@ public class ConsumerExamples {
 
         IntConsumer printIntAsDouble = i -> System.out.printf("Int as Double: %.2f\n", Double.valueOf(i));
         IntConsumer printIfIntIsPositiveOrNegative = i -> {
-          if (i > 0) {
-              System.out.println(i + " is Positive");
-              return;
-          }
-          if (i < 0) System.out.println(i + " is Negative");
+          if (i > 0) System.out.println(i + " is Positive");
+          else if (i < 0) System.out.println(i + " is Negative");
+        };
+
+        LongConsumer printLongAsDouble = l -> System.out.printf("Long as Double: %.2f\n", Double.valueOf(l));
+        LongConsumer printIfLongIsPositiveOrNegative = l -> {
+            if (l > 0) System.out.println(l + " is Positive");
+            else if (l < 0) System.out.println(l + " is Negative");
         };
 
         System.out.print("printInteger.accept(13) -> ");
@@ -42,16 +46,24 @@ public class ConsumerExamples {
         System.out.print("print.accept(builder.toString()) -> ");
         print.accept(builder.toString());
 
-        System.out.println(" ---> Consumer andThen ");
+        System.out.println(" ---> Consumer Combining andThen ");
         System.out.println("printOriginal.andThen(sort).andThen(printSorted).andThen(reverse).andThen(printReversed).accept(Arrays.asList(5, 2, 8, 1, 9)):");
         printOriginal.andThen(sort).andThen(printSorted).andThen(reverse).andThen(printReversed).accept(Arrays.asList(5, 2, 8, 1, 9));
 
         System.out.println(" ---> IntConsumer ");
         System.out.print("printIntAsDouble.accept(10) -> ");
         printIntAsDouble.accept(10);
+        System.out.println(" ---> IntConsumer Combining andThen ");
         System.out.println("printIntAsDouble.andThen(printIfIntIsPositiveOrNegative).accept(-10) -> ");
         printIntAsDouble.andThen(printIfIntIsPositiveOrNegative).accept(-10);
+
         System.out.println(" ---> LongConsumer ");
+        System.out.print("printLongAsDouble.accept(666L) -> ");
+        printLongAsDouble.accept(666L);
+        System.out.println(" ---> LongConsumer Combining andThen ");
+        System.out.println("printLongAsDouble.andThen(printIfLongIsPositiveOrNegative).accept(1000L) -> ");
+        printLongAsDouble.andThen(printIfLongIsPositiveOrNegative).accept(1000L);
+
         System.out.println(" ---> DoubleConsumer ");
         System.out.println(" --- --- - --- --- ");
     }
