@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 
@@ -32,6 +33,12 @@ public class ConsumerExamples {
         LongConsumer printIfLongIsPositiveOrNegative = l -> {
             if (l > 0) System.out.println(l + " is Positive");
             else if (l < 0) System.out.println(l + " is Negative");
+        };
+
+        DoubleConsumer printDouble = d -> System.out.println("Double value: " + d);
+        DoubleConsumer printIfDoubleIsPositiveOrNegative = d -> {
+            if (d > 0) System.out.println(d + " is Positive");
+            else if (d < 0) System.out.println(d + " is Negative");
         };
 
         System.out.print("printInteger.accept(13) -> ");
@@ -65,6 +72,11 @@ public class ConsumerExamples {
         printLongAsDouble.andThen(printIfLongIsPositiveOrNegative).accept(1000L);
 
         System.out.println(" ---> DoubleConsumer ");
+        System.out.println("printDouble.accept(Math.PI) -> ");
+        printDouble.accept(Math.PI);
+        System.out.println(" ---> DoubleConsumer Combining andThen ");
+        System.out.println("printDouble.andThen(printIfDoubleIsPositiveOrNegative).accept(-Math.PI) -> ");
+        printDouble.andThen(printIfDoubleIsPositiveOrNegative).accept(-Math.PI);
         System.out.println(" --- --- - --- --- ");
     }
 
