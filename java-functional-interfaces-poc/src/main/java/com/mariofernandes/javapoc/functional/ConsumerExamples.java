@@ -3,6 +3,7 @@ package com.mariofernandes.javapoc.functional;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
@@ -82,6 +83,8 @@ public class ConsumerExamples {
 
     public static void biConsumer() {
         System.out.println(" --- BiConsumer Example --- ");
+        BiConsumer<String, Integer> printNameAndAge = (name, age) -> System.out.println("Name: " + name + ", Age: " + age);
+        printNameAndAge.accept("Mario", 30);
         System.out.println(" --- --- - --- --- ");
     }
 
