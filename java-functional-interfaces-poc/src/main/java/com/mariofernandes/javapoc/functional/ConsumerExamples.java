@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
+import java.util.function.ObjDoubleConsumer;
 
 public class ConsumerExamples {
 
@@ -85,6 +86,9 @@ public class ConsumerExamples {
         System.out.println(" --- BiConsumer Example --- ");
         BiConsumer<String, Integer> printNameAndAge = (name, age) -> System.out.println("Name: " + name + ", Age: " + age);
         printNameAndAge.accept("Mario", 30);
+
+        ObjDoubleConsumer<String> printNameAndSalary = (name, salary) -> System.out.println("Name: " + name + ", Salary: " + salary);
+        printNameAndSalary.accept("Luigi", 55000.50);
         System.out.println(" --- --- - --- --- ");
     }
 
