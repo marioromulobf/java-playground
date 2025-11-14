@@ -10,6 +10,7 @@ import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.ObjLongConsumer;
 
 public class ConsumerExamples {
 
@@ -87,6 +88,7 @@ public class ConsumerExamples {
         System.out.println(" --- BiConsumer Example --- ");
         BiConsumer<String, Integer> printNameAndAge = (name, age) -> System.out.println("Name: " + name + ", Age: " + age);
         ObjIntConsumer<String> printNameAndYearsOfExperience = (name, years) -> System.out.println("Name: " + name + ", Years of Experience: " + years);
+        ObjLongConsumer<String> printNameAndId = (name, id) -> System.out.println("Name: " + name + ", ID: " + id);
         ObjDoubleConsumer<String> printNameAndSalary = (name, salary) -> System.out.println("Name: " + name + ", Salary: " + salary);
 
         System.out.print("printNameAndAge.accept(\"Mario\", 30) -> ");
@@ -95,6 +97,10 @@ public class ConsumerExamples {
         System.out.println(" ---> ObjIntConsumer ");
         System.out.print("printNameAndYearsOfExperience.accept(\"Luigi\", 5) -> ");
         printNameAndYearsOfExperience.accept("Luigi", 5);
+
+        System.out.println(" ---> ObjLongConsumer ");
+        System.out.print("printNameAndId.accept(\"Romulo\", 123456789L) -> ");
+        printNameAndId.accept("Romulo", 123456789L);
 
         System.out.println(" ---> ObjDoubleConsumer ");
         System.out.print("printNameAndSalary.accept(\"Luigi\", 55000.50) -> ");
