@@ -1,8 +1,11 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
@@ -87,12 +90,25 @@ public class ConsumerExamples {
     public static void biConsumer() {
         System.out.println(" --- BiConsumer Example --- ");
         BiConsumer<String, Integer> printNameAndAge = (name, age) -> System.out.println("Name: " + name + ", Age: " + age);
+        BiConsumer<String, Integer> printIsAdult = (name, age) -> {
+            if (age >= 18) {
+                System.out.println(name + " is an Adult.");
+            } else {
+                System.out.println(name + " is a Minor.");
+            }
+        };
         ObjIntConsumer<String> printNameAndYearsOfExperience = (name, years) -> System.out.println("Name: " + name + ", Years of Experience: " + years);
         ObjLongConsumer<String> printNameAndId = (name, id) -> System.out.println("Name: " + name + ", ID: " + id);
         ObjDoubleConsumer<String> printNameAndSalary = (name, salary) -> System.out.println("Name: " + name + ", Salary: " + salary);
 
         System.out.print("printNameAndAge.accept(\"Mario\", 30) -> ");
         printNameAndAge.accept("Mario", 30);
+
+        System.out.println(" ---> BiConsumer Combining andThen ");
+        System.out.println("printNameAndAge.andThen(printIsAdult).accept(\"Maria\", 17) -> ");
+        printNameAndAge.andThen(printIsAdult).accept("Maria", 17);
+        System.out.println("printNameAndAge.andThen(printIsAdult).accept(\"Anna\", 22) -> ");
+        printNameAndAge.andThen(printIsAdult).accept("Anna", 22);
 
         System.out.println(" ---> ObjIntConsumer ");
         System.out.print("printNameAndYearsOfExperience.accept(\"Luigi\", 5) -> ");
@@ -111,6 +127,50 @@ public class ConsumerExamples {
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        Map<String, List<Person>> validations = new HashMap<>();
+        BiConsumer<Person, String> errorLogger = (p, m) -> System.out.printf("[ERROR] %s: %s\n", m, p);
+        Consumer<Person> validatePerson = person -> {
+            if (person.getName() == null || person.getName().isBlank()) {
+                validations.computeIfAbsent("Invalid Name", k -> new ArrayList<>()).add(person);
+                errorLogger.accept(person, "Invalid Name");
+            }
+            if (person.getAge() < 0 || person.getAge() > 130) {
+                validations.computeIfAbsent("Invalid Age", k -> new ArrayList<>()).add(person);
+                errorLogger.accept(person, "Invalid Age");
+            }
+            if (person.getCountry() == null || person.getCountry().isBlank()) {
+                validations.computeIfAbsent("Invalid Country", k -> new ArrayList<>()).add(person);
+                errorLogger.accept(person, "Invalid Country");
+            }
+        };
+        BiConsumer<List<Person>, Map<String, List<Person>>> generateReport = (peopleList, validationPeople) -> {
+            System.out.println("\n === Report === ");
+            System.out.println("Total People Processed: " + peopleList.size());
+            validationPeople.forEach((issue, persons) -> {
+                System.out.printf(" - Total %s People: %s\n", issue, persons.size());
+            });
+            double avgAge = peopleList.stream()
+                    .mapToInt(Person::getAge)
+                    .average()
+                    .orElse(0.0);
+            System.out.printf("\nAverage Age of People: %.2f\n", avgAge);
+            System.out.println(" === End of Report === ");
+        };
+        List<Person> people = List.of(
+                new Person("Mario", 30, "Brazil"),
+                new Person("Anne", 25, "USA"),
+                new Person("Joao", 15, "Brazil"),
+                new Person("Maria", 70, "Portugal"),
+                new Person("", "South Korea"),
+                new Person("Luigi", -33, null),
+                new Person("Maui", 1000, "Hawaii")
+        );
+        System.out.println("People:");
+        people.forEach(System.out::println);
+        System.out.println("\nLog validation People:");
+        people.forEach(validatePerson);
+        generateReport.accept(people, validations);
+
         System.out.println(" --- --- - --- --- ");
     }
 }
