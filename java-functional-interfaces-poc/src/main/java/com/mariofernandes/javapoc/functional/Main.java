@@ -20,6 +20,9 @@ public class Main {
         ConsumerExamples.whyDoNotWe();
 
         System.out.println("\n  4. Supplier<T>");
+        SupplierExamples.basic();
+        SupplierExamples.whyDoNotWe();
+
         System.out.println("  5. BiFunction<T, U, R>");
         System.out.println("  6. UnaryOperator<T>");
         System.out.println("  7. BinaryOperator<T>");
