@@ -43,7 +43,8 @@ public class SupplierExamples {
 
         System.out.println("People:");
         List<Person> people = Stream.generate(personSingleton)
-                        .limit(3)
+                        .parallel()
+                        .limit(10)
                         .toList();
         people.forEach(System.out::println);
 
@@ -72,6 +73,7 @@ public class SupplierExamples {
     static class PersonSingletonSupplier<T> implements Supplier<T> {
         private final Supplier<T> factory;
         private T instance;
+        private static int counter = 0;
 
         public PersonSingletonSupplier(Supplier<T> factory) {
             this.factory = factory;
@@ -83,6 +85,8 @@ public class SupplierExamples {
                 System.out.println("Creating the instance");
                 instance = factory.get();
             }
+            counter++;
+            System.out.println("Instance requested " + counter + " times");
 
             return instance;
         }
