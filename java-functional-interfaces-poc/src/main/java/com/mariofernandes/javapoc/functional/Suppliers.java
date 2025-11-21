@@ -10,7 +10,7 @@ import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public class SupplierExamples {
+public class Suppliers {
     public static void basic() {
         System.out.println(" --- Basic Supplier --- ");
         Supplier<String> stringSupplier = () -> "Hello, My Constant Supplier!";
@@ -35,6 +35,7 @@ public class SupplierExamples {
 
         System.out.println(" ---> BooleanSupplier ");
         System.out.println("todayIsWeekendBooleanSupplier.getAsBoolean() = " + todayIsWeekendBooleanSupplier.getAsBoolean());
+        System.out.println(" --- --- - --- --- ");
     }
 
     public static void whyDoNotWe() {

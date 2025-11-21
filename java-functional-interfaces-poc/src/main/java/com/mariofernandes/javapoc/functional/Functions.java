@@ -18,7 +18,7 @@ import java.util.function.ToIntFunction;
 import java.util.function.ToLongBiFunction;
 import java.util.function.ToLongFunction;
 
-public class FunctionExamples {
+public class Functions {
 
     public static void basic() {
         System.out.println(" --- Basic Function --- ");

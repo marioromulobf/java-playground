@@ -15,7 +15,7 @@ import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
 import java.util.function.ObjLongConsumer;
 
-public class ConsumerExamples {
+public class Consumers {
 
     public static void basic() {
         System.out.println(" --- Basic Consumer --- ");
