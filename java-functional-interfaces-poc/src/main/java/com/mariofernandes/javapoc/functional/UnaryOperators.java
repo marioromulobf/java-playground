@@ -8,10 +8,12 @@ public class UnaryOperators {
         System.out.println(" --- Basic UnaryOperator --- ");
         UnaryOperator<String> toUpperCase = String::toUpperCase;
         UnaryOperator<String> reverseString = s -> new StringBuilder(s).reverse().toString();
+        UnaryOperator<String> toLowerCase = String::toLowerCase;
 
 
         System.out.println("toUpperCase.apply(\"Mario\") = " + toUpperCase.apply("Mario"));
         System.out.println("reverseString.andThen(toUpperCase).apply(\"Mario\") = " + reverseString.andThen(toUpperCase).apply("Mario"));
+        System.out.println("toLowerCase.compose(reverseString.compose(toUpperCase)).apply(\"Mario\") = " + toLowerCase.compose(reverseString.compose(toUpperCase)).apply("Mario"));
 
         System.out.println(" --- --- - --- --- ");
     }
