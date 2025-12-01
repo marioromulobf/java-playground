@@ -40,4 +40,8 @@ public class Person {
                 "country='" + country + '\'' +
                 '}';
     }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
@@ -60,6 +61,23 @@ public class UnaryOperators {
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        UnaryOperator<Person> incrementAge = person -> {
+            person.setAge(person.getAge() + 1);
+            return person;
+        };
+        List<Person> people = List.of(
+                new Person("Mario", 30, "Brazil"),
+                new Person("Anne", 25, "USA"),
+                new Person("Joao", 15, "Brazil"),
+                new Person("Maria", 70, "Portugal"),
+                new Person("Maui", 1000, "Hawaii")
+        );
+        System.out.println("People:");
+        people.forEach(System.out::println);
+        System.out.println("\nIncrement Age:");
+        people.stream()
+                .map(incrementAge)
+                .forEach(person -> System.out.println("After Birthday: " + person));
         System.out.println(" --- --- - --- --- ");
     }
 }
