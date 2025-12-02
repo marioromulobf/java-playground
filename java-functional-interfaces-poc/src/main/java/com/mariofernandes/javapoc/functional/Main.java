@@ -28,7 +28,10 @@ public class Main {
         UnaryOperators.whyDoNotWe();
 
         System.out.println("\n  6. BinaryOperator<T>");
-        System.out.println("  7. Primitive Specializations");
+        BinaryOperators.basic();
+        BinaryOperators.whyDoNotWe();
+
+        System.out.println("\n  7. Primitive Specializations");
         System.out.println("  8. Method References");
         System.out.println("  9. Custom Functional Interfaces");
         System.out.println(" 10. Streams API Integration");
