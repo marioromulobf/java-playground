@@ -1,7 +1,6 @@
 package com.mariofernandes.javapoc.functional;
 
 import java.util.function.BinaryOperator;
-import java.util.function.Function;
 
 public class BinaryOperators {
     public static void basic() {
