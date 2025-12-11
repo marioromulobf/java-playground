@@ -11,8 +11,6 @@ Demonstrates Java Functional Interfaces capabilities:
 
 ### Project Structure
 - **Main.java** - Complete demonstrations of all functional interface types
-- **StringProcessor.java** - Custom functional interface for string operations
-- **Calculator.java** - Custom functional interface for mathematical operations
 
 ### Tech Stack
 * Java 25 (LTS)
@@ -72,15 +70,7 @@ Supplier<String> uuid = () -> UUID.randomUUID().toString();
 Double value = random.get();
 ```
 
-#### 5. BiFunction<T, U, R> - Two Input Transform
-```java
-BiFunction<Integer, Integer, Integer> add = (a, b) -> a + b;
-BiFunction<String, Integer, String> repeat = (s, n) -> s.repeat(n);
-
-int sum = add.apply(5, 3);
-```
-
-#### 6. UnaryOperator<T> - Same Type Transform
+#### 5. UnaryOperator<T> - Same Type Transform
 ```java
 UnaryOperator<Integer> square = n -> n * n;
 UnaryOperator<String> toUpper = String::toUpperCase;
@@ -89,41 +79,13 @@ UnaryOperator<String> toUpper = String::toUpperCase;
 list.replaceAll(String::toUpperCase);
 ```
 
-#### 7. BinaryOperator<T> - Combine Two Same Type
+#### 6. BinaryOperator<T> - Combine Two Same Type
 ```java
 BinaryOperator<Integer> max = Math::max;
 BinaryOperator<String> concat = (s1, s2) -> s1 + s2;
 
 // Use with Stream.reduce()
 int sum = numbers.stream().reduce(0, (a, b) -> a + b);
-```
-
-#### 8. Primitive Specializations
-```java
-// Avoid boxing/unboxing overhead
-IntPredicate isEven = n -> n % 2 == 0;
-IntFunction<String> intToString = i -> "Number: " + i;
-IntConsumer printer = System.out::println;
-IntSupplier random = () -> (int) (Math.random() * 100);
-IntUnaryOperator square = n -> n * n;
-IntBinaryOperator add = (a, b) -> a + b;
-```
-
-#### 9. Method References
-```java
-// Static method
-Function<String, Integer> parseInt = Integer::parseInt;
-
-// Instance method of particular object
-String prefix = "Hello ";
-Function<String, String> addPrefix = prefix::concat;
-
-// Instance method of arbitrary object
-Function<String, String> toUpper = String::toUpperCase;
-
-// Constructor
-Supplier<ArrayList<String>> listSupplier = ArrayList::new;
-BiFunction<String, Integer, Person> personCreator = Person::new;
 ```
 
 #### 10. Custom Functional Interfaces
@@ -145,35 +107,6 @@ public interface StringProcessor {
 StringProcessor pipeline = StringProcessor.trim()
     .andThen(String::toUpperCase);
 String result = pipeline.process("  hello  ");
-```
-
-#### 11. Streams API Integration
-```java
-List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
-
-List<String> result = names.stream()
-    .filter(s -> s.length() > 3)      // Predicate
-    .map(String::toUpperCase)          // Function
-    .collect(Collectors.toList());
-
-names.forEach(System.out::println);    // Consumer
-```
-
-#### 12. Comparators
-```java
-List<Person> people = Arrays.asList(...);
-
-// Sort by age
-people.sort(Comparator.comparing(Person::getAge));
-
-// Sort by age, then name
-people.sort(
-    Comparator.comparing(Person::getAge)
-             .thenComparing(Person::getName)
-);
-
-// Reversed
-people.sort(Comparator.comparing(Person::getAge).reversed());
 ```
 
 ### Key Concepts
