@@ -1,5 +1,7 @@
 package com.mariofernandes.javapoc.functional;
 
+import java.io.PrintStream;
+import java.util.Map;
 import java.util.function.BinaryOperator;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.Function;
@@ -39,7 +41,22 @@ public class BinaryOperators {
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        Map<String, Double> shoppingList = Map.of(
+                "Laptop", 1200.00,
+                "Smartphone", 800.00,
+                "Tablet", 400.00,
+                "Monitor", 300.00
+        );
         BinaryOperator<Double> applyDiscount = (price, discount) -> price - (price * discount / 100);
+        BinaryOperator<Double> sumPrices = Double::sum;
+
+        System.out.println("Shopping List:");
+        shoppingList.forEach((s, aDouble) -> System.out.println(" - Product " + s + ": $" + String.format("%.2f", aDouble)));
+        Double totalPrice = shoppingList.values().stream().reduce(sumPrices).orElse(0.0);
+        System.out.printf("Total Price before discount: $%.2f\n", totalPrice);
+        Double totalAfterDiscount = applyDiscount.apply(totalPrice, 5.5);
+        System.out.println("Total Price after 5.5% discount: " + String.format("$%.2f", totalAfterDiscount));
+
         System.out.println(" --- --- - --- --- ");
     }
 }
