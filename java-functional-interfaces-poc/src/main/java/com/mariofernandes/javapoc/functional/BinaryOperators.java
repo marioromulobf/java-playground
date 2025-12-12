@@ -39,6 +39,7 @@ public class BinaryOperators {
 
     public static void whyDoNotWe() {
         System.out.println(" --- Suggestions --- ");
+        BinaryOperator<Double> applyDiscount = (price, discount) -> price - (price * discount / 100);
         System.out.println(" --- --- - --- --- ");
     }
 }
