@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== Java Stream POC ===\n");
         System.out.println("  1. List");
+        Lists.streams();
 
         System.out.println("\n  2. Arrays");
 
