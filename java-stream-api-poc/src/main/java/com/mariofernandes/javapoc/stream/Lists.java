@@ -11,6 +11,11 @@ public class Lists {
              .map(String::toUpperCase)
              .forEach(System.out::println);
 
+        names.stream()
+             .sorted()
+             .forEach(System.out::println);
+
         Stream.of(names).forEach(System.out::println);
+        Stream.of(names).sorted().forEach(System.out::println);
     }
 }
