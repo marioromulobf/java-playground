@@ -15,10 +15,11 @@ public class Lists {
                 .limit(3)
                 .forEach(name -> System.out.println(" - " + name));
 
-        System.out.println("Sorted, skip by 3 and forEach of names (Collection stream): ");
+        System.out.println("Sorted, skip by 3, parallel and forEach of names (Collection stream): ");
         names.stream()
                 .sorted()
                 .skip(3)
+                .parallel()
                 .forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Distinct and forEach of names (Collection stream): ");
