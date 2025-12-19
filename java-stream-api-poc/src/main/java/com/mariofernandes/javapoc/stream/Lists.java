@@ -15,11 +15,26 @@ public class Lists {
                 .limit(3)
                 .forEach(name -> System.out.println(" - " + name));
 
+        System.out.println("Sorted, skip by 3 and forEach of names (Collection stream): ");
+        names.stream()
+                .sorted()
+                .skip(3)
+                .forEach(name -> System.out.println(" - " + name));
+
         System.out.println("Distinct and forEach of names (Collection stream): ");
         names.stream()
                 .distinct()
                 .forEach(name -> System.out.println(" - " + name));
 
+        System.out.print("max(String::compareTo) of names (Collection stream): ");
+        names.stream()
+                .max(String::compareTo)
+                .ifPresent(System.out::println);
+
+        System.out.print("min(String::compareTo) of names (Collection stream): ");
+        names.stream()
+                .min(String::compareTo)
+                .ifPresent(System.out::println);
 
         System.out.println("Using Stream.of(List) and foreach: ");
         Stream.of(names).forEach(name -> System.out.println(" - " + name));
