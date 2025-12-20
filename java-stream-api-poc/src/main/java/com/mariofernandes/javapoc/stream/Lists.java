@@ -4,46 +4,58 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class Lists {
+
+    private static final List<String> NAMES = List.of("Mario", "Ana", "Pedro", "Mario", "Carla", "Maria");
+
+    public Lists() {}
+
+    public List<String> collectionStreamSortedLimitToList() {
+        return NAMES.stream()
+                .sorted()
+                .limit(3)
+                .toList();
+    }
+
     public static void streams() {
-        List<String> names = List.of("Mario", "Ana", "Pedro", "Mario", "Carla", "Maria");
+
         System.out.println("List of names: ");
-        names.forEach(name -> System.out.println(" - " + name));
+        NAMES.forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Sorted, limit by 3 and forEach of names (Collection stream): ");
-        names.stream()
+        NAMES.stream()
                 .sorted()
                 .limit(3)
                 .forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Sorted, skip by 3, parallel and forEach of names (Collection stream): ");
-        names.stream()
+        NAMES.stream()
                 .sorted()
                 .skip(3)
                 .parallel()
                 .forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Distinct and forEach of names (Collection stream): ");
-        names.stream()
+        NAMES.stream()
                 .distinct()
                 .forEach(name -> System.out.println(" - " + name));
 
         System.out.print("max(String::compareTo) of names (Collection stream): ");
-        names.stream()
+        NAMES.stream()
                 .max(String::compareTo)
                 .ifPresent(System.out::println);
 
         System.out.print("min(String::compareTo) of names (Collection stream): ");
-        names.stream()
+        NAMES.stream()
                 .min(String::compareTo)
                 .ifPresent(System.out::println);
 
         System.out.println("Using Stream.of(List) and foreach: ");
-        Stream.of(names).forEach(name -> System.out.println(" - " + name));
+        Stream.of(NAMES).forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Using Stream.of(List.toArray) and foreach: ");
-        Stream.of(names.toArray()).forEach(name -> System.out.println(" - " + name));
+        Stream.of(NAMES.toArray()).forEach(name -> System.out.println(" - " + name));
 
         System.out.println("Using Stream.of(List.toArray), sorted and foreach: ");
-        Stream.of(names.toArray()).sorted().forEach(name -> System.out.println(" - " + name));
+        Stream.of(NAMES.toArray()).sorted().forEach(name -> System.out.println(" - " + name));
     }
 }
