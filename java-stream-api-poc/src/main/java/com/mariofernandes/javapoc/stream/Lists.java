@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public class Lists {
 
-    private static final List<String> NAMES = List.of("Mario", "Ana", "Pedro", "Mario", "Carla", "Maria");
+    public static final List<String> NAMES = List.of("Mario", "Ana", "Pedro", "Mario", "Carla", "Maria");
 
     public Lists() {}
 
