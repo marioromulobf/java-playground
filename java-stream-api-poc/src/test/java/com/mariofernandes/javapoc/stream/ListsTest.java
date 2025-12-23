@@ -61,4 +61,48 @@ public class ListsTest {
         Assertions.assertEquals(expectedResult, result,
                 "Should return last 3 names in alphabetical order: Mario, Mario, Pedro");
     }
+
+    @Test
+    @DisplayName("Test Distinct and toList (Collection stream)")
+    void testCollectionStreamDistinctToList_ReturnsExpectedValues() {
+        var result = lists.collectionStreamDistinctToList();
+        var expectedResult = List.of("Mario", "Ana", "Pedro", "Carla", "Maria");
+
+        // Assertions toList
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+
+        // Assertions distinct
+        Assertions.assertNotEquals(Lists.NAMES.size(), result.size(),
+                "Should return a different size than the original list");
+        Assertions.assertEquals(expectedResult, result,
+                "Should return distinct names: Mario, Ana, Pedro, Carla, Maria");
+    }
+
+    @Test
+    @DisplayName("Test Max by Alphabetical (Collection stream)")
+    void testCollectionStreamMaxByAlphabetical_ReturnsExpectedValue() {
+        var result = lists.collectionStreamMaxByAlphabetical();
+        var expectedResult = "Pedro";
+
+        // Assertions Optional
+        Assertions.assertTrue(result.isPresent(), "Should return a value");
+
+        // Assertions max by alphabetical
+        Assertions.assertEquals(expectedResult, result.get(),
+                "Should return the name that is last in alphabetical order: Pedro");
+    }
+
+    @Test
+    @DisplayName("Test Min by length (Collection stream)")
+    void testCollectionStreamMinByLength_ReturnsExpectedValue() {
+        var result = lists.collectionStreamMinByLength();
+        var expectedResult = "Ana";
+
+        // Assertions Optional
+        Assertions.assertTrue(result.isPresent(), "Should return a value");
+
+        // Assertions min by length
+        Assertions.assertEquals(expectedResult, result.get(),
+                "Should return the nam with the shortest length: Ana");
+    }
 }

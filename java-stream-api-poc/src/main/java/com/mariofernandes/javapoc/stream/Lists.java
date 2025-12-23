@@ -1,6 +1,8 @@
 package com.mariofernandes.javapoc.stream;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class Lists {
@@ -24,6 +26,20 @@ public class Lists {
                 .sorted()
                 .skip(3)
                 .toList();
+    }
+
+    public List<String> collectionStreamDistinctToList() {
+        return NAMES.stream()
+                .distinct()
+                .toList();
+    }
+
+    public Optional<String> collectionStreamMaxByAlphabetical() {
+        return NAMES.stream().max(String::compareTo);
+    }
+
+    public Optional<String> collectionStreamMinByLength() {
+        return NAMES.stream().min(Comparator.comparingInt(String::length));
     }
 
     public static void streams() {
