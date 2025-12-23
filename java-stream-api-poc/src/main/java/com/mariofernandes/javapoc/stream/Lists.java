@@ -16,6 +16,16 @@ public class Lists {
                 .toList();
     }
 
+    public List<String> collectionParallelStreamSortedSkipToList() {
+        // This implementation is not recommended, just for demonstration purposes.
+        // The use of sorted() and skip() introduces stateful operations that can
+        // incur significant overhead in a parallel stream.
+        return NAMES.parallelStream()
+                .sorted()
+                .skip(3)
+                .toList();
+    }
+
     public static void streams() {
 
         System.out.println("List of names: ");
