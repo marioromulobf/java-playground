@@ -17,6 +17,12 @@ mvn spring-boot:run
 * `GET /set-attribute?name=Mario` - Public endpoint to set session attribute `user_name`.
 * `GET /get-attribute` - Public endpoint to get session attribute `user_name`.
 * `GET /invalidate` - Public endpoint to invalidate the current session.
+* `GET /count-access-session` - Public endpoint to count the number of accesses in the current session.
+
+### How to Run Tests
+```bash
+mvn test
+```
 
 ### Notes
 * This is a simple proof of concept (POC) for managing sessions in memory using Java Spring.
