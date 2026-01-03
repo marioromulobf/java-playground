@@ -1,0 +1,35 @@
+services:
+  nginx:
+    build:
+        context: .nginx
+        dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: always
+    networks:
+      - app-network
+    depends_on:
+      - app
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    #ports:
+    #  - "8088-8091:8088"
+    environment:
+      - PORT=8088
+    #volumes:
+    #  - ./src:/src
+    deploy:
+      replicas: 4
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.3.0.0/26
