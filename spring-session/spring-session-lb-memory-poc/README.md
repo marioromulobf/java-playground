@@ -38,7 +38,7 @@ mvn test
 
 ### Notes
 * This is a simple proof of concept (POC) for managing sessions in memory using Java Spring.
-* Sessions are stored in memory and cookies, which means they will be lost when:
+* Sessions are stored in memory (and cookies in the browser), which means they will be lost when:
   * the application is restarted, or
   * after a certain timeout period (5m - see application.properties), or
-  * when the user clears their cookies.
+  * when the user clears or changes their cookies.
