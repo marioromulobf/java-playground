@@ -37,3 +37,6 @@ nbdist/
 
 # Log files
 *.log
+
+# Diagnostics custom files
+*DiagnosticsMario*
