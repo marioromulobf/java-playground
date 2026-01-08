@@ -63,6 +63,9 @@ public class CartController {
     @DeleteMapping("/clear")
     public ResponseEntity<String> clearCart(HttpSession session) {
         session.removeAttribute(CART_SESSION_KEY);
+        LOG.info("Session ID: {} - Cart cleared", session.getId());
+        session.invalidate();
+        LOG.info("Session invalidated: {}", session.getId());
 
         return ResponseEntity.ok(String.format(RESPONSE_SUCCESSFULLY, "Cart cleared", session.getId()));
     }
