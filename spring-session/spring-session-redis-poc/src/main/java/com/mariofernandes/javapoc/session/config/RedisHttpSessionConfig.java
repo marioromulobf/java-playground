@@ -9,7 +9,6 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer;
-import org.springframework.data.redis.serializer.JacksonJsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.FlushMode;
@@ -88,24 +87,5 @@ public class RedisHttpSessionConfig {
 
         return new SortedSetRedisSessionExpirationStore(template, "session:cart");
     }
-//    @Bean
-//    public RedisTemplate<String, Map<String, CartItem>> userRedisTemplate(RedisConnectionFactory connectionFactory) {
-//        LOG.info("Begin userRedisTemplate()");
-//        RedisTemplate<String, Map<String, CartItem>> template = new RedisTemplate<>();
-//        template.setConnectionFactory(connectionFactory);
-//
-//        //Key serializer
-//        template.setKeySerializer(new StringRedisSerializer());
-//
-//        //Value serializer for CartItem objects
-//        ObjectMapper mapper = new ObjectMapper();
-//        JacksonJsonRedisSerializer<CartItem> serializer = new JacksonJsonRedisSerializer<>(mapper, CartItem.class);
-//
-//        template.setValueSerializer(serializer);
-//        template.afterPropertiesSet();
-//
-//        return template;
-//    }
-
 }
 
