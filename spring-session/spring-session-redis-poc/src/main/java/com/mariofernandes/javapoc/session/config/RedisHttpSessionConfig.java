@@ -26,12 +26,13 @@ import tools.jackson.databind.jsontype.PolymorphicTypeValidator;
 
 @Configuration
 // @EnableRedisHttpSession -> Better for simple cases, like shopping cart.
-// @EnableRedisIndexedHttpSession -> Better for complex cases, like user authentication and authorization, where we may need to query sessions based on attributes.
+// @EnableRedisIndexedHttpSession -> Better for complex cases, like user authentication and authorization,
+//                                   where we may need to query sessions based on attributes.
 @EnableRedisIndexedHttpSession(
         redisNamespace = "${spring.session.redis.namespace}",
         maxInactiveIntervalInSeconds = 10,
-        flushMode = FlushMode.ON_SAVE,
-        saveMode = SaveMode.ALWAYS
+        flushMode = FlushMode.IMMEDIATE, // cons: performance impact. pros: consistency
+        saveMode = SaveMode.ON_GET_ATTRIBUTE // cons: lost session if attribute is not accessed. pros: performance
 )
 // Better specify properties in annotation's attribute. Like redisNamespace, flushMode, saveMode, etc.
 public class RedisHttpSessionConfig {
@@ -47,7 +48,7 @@ public class RedisHttpSessionConfig {
                 .allowIfSubType("com.mariofernandes.javapoc.session.dto.") // Allow my custom DTOs
                 .allowIfSubType("java.util.") // Allow Java Collections like Map, List, etc.
                 .allowIfSubType("java.math.") // Allow Java Math classes like BigDecimal, BigInteger
-                .allowIfSubType("java.lang.") // Allow Java core classes like String, Integer, etc. (because @EnableRedisIndexedHttpSession may store such types)
+                .allowIfSubType("java.lang.") // Allow Java Core classes like String, Integer, etc. (because @EnableRedisIndexedHttpSession may store such types)
                 .build();
 
         ObjectMapper mapper = JsonMapper.builder()
@@ -92,6 +93,7 @@ public class RedisHttpSessionConfig {
     @Bean
     public ConfigureReactiveRedisAction configureReactiveRedisAction() {
         LOG.info("Configuring custom ConfigureReactiveRedisAction()");
+        // Disable Auto-configuration of Redis Keyspace Notifications
         return ConfigureReactiveRedisAction.NO_OP;
     }
 }
