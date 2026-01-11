@@ -15,6 +15,7 @@ import org.springframework.session.FlushMode;
 import org.springframework.session.SaveMode;
 import org.springframework.session.data.redis.RedisSessionExpirationStore;
 import org.springframework.session.data.redis.SortedSetRedisSessionExpirationStore;
+import org.springframework.session.data.redis.config.ConfigureReactiveRedisAction;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisIndexedHttpSession;
 import tools.jackson.databind.DefaultTyping;
 import tools.jackson.databind.ObjectMapper;
@@ -86,6 +87,12 @@ public class RedisHttpSessionConfig {
         template.afterPropertiesSet();
 
         return new SortedSetRedisSessionExpirationStore(template, "session:cart");
+    }
+
+    @Bean
+    public ConfigureReactiveRedisAction configureReactiveRedisAction() {
+        LOG.info("Configuring custom ConfigureReactiveRedisAction()");
+        return ConfigureReactiveRedisAction.NO_OP;
     }
 }
 
