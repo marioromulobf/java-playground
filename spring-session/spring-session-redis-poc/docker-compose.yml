@@ -19,11 +19,24 @@ services:
     #  - "8088-8090:8088"
     environment:
       - PORT=8088
+      - SPRING_REDIS_HOST=redis-server
+      - SPRING_REDIS_PORT=6379
     #volumes:
     #  - ./src:/src
     deploy:
       replicas: 3
     restart: always
+    networks:
+      - app-network
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis-server
+    restart: always
+    ports:
+      - "6379:6379"
     networks:
       - app-network
 

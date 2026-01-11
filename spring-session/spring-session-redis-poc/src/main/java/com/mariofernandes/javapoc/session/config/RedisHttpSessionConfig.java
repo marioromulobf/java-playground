@@ -2,6 +2,7 @@ package com.mariofernandes.javapoc.session.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -39,6 +40,12 @@ public class RedisHttpSessionConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(RedisHttpSessionConfig.class);
 
+    @Value("${spring.data.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.data.redis.port}")
+    private int redisPort;
+
     @Bean
     public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
         LOG.info("Configuring Custom springSessionDefaultRedisSerializer()");
@@ -65,8 +72,8 @@ public class RedisHttpSessionConfig {
 
         // I can customize the Redis connection here if needed
         RedisStandaloneConfiguration redisConfig = new RedisStandaloneConfiguration();
-        redisConfig.setHostName("localhost");
-        redisConfig.setPort(6379);
+        redisConfig.setHostName(redisHost);
+        redisConfig.setPort(redisPort);
         // If Redis requires authentication, set the password here
         // redisConfig.setPassword(RedisPassword.of("yourRedisPassword"));
 
