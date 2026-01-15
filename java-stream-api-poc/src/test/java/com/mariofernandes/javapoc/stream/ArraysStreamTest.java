@@ -33,8 +33,32 @@ public class ArraysStreamTest {
                     "Should be in alphabetical order"
             );
         }
-        Assertions.assertEquals(expectedResult, result,
+        Assertions.assertArrayEquals(expectedResult, result,
                 "Should return first 3 names in alphabetical order: Ana, Carla, Maria");
     }
 
+    @Test
+    @DisplayName("Test Operations: Map, Skip, and toArray")
+    void testOperationMapSkipToArray_ReturnsExpectedValues() {
+        var result = arraysStream.operationMapSkipToArray();
+        var expectedResult = new String[]{"mario", "carla", "maria"};
+
+        // Assertions toArray
+        Assertions.assertInstanceOf(String[].class, result, "Should return a String Array Instance");
+
+        // Assertions skip (ArraysStream.NAMES.length - ArraysStream.LIMIT_SKIP) = 3
+        Assertions.assertEquals(ArraysStream.NAMES.length - ArraysStream.LIMIT_SKIP, result.length,
+                "Should return exactly 3 items");
+
+        // Assertions mapped to lowercase
+        for (int i = 0; i < result.length; i++) {
+            Assertions.assertEquals(
+                    ArraysStream.NAMES[ArraysStream.LIMIT_SKIP + i].toLowerCase(),
+                    result[i],
+                    "Should be mapped to lowercase"
+            );
+        }
+        Assertions.assertArrayEquals(expectedResult, result,
+                "Should return last 3 names in lowercase: mario, carla, maria");
+    }
 }
