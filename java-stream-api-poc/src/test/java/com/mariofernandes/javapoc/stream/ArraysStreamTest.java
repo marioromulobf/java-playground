@@ -16,8 +16,8 @@ public class ArraysStreamTest {
 
     @Test
     @DisplayName("Test Operations: Sorted, Limit, and toArray")
-    void testOperationSortedLimitToArray_ReturnsExpectedValues() {
-        var result = arraysStream.operationSortedLimitToArray();
+    void testOperationsSortedLimitToArray_ReturnsExpectedValues() {
+        var result = arraysStream.operationsSortedLimitToArray();
         var expectedResult = new String[]{"Ana", "Carla", "Maria"};
 
         // Assertions toArray
@@ -39,8 +39,8 @@ public class ArraysStreamTest {
 
     @Test
     @DisplayName("Test Operations: Map, Skip, and toArray")
-    void testOperationMapSkipToArray_ReturnsExpectedValues() {
-        var result = arraysStream.operationMapSkipToArray();
+    void testOperationsMapSkipToArray_ReturnsExpectedValues() {
+        var result = arraysStream.operationsMapSkipToArray();
         var expectedResult = new String[]{"mario", "carla", "maria"};
 
         // Assertions toArray
@@ -60,5 +60,30 @@ public class ArraysStreamTest {
         }
         Assertions.assertArrayEquals(expectedResult, result,
                 "Should return last 3 names in lowercase: mario, carla, maria");
+    }
+
+    @Test
+    @DisplayName("Test Operations: Distinct, Filter, and Collect Joining")
+    void testOperationsDistinctFilterCollectJoining_ReturnsExpectedValues() {
+        var result = arraysStream.operationsDistinctFilterCollectJoining();
+        var duplicateName = "Mario";
+        var expectedResult = "Mario,Maria";
+
+        // Assertions String type
+        Assertions.assertInstanceOf(String.class, result, "Should return a String Instance");
+
+        // Assertions distinct
+        Assertions.assertEquals(0, result.indexOf(duplicateName), "Should exit 'Mario'");
+        Assertions.assertEquals(result.indexOf(duplicateName), result.lastIndexOf(duplicateName),
+                "Should contain 'Mario' only once");
+
+        // Assertions filter starts with "Mar"
+        String[] filteredNames = result.split(",");
+        for (String name : filteredNames) {
+            Assertions.assertTrue(name.startsWith("Mar"), "Should start with 'Mar'");
+        }
+
+        // Assertions collectors joining
+        Assertions.assertEquals(expectedResult, result, "Should return joined names: 'Mario,Maria'");
     }
 }
