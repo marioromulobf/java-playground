@@ -8,6 +8,7 @@ public class Main {
         Lists.streams();
 
         System.out.println("\n  2. Arrays");
+        ArraysStream.run();
 
         System.out.println("\n  3. Map");
 

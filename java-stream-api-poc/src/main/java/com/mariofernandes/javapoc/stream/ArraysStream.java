@@ -47,4 +47,30 @@ public class ArraysStream {
                 .min(Comparator.comparingInt(String::length))
                 .orElse(null);
     }
+
+    public static void run() {
+        var instance = new ArraysStream();
+
+        System.out.println("Array of names: ");
+        Arrays.stream(NAMES).forEach(name -> System.out.println(" - " + name));
+
+        System.out.println("Operations: Sorted, Limit, and toArray -> Result:");
+        for (String name : instance.operationsSortedLimitToArray()) {
+            System.out.println(" - " + name);
+        }
+
+        System.out.println("Operations: Map, Skip, and toArray -> Result:");
+        for (String name : instance.operationsMapSkipToArray()) {
+            System.out.println(" - " + name);
+        }
+
+        System.out.println("Operations: Distinct, Filter, and Collect Joining -> Result:");
+        System.out.println(" - " + instance.operationsDistinctFilterCollectJoining());
+
+        System.out.println("Aggregation: Count -> Result: " + instance.aggregationCount());
+
+        System.out.println("Aggregation: Max by Alphabetical -> Result: " + instance.aggregationMaxByAlphabetical());
+
+        System.out.println("Aggregation: Min by Length -> Result: " + instance.aggregationMinByLength());
+    }
 }
