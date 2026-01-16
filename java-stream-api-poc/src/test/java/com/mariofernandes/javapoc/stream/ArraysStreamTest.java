@@ -99,4 +99,18 @@ public class ArraysStreamTest {
         // Assertions count
         Assertions.assertEquals(expectedResult, result, "Should return the correct count of names.");
     }
+
+    @Test
+    @DisplayName("Test Aggregation: Max by Alphabetical")
+    void testAggregationMaxByAlphabetical_ReturnsExpectedValue() {
+        var result = arraysStream.aggregationMaxByAlphabetical();
+        var expectedResult = "Pedro";
+
+        // Assertions String type
+        Assertions.assertInstanceOf(String.class, result, "Should return a String Instance");
+
+        // Assertions max by alphabetical
+        Assertions.assertEquals(expectedResult, result,
+                "Should return the name that is last in alphabetical order: Pedro");
+    }
 }
