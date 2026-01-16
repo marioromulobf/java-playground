@@ -86,4 +86,17 @@ public class ArraysStreamTest {
         // Assertions collectors joining
         Assertions.assertEquals(expectedResult, result, "Should return joined names: 'Mario,Maria'");
     }
+
+    @Test
+    @DisplayName("Test Aggregation: Count")
+    void testAggregationCount_ReturnsExpectedValue() {
+        var result = arraysStream.aggregationCount();
+        var expectedResult = 6L;
+
+        // Assertions Long type
+        Assertions.assertInstanceOf(Long.class, result, "Should return a Long Instance");
+
+        // Assertions count
+        Assertions.assertEquals(expectedResult, result, "Should return the correct count of names.");
+    }
 }
