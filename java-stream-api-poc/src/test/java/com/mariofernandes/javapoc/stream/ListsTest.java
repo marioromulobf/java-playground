@@ -103,6 +103,6 @@ public class ListsTest {
 
         // Assertions min by length
         Assertions.assertEquals(expectedResult, result.get(),
-                "Should return the nam with the shortest length: Ana");
+                "Should return the name with the shortest length: Ana");
     }
 }

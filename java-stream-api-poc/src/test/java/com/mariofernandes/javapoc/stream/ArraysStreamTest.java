@@ -113,4 +113,17 @@ public class ArraysStreamTest {
         Assertions.assertEquals(expectedResult, result,
                 "Should return the name that is last in alphabetical order: Pedro");
     }
+
+    @Test
+    @DisplayName("Test Aggregation: Min by Length")
+    void testAggregationMinByLength_ReturnsExpectedValue() {
+        var result = arraysStream.aggregationMinByLength();
+        var expectedResult = "Ana";
+
+        // Assertion String type
+        Assertions.assertInstanceOf(String.class, result, "Should return a String Instance");
+
+        // Assertion min by length
+        Assertions.assertEquals(expectedResult, result, "Should return the name with the shortest length: Ana");
+    }
 }
