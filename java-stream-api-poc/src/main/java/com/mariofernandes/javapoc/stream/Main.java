@@ -11,6 +11,7 @@ public class Main {
         ArraysStream.run();
 
         System.out.println("\n  3. Map");
+        MapsStream.run();
 
         System.out.println("\n  4. Filter");
 
