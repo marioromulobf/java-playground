@@ -4,8 +4,8 @@
 
 Demonstrates Java Streams API capabilities:
 * **Lists**: Creating streams from List, ArrayList, Set
-* **Arrays**: 
-* **Map**: 
+* **Arrays**: Creating streams from Arrays with Arrays.stream() and Stream.of()
+* **Map**: Working with Map: map(), mapToInt(), mapToDouble(), mapToLong(), mapMulti(), flatMap()
 * **Filter**: 
 * **Predicates**: 
 * **Supplier**: 

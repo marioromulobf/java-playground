@@ -14,6 +14,7 @@ public class Main {
         MapsStream.run();
 
         System.out.println("\n  4. Filter");
+        Filters.run();
 
         System.out.println("\n  5. Predicates");
 
