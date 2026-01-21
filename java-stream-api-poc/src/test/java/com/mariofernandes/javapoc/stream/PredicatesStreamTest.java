@@ -36,4 +36,14 @@ public class PredicatesStreamTest {
         Assertions.assertInstanceOf(Boolean.class, result, "Should return a Boolean Instance");
         Assertions.assertFalse(result, "Should return false as not all persons match the predicate criteria");
     }
+
+    @Test
+    @DisplayName("Test Operations: Any Match nameStartsWithM and livesInPorto")
+    void testOperationsAnyMatchNameStartsWithMAndLivesInPorto_ReturnsExpectedValue() {
+        var result = predicatesStream.operationsAnyMatchNameStartsWithMAndLivesInPorto();
+
+        // Assertions
+        Assertions.assertInstanceOf(Boolean.class, result, "Should return a Boolean Instance");
+        Assertions.assertTrue(result, "Should return true as at least one person matches the predicate criteria");
+    }
 }

@@ -30,4 +30,9 @@ public class PredicatesStream {
         return PEOPLE.stream()
                 .allMatch(nameStartsWithM.or(isAdult));
     }
+
+    public boolean operationsAnyMatchNameStartsWithMAndLivesInPorto() {
+        return PEOPLE.stream()
+                .anyMatch(nameStartsWithM.and(livesInPorto));
+    }
 }
