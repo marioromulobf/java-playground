@@ -35,4 +35,9 @@ public class PredicatesStream {
         return PEOPLE.stream()
                 .anyMatch(nameStartsWithM.and(livesInPorto));
     }
+
+    public boolean operationsNoneMatchNotIsAdultAndLivesInPortoAndNameStartsWithM() {
+        return PEOPLE.stream()
+                .noneMatch(isAdult.negate().and(livesInPorto).and(nameStartsWithM));
+    }
 }
