@@ -46,4 +46,10 @@ public class PredicatesStream {
                 .dropWhile(isAdult)
                 .toList();
     }
+
+    public List<Person> operationsTakeWhileIsAdult() {
+        return PEOPLE.stream()
+                .takeWhile(isAdult)
+                .toList();
+    }
 }

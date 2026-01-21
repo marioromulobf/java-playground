@@ -73,4 +73,19 @@ public class PredicatesStreamTest {
         Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 4 Person objects");
         Assertions.assertEquals(expectedResult, result, "Should return Person objects after not matching the isAdult predicate");
     }
+
+    @Test
+    @DisplayName("Test Operations: Take While isAdult")
+    void testOperationsTakeWhileIsAdult_ReturnsExpectedValues() {
+        var result = predicatesStream.operationsTakeWhileIsAdult();
+        var expectedResult = List.of(
+                new Person("Mario", 40, "Lisbon"),
+                new Person("Ana", 20, "Porto")
+        );
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 2 Person objects");
+        Assertions.assertEquals(expectedResult, result, "Should return Person objects while matching the isAdult");
+    }
 }
