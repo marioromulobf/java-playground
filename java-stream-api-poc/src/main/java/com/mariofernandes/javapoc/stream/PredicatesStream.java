@@ -40,4 +40,10 @@ public class PredicatesStream {
         return PEOPLE.stream()
                 .noneMatch(isAdult.negate().and(livesInPorto).and(nameStartsWithM));
     }
+
+    public List<Person> operationsDropWhileIsAdult() {
+        return PEOPLE.stream()
+                .dropWhile(isAdult)
+                .toList();
+    }
 }

@@ -56,4 +56,21 @@ public class PredicatesStreamTest {
         Assertions.assertInstanceOf(Boolean.class, result, "Should return a Boolean Instance");
         Assertions.assertTrue(result, "Should return true as any person matches the predicate criteria");
     }
+
+    @Test
+    @DisplayName("Test Operations: Drop While isAdult")
+    void testOperationsDropWhileIsAdult_ReturnsExpectedValues() {
+        var result = predicatesStream.operationsDropWhileIsAdult();
+        var expectedResult = List.of(
+                new Person("Pedro", 9, "Coimbra"),
+                new Person("Mario", 40, "Porto"),
+                new Person("Carla", 101, "Braga"),
+                new Person("Maria", 35, "Porto")
+        );
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 4 Person objects");
+        Assertions.assertEquals(expectedResult, result, "Should return Person objects after not matching the isAdult predicate");
+    }
 }
