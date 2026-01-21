@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class Filters {
 
-    List<Person> people = List.of(
+    public static final List<Person> PEOPLE = List.of(
             new Person("Mario", 40, "Lisbon"),
             new Person("Ana", 20, "Porto"),
             new Person("Pedro", 9, "Coimbra"),
@@ -18,7 +18,7 @@ public class Filters {
     }
 
     public List<Person> operationsFilterChain() {
-        return people.stream()
+        return PEOPLE.stream()
                 .filter(person -> person.age() >= 18)
                 .filter(person -> person.age() < 60)
                 .filter(person -> person.name().startsWith("M"))
@@ -26,20 +26,20 @@ public class Filters {
     }
 
     public List<Person> operationsFilterComplex() {
-        return people.stream()
+        return PEOPLE.stream()
                 .filter(person -> (person.age() >= 18 && person.age() < 60) || person.name().startsWith("P"))
                 .toList();
     }
 
     public Optional<Person> operationsFilterFindFirst() {
-        return people.stream()
+        return PEOPLE.stream()
                 .filter(person -> person.city() != null)
                 .filter(person -> person.city().equals("Porto"))
                 .findFirst();
     }
 
     public Optional<Person> operationsFilterFindAny() {
-        return people.stream()
+        return PEOPLE.stream()
                 .filter(person -> person.city() != null)
                 .filter(person -> person.city().equals("Porto"))
                 .findAny();
@@ -49,7 +49,7 @@ public class Filters {
         Filters filters = new Filters();
 
         System.out.println("People List: ");
-        filters.people.forEach(person -> System.out.println(" - " + person));
+        PEOPLE.forEach(person -> System.out.println(" - " + person));
 
         System.out.println("Operations: Filter Chain -> Results: ");
         System.out.println(filters.operationsFilterChain());
