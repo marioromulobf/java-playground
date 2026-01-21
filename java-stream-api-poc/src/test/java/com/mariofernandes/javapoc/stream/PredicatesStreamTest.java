@@ -26,4 +26,14 @@ public class PredicatesStreamTest {
         Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 1 Person object");
         Assertions.assertEquals(expectedResult, result, "Should return Person objects matching the predicate criteria");
     }
+
+    @Test
+    @DisplayName("Test Operations: All Match nameStartsWithM or isAdult")
+    void testOperationsAllMatchNameStartsWithMOrIsAdult_ReturnsExpectedValue() {
+        var result = predicatesStream.operationsAllMatchNameStartsWithMOrIsAdult();
+
+        // Assertions
+        Assertions.assertInstanceOf(Boolean.class, result, "Should return a Boolean Instance");
+        Assertions.assertFalse(result, "Should return false as not all persons match the predicate criteria");
+    }
 }

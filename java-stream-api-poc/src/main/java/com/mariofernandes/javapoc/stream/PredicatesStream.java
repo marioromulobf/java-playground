@@ -25,4 +25,9 @@ public class PredicatesStream {
                 .filter(isAdult.negate().and(livesInPorto.negate()))
                 .toList();
     }
+
+    public boolean operationsAllMatchNameStartsWithMOrIsAdult() {
+        return PEOPLE.stream()
+                .allMatch(nameStartsWithM.or(isAdult));
+    }
 }
