@@ -52,4 +52,30 @@ public class PredicatesStream {
                 .takeWhile(isAdult)
                 .toList();
     }
+
+    public static void run() {
+        PredicatesStream predicatesStream = new PredicatesStream();
+
+        System.out.println("People List: ");
+        PEOPLE.forEach(person -> System.out.println(" - " + person));
+
+        System.out.println("Operations: Predicates in Filter (Is not Adult and not Lives In Porto) -> Results: ");
+        predicatesStream.operationsFilterPredicatesIsNotAdultAndNotLivesInPorto()
+                .forEach(person -> System.out.println(" - " + person));
+
+        System.out.println("Operations: Predicates in All Match (Name starts With 'M' or Is Adult) -> Result: "
+                + predicatesStream.operationsAllMatchNameStartsWithMOrIsAdult());
+
+        System.out.println("Operations: Predicates in Any Match (Name starts With 'M' and Lives In Porto) -> Result: "
+                + predicatesStream.operationsAnyMatchNameStartsWithMAndLivesInPorto());
+
+        System.out.println("Operations: Predicates in None Match (Is not Adult and Lives In Porto and Name starts With 'M') -> Result: "
+                + predicatesStream.operationsNoneMatchNotIsAdultAndLivesInPortoAndNameStartsWithM());
+
+        System.out.println("Operations: Predicates in Drop While (Is Adult) -> Results: ");
+        predicatesStream.operationsDropWhileIsAdult().forEach(person -> System.out.println(" - " + person));
+
+        System.out.println("Operations: Predicates in Take While (Is Adult) -> Results: ");
+        predicatesStream.operationsTakeWhileIsAdult().forEach(person -> System.out.println(" - " + person));
+    }
 }

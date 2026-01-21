@@ -17,6 +17,7 @@ public class Main {
         Filters.run();
 
         System.out.println("\n  5. Predicates");
+        PredicatesStream.run();
 
         System.out.println("\n  6. Supplier");
 
