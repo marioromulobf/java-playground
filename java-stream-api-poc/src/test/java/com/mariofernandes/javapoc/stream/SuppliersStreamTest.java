@@ -35,4 +35,20 @@ public class SuppliersStreamTest {
                     "Person age should be less than or equal to 111 and greater than or equal to 0");
         });
     }
+
+    @Test
+    @DisplayName("Test Operations: Supplier and BiConsumer in collect")
+    void testOperationsParallelCollect_ReturnsExpectedValues() {
+        var result = suppliersStream.operationsParallelCollect();
+        var expectedResult = List.of(
+                new Person("Mario", 40, "Lisbon"),
+                new Person("Ana", 20, "Porto"),
+                new Person("Maria", 35, "Porto")
+        );
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 3 Person objects");
+        Assertions.assertEquals(expectedResult, result, "Should return Person objects after matching the accumulator and combiner criteria");
+    }
 }
