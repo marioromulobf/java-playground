@@ -20,6 +20,7 @@ public class Main {
         PredicatesStream.run();
 
         System.out.println("\n  6. Supplier");
+        SuppliersStream.run();
 
         System.out.println("\n  7. Consumer");
 
