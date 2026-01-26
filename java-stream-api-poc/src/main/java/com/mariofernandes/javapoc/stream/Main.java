@@ -23,6 +23,7 @@ public class Main {
         SuppliersStream.run();
 
         System.out.println("\n  7. Consumer");
+        ConsumersStream.run();
 
         System.out.println("\n  8. BinaryOperator");
 
