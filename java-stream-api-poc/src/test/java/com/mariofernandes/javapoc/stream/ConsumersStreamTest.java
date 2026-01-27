@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class ConsumersStreamTest {
     private ConsumersStream consumersStream;
 
@@ -15,12 +17,24 @@ public class ConsumersStreamTest {
 
     @Test
     @DisplayName("Test Operations: MapMult")
-    void testOperationsMapMult_ReturnsExpectedValue() {
-        var result = consumersStream.operationsMapMult();
+    void testOperationsMapMultPersonToName_ReturnsExpectedValue() {
+        var result = consumersStream.operationsMapMultPersonToName();
         var expectedResult = "Mario, Ana, Pedro, Mario, Carla, Maria";
 
         // Assertions
         Assertions.assertInstanceOf(String.class, result, "Should return a String Instance");
         Assertions.assertEquals(expectedResult, result, "Should return the correct names");
+    }
+
+    @Test
+    @DisplayName("Test Operations: MapMultiToDouble")
+    void testOperationsMapMultiToDoublePersonToPercentOfAverageAge_ReturnsExpectedValues() {
+        var result = consumersStream.operationsMapMultiToDoublePersonToPercentOfAverageAge();
+        var expectedResult = List.of(97.96, 48.98, 22.04, 97.96, 247.35, 85.71);
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 6 averages");
+        Assertions.assertEquals(expectedResult, result, "Should return correct averages formated with 2 decimals");
     }
 }
