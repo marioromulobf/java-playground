@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
+import java.util.function.IntConsumer;
 import java.util.function.LongConsumer;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,11 @@ public class ConsumersStream {
     public final Double averageAge = PEOPLE.stream()
             .mapToDouble(person -> Double.parseDouble(person.age()+"")).average().orElse(0.0);
     private final BiConsumer<Person, DoubleConsumer> biConsumerPercentOfAverageAge =
-            (person, doubleConsumer) -> doubleConsumer.accept( Math.round(10000.0 * person.age() / averageAge) / 100.0);
+            (person, doubleConsumer) -> doubleConsumer.accept(Math.round(10000.0 * person.age() / averageAge) / 100.0);
     private final BiConsumer<Person, LongConsumer> biConsumerPercentOfAverageAgeAsLong =
-            (person, longConsumer) -> longConsumer.accept( Math.round(100.0 * person.age() / averageAge));
+            (person, longConsumer) -> longConsumer.accept(Math.round(100.0 * person.age() / averageAge));
+    private final BiConsumer<Person, IntConsumer> biConsumerAverageAgeDifference =
+            (person, intConsumer) -> intConsumer.accept(person.age() - Integer.parseInt(""+Math.round(averageAge)));
 
     public ConsumersStream() {}
 
@@ -39,6 +42,10 @@ public class ConsumersStream {
 
     public List<Long> operationsMapMultiToLongPersonToPercentOfAverageAgeAsLong() {
         return PEOPLE.stream().mapMultiToLong(biConsumerPercentOfAverageAgeAsLong).boxed().toList();
+    }
+
+    public List<Integer> operationsMapMultiToIntPersonToAverageAgeDifference() {
+        return PEOPLE.stream().mapMultiToInt(biConsumerAverageAgeDifference).boxed().toList();
     }
 
 
@@ -57,5 +64,8 @@ public class ConsumersStream {
 
         System.out.println("Operations: BiConsumer in MapMultiToLong - Percentage of Average Age as Long -> Results: ");
         System.out.println(consumersStream.operationsMapMultiToLongPersonToPercentOfAverageAgeAsLong());
+
+        System.out.println("Operations: BiConsumer in MapMultiToInt - Average Age Difference -> Results: ");
+        System.out.println(consumersStream.operationsMapMultiToIntPersonToAverageAgeDifference());
     }
 }

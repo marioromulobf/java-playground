@@ -49,4 +49,16 @@ public class ConsumersStreamTest {
         Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 6 averages");
         Assertions.assertEquals(expectedResult, result, "Should return correct averages values");
     }
+
+    @Test
+    @DisplayName("Test Operations: MapMultiToInt")
+    void testOperationsMapMultiToIntPersonToAverageAgeDifference_ReturnsExpectedValues() {
+        var result = consumersStream.operationsMapMultiToIntPersonToAverageAgeDifference();
+        var expectedResult = List.of(-1, -21, -32, -1, 60, -6);
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 6 differences");
+        Assertions.assertEquals(expectedResult, result, "Should return correct difference values");
+    }
 }
