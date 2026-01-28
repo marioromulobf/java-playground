@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
+import java.util.function.LongConsumer;
 import java.util.stream.Collectors;
 
 public class ConsumersStream {
@@ -22,6 +23,8 @@ public class ConsumersStream {
             .mapToDouble(person -> Double.parseDouble(person.age()+"")).average().orElse(0.0);
     private final BiConsumer<Person, DoubleConsumer> biConsumerPercentOfAverageAge =
             (person, doubleConsumer) -> doubleConsumer.accept( Math.round(10000.0 * person.age() / averageAge) / 100.0);
+    private final BiConsumer<Person, LongConsumer> biConsumerPercentOfAverageAgeAsLong =
+            (person, longConsumer) -> longConsumer.accept( Math.round(100.0 * person.age() / averageAge));
 
     public ConsumersStream() {}
 
@@ -33,6 +36,11 @@ public class ConsumersStream {
     public List<Double> operationsMapMultiToDoublePersonToPercentOfAverageAge() {
         return PEOPLE.stream().mapMultiToDouble(biConsumerPercentOfAverageAge).boxed().toList();
     }
+
+    public List<Long> operationsMapMultiToLongPersonToPercentOfAverageAgeAsLong() {
+        return PEOPLE.stream().mapMultiToLong(biConsumerPercentOfAverageAgeAsLong).boxed().toList();
+    }
+
 
     public static void run() {
         ConsumersStream consumersStream = new ConsumersStream();
@@ -46,5 +54,8 @@ public class ConsumersStream {
 
         System.out.println("Operations: BiConsumer in MapMultiToDouble - Percentage of Average Age -> Results: ");
         System.out.println(consumersStream.operationsMapMultiToDoublePersonToPercentOfAverageAge());
+
+        System.out.println("Operations: BiConsumer in MapMultiToLong - Percentage of Average Age as Long -> Results: ");
+        System.out.println(consumersStream.operationsMapMultiToLongPersonToPercentOfAverageAgeAsLong());
     }
 }

@@ -37,4 +37,16 @@ public class ConsumersStreamTest {
         Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 6 averages");
         Assertions.assertEquals(expectedResult, result, "Should return correct averages formated with 2 decimals");
     }
+
+    @Test
+    @DisplayName("Test Operations: MapMultiToLong")
+    void testOperationsMapMultiToLongPersonToPercentOfAverageAgeAsLong_ReturnsExpectedValues() {
+        var result = consumersStream.operationsMapMultiToLongPersonToPercentOfAverageAgeAsLong();
+        var expectedResult = List.of(98L, 49L, 22L, 98L, 247L, 86L);
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 6 averages");
+        Assertions.assertEquals(expectedResult, result, "Should return correct averages values");
+    }
 }
