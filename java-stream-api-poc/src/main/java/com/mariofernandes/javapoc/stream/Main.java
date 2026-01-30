@@ -26,6 +26,7 @@ public class Main {
         ConsumersStream.run();
 
         System.out.println("\n  8. BinaryOperator");
+        BinaryOperatorStream.run();
 
         System.out.println("\n  9. UnaryOperator");
     }
