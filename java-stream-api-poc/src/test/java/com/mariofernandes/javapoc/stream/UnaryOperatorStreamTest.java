@@ -26,4 +26,16 @@ public class UnaryOperatorStreamTest {
         Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 10 numbers");
         Assertions.assertEquals(expectedResult, result, "Should return correct Fibonacci sequence");
     }
+
+    @Test
+    @DisplayName("Test Operations: Iterate - While last number in Fibonacci sequence is less than 55")
+    void test() {
+        var result = unaryOperatorStream.operationsIterateMapToList();
+        var expectedResult = List.of(0, 1, 1, 2, 3, 5, 8, 13, 21, 34);
+
+        // Assertions
+        Assertions.assertInstanceOf(List.class, result, "Should return a List Instance");
+        Assertions.assertEquals(expectedResult.size(), result.size(), "Should return exactly 10 numbers");
+        Assertions.assertEquals(expectedResult, result, "Should return correct Fibonacci sequence");
+    }
 }
