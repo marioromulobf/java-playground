@@ -29,5 +29,6 @@ public class Main {
         BinaryOperatorStream.run();
 
         System.out.println("\n  9. UnaryOperator");
+        UnaryOperatorStream.run();
     }
 }
