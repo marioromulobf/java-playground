@@ -6,12 +6,12 @@ Demonstrates Java Streams API capabilities:
 * **Lists**: Creating streams from List, ArrayList, Set
 * **Arrays**: Creating streams from Arrays with Arrays.stream() and Stream.of()
 * **Map**: Working with Map: map(), mapToInt(), mapToDouble(), mapToLong(), mapMulti(), flatMap()
-* **Filter**: 
-* **Predicates**: 
-* **Supplier**: 
-* **Consumer**: 
-* **BinaryOperator**: 
-* **UnaryOperator**: 
+* **Filter**: Working with Filter: filter(), findFirst(), findAny() 
+* **Predicates**: Working with Predicates: and(), or(), negate()
+* **Supplier**: Working with Supplier on generate(), collect()
+* **Consumer**: Working with BiConsumer on mapMult(), mapMultiToDouble(), mapMultiToInt(), mapMultiToLong()
+* **BinaryOperator**: Working with BinaryOperator on reduce()
+* **UnaryOperator**: Working with UnaryOperator on Stream.iterate()
 
 ### Tech Stack
 * Java 25 (LTS)
