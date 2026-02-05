@@ -8,8 +8,13 @@ import java.util.concurrent.TimeUnit;
 public class ExecServiceExecutors {
 
     private ExecutorService executorService;
+    private String threadName;
 
     public ExecServiceExecutors() {}
+
+    public String getThreadName() {
+        return threadName;
+    }
 
     public boolean basicSingleThreadExecutor() throws InterruptedException {
         // Confirming that executorService has been shut down
@@ -19,7 +24,10 @@ public class ExecServiceExecutors {
         // Creating a single-threaded executor service
         this.executorService = Executors.newSingleThreadExecutor();
         // Execute the given task in the single thread
-        this.executorService.execute(() -> System.out.println("Single Thread: " + Thread.currentThread().getName()));
+        this.executorService.execute(() -> {
+            this.threadName = Thread.currentThread().getName();
+            System.out.println("Single Thread: " + this.threadName);
+        });
         // Initiating an orderly shutdown
         this.executorService.shutdown();
 
