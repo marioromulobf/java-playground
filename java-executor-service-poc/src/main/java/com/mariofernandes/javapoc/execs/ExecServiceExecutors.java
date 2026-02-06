@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 public class ExecServiceExecutors {
@@ -26,7 +27,7 @@ public class ExecServiceExecutors {
     public boolean basicSingleThreadExecutor() throws InterruptedException {
         // Confirming that executorService has been shut down
         if (Objects.nonNull(executorService) && !executorService.isShutdown()) {
-            executorService.shutdown();
+            executorService.close();
         }
         // Creating a single-threaded executor service
         this.executorService = Executors.newSingleThreadExecutor();
@@ -35,8 +36,8 @@ public class ExecServiceExecutors {
             this.threadName = Thread.currentThread().getName();
             System.out.println("Single Thread: " + this.threadName);
         });
-        // Initiating an orderly shutdown
-        this.executorService.shutdown();
+        // Orderly default shutdown of the executor service
+        this.executorService.close();
 
         // return status of termination
         return this.executorService.awaitTermination(1, TimeUnit.SECONDS);
@@ -45,7 +46,7 @@ public class ExecServiceExecutors {
     public boolean basicCachedThreadPool() throws InterruptedException {
         // Confirming that executorService has been shut down
         if (Objects.nonNull(executorService) && !executorService.isShutdown()) {
-            executorService.shutdown();
+            executorService.close();
         }
         this.threadNames = new ArrayList<>();
         // Creating a new cached thread pool executor service
@@ -60,11 +61,38 @@ public class ExecServiceExecutors {
                 System.out.println("Cached Thread Pool - Task " + taskId + ": " + this.threadName);
             });
         }
-        // Initiating an orderly shutdown
-        this.executorService.shutdown();
+        // Orderly default shutdown of the executor service
+        this.executorService.close();
 
         // return status of termination
         return this.executorService.awaitTermination(1, TimeUnit.SECONDS);
+    }
+
+    public List<Future<Integer>> basicWorkStealingPool() throws InterruptedException {
+        // Confirming that executorService has been shut down
+        if (Objects.nonNull(this.executorService) && !this.executorService.isShutdown()) {
+            this.executorService.close();
+        }
+        this.threadNames = new ArrayList<>();
+        List<Future<Integer>> results = new ArrayList<>();
+        // Creating a new work-stealing pool executor service
+        this.executorService = Executors.newWorkStealingPool();
+        for (int i = 0; i < 10; i++) {
+            final int taskId = i;
+            // Submit a task that returns a result to the work-stealing pool
+            results.add(
+                this.executorService.submit(() -> {
+                    this.threadName = Thread.currentThread().getName();
+                    this.threadNames.add(this.threadName);
+                    System.out.println("Work-Stealing Pool - Task " + taskId + ": " + this.threadName);
+                    return taskId * taskId; // Example computation
+                })
+            );
+        }
+        // Orderly default shutdown of the executor service
+        this.executorService.close();
+
+        return results;
     }
 
     public static void run() {
@@ -85,6 +113,27 @@ public class ExecServiceExecutors {
             System.out.println("Threads used in Cached Thread Pool: " + execServiceExecutors.getThreadNames());
         } catch (InterruptedException e) {
             System.out.println("Basic Cached Thread Pool Executor Service was interrupted: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basicWorkStealingPool...");
+            var results = execServiceExecutors.basicWorkStealingPool();
+            System.out.println("Work-Stealing Pool Executor terminated: " + (results != null));
+            if (results != null) {
+                System.out.println("Threads used in Cached Thread Pool: " + results);
+                for (int i = 0; i < results.size(); i++) {
+                    try {
+                        System.out.println("Result of Task " + i + ": " + results.get(i).get());
+                    } catch (Exception e) {
+                        System.out.println("Error retrieving result for Task " + i + ": " + e.getMessage());
+                    }
+                }
+                System.out.println("Threads used in Cached Thread Pool: " + execServiceExecutors.getThreadNames());
+            } else {
+                System.out.println("No results returned from Work-Stealing Pool Executor.");
+            }
+        } catch (InterruptedException e) {
+            System.out.println("Basic Work-Stealing Pool Executor Service was interrupted: " + e.getMessage());
         }
     }
 }

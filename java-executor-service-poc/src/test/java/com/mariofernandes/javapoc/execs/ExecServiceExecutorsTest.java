@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
 import static org.mockito.Mockito.times;
@@ -38,7 +40,7 @@ public class ExecServiceExecutorsTest {
             Assertions.assertTrue(execServiceExecutors.getThreadName().startsWith("pool-"));
             Assertions.assertTrue(execServiceExecutors.getThreadName().endsWith("-thread-1"));
             verify(executorService, times(1)).isShutdown();
-            verify(executorService, times(1)).shutdown();
+            verify(executorService, times(1)).close();
 
         } catch (InterruptedException e) {
             Assertions.fail("The test was interrupted: " + e.getMessage());
@@ -50,6 +52,7 @@ public class ExecServiceExecutorsTest {
     void testBasicCachedThreadPool_ShouldReturnExpectedValues() {
         try {
             var result = execServiceExecutors.basicCachedThreadPool();
+
             var expectedThreadCount = 5;
 
             Assertions.assertTrue(result);
@@ -59,10 +62,35 @@ public class ExecServiceExecutorsTest {
                 Assertions.assertTrue(execServiceExecutors.getThreadNames().get(i).endsWith("-thread-" + (i + 1)));
             }
             verify(executorService, times(1)).isShutdown();
-            verify(executorService, times(1)).shutdown();
+            verify(executorService, times(1)).close();
 
         } catch (InterruptedException e) {
             Assertions.fail("The test was interrupted: " + e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Test Operations of Executor Service: basicWorkerThreadPool")
+    void testBasicWorkerThreadPool_ShouldReturnExpectedValues() {
+        try {
+            var results = execServiceExecutors.basicWorkStealingPool();
+            var expectedResult = List.of(0, 1, 4, 9, 16, 25, 36, 49, 64, 81);
+
+            Assertions.assertNotNull(results);
+            Assertions.assertEquals(expectedResult.size(), execServiceExecutors.getThreadNames().size());
+            for (int i = 0; i < expectedResult.size(); i++) {
+                Assertions.assertTrue(execServiceExecutors.getThreadNames().get(i).startsWith("ForkJoinPool-"));
+                Assertions.assertTrue(execServiceExecutors.getThreadNames().get(i).contains("-worker-"));
+                Assertions.assertEquals(expectedResult.get(i), results.get(i).get());
+            }
+            verify(executorService, times(1)).isShutdown();
+            verify(executorService, times(1)).close();
+            Assertions.assertEquals(expectedResult.size(), results.size());
+
+        } catch (InterruptedException e) {
+            Assertions.fail("The test was interrupted: " + e.getMessage());
+        } catch (ExecutionException e) {
+            Assertions.fail("The test encountered an execution exception: " + e.getMessage());
         }
     }
 }
