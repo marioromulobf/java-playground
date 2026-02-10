@@ -3,6 +3,7 @@ package com.mariofernandes.javapoc.execs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -95,6 +96,37 @@ public class ExecServiceExecutors {
         return results;
     }
 
+    public void basicSubmitMethod() throws ExecutionException, InterruptedException {
+        confirmExecutorServiceShutdown();
+        this.executorService = Executors.newFixedThreadPool(2);
+
+        // execute - fire and forget
+        this.executorService.execute(() -> System.out.println("execute() : No return value"));
+
+        // submit (Runnable) - returns Future<?>
+        Future<?> future1 = this.executorService.submit(() -> System.out.println("submit(Runnable): returns Future<?>"));
+        System.out.println("Future<?>: " + future1.get());
+
+        // submit (Runnable, result) - returns Future<T>
+        Future<String> future2 = this.executorService.submit(() -> System.out.println("submit(Runnable, T): returns Future<T>"), Thread.currentThread().getName());
+        System.out.println("Future<String>: " + future2.get());
+
+        // submit (Callable) - returns Future<T>
+        Future<Integer> future3 = this.executorService.submit(() -> {
+            this.threadName = Thread.currentThread().getName();
+            System.out.println("submit(Callable): returns Future<T>");
+            return this.threadName.length(); // Example return value
+        });
+        System.out.println("Future<Integer>: " + future3.get());
+        this.executorService.close();
+    }
+
+    private void confirmExecutorServiceShutdown() {
+        if (Objects.nonNull(this.executorService) && !this.executorService.isShutdown()) {
+            this.executorService.close();
+        }
+    }
+
     public static void run() {
         ExecServiceExecutors execServiceExecutors = new ExecServiceExecutors();
 
@@ -134,6 +166,13 @@ public class ExecServiceExecutors {
             }
         } catch (InterruptedException e) {
             System.out.println("Basic Work-Stealing Pool Executor Service was interrupted: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basicSubmitMethod...");
+            execServiceExecutors.basicSubmitMethod();
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Basic Submit Method Executor Service was interrupted: " + e.getMessage());
         }
     }
 }

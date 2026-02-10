@@ -93,4 +93,20 @@ public class ExecServiceExecutorsTest {
             Assertions.fail("The test encountered an execution exception: " + e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Test Operations of Executor Service: basicSubmitMethod")
+    void testBasicSubmitMethod_ShouldReturnExpectedValues() {
+        try {
+            execServiceExecutors.basicSubmitMethod();
+
+            verify(executorService, times(1)).isShutdown();
+            verify(executorService, times(1)).close();
+
+            Assertions.assertTrue(execServiceExecutors.getThreadName().startsWith("pool-"));
+            Assertions.assertTrue(execServiceExecutors.getThreadName().endsWith("-thread-2"));
+        } catch (ExecutionException | InterruptedException e) {
+            Assertions.fail("The test was interrupted or encountered an execution exception: " + e.getMessage());
+        }
+    }
 }
