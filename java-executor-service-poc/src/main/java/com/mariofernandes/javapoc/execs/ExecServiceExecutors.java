@@ -158,6 +158,41 @@ public class ExecServiceExecutors {
         return results;
     }
 
+    public String basicInvokeAnyMethod() throws ExecutionException, InterruptedException {
+        confirmExecutorServiceShutdown();
+
+        this.executorService = Executors.newFixedThreadPool(3);
+        this.threadNames = new ArrayList<>();
+
+        // Prepare tasks for invokeAny
+        List<Callable<String>> tasks = Arrays.asList(
+                () -> {
+                    String threadName = Thread.currentThread().getName();
+                    Thread.sleep(200);
+                    this.threadNames.add(threadName);
+                    return threadName;
+                },
+                () -> {
+                    String threadName = Thread.currentThread().getName();
+                    Thread.sleep(100);
+                    this.threadNames.add(threadName);
+                    return threadName;
+                },
+                () -> {
+                    String threadName = Thread.currentThread().getName();
+                    Thread.sleep(300);
+                    this.threadNames.add(threadName);
+                    return threadName;
+                }
+        );
+
+        // Execute any one of the tasks and return its result
+        this.threadName = this.executorService.invokeAny(tasks);
+        this.executorService.close();
+
+        return this.threadName;
+    }
+
     private void confirmExecutorServiceShutdown() {
         if (Objects.nonNull(this.executorService) && !this.executorService.isShutdown()) {
             this.executorService.close();
@@ -228,6 +263,19 @@ public class ExecServiceExecutors {
             System.out.println("Basic InvokeAll Method Executor Service was interrupted: " + e.getMessage());
         } catch (ExecutionException e) {
             throw new RuntimeException(e);
+        }
+
+        try {
+            System.out.println("\nRunning basicInvokeAnyMethod...");
+
+            var result = execServiceExecutors.basicInvokeAnyMethod();
+
+            System.out.println("InvokeAny Method Executor terminated: " + (result != null));
+            System.out.println("Result from InvokeAny Method Executor: " + result);
+            System.out.println("Threads used in InvokeAny Method Executor: " + execServiceExecutors.getThreadNames());
+
+        } catch (ExecutionException | InterruptedException e) {
+            System.out.println("Basic InvokeAny Method Executor Service was interrupted: " + e.getMessage());
         }
     }
 }

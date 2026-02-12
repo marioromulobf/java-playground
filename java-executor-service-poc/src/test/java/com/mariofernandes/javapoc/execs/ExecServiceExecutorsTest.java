@@ -131,4 +131,22 @@ public class ExecServiceExecutorsTest {
             Assertions.fail("The test was interrupted or encountered an execution exception: " + e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Test Operations of Executor Service: basicInvokeAnyMethod")
+    void testBasicInvokeAnyMethod_ShouldReturnExpectedValue() {
+        try {
+            var result = execServiceExecutors.basicInvokeAnyMethod();
+
+            verify(executorService, times(1)).isShutdown();
+            verify(executorService, times(1)).close();
+
+            Assertions.assertEquals(1, execServiceExecutors.getThreadNames().size());
+            Assertions.assertEquals(execServiceExecutors.getThreadName(), result);
+            Assertions.assertLinesMatch(List.of(result), execServiceExecutors.getThreadNames());
+            Assertions.assertLinesMatch(List.of(execServiceExecutors.getThreadName()), execServiceExecutors.getThreadNames());
+        } catch (InterruptedException | ExecutionException e) {
+            Assertions.fail("The test was interrupted or encountered an execution exception: " + e.getMessage());
+        }
+    }
 }
