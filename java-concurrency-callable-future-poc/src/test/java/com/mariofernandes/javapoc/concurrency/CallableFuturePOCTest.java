@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.CancellationException;
+
 public class CallableFuturePOCTest {
 
     private CallableFuturePOC callableFuturePOC;
@@ -19,12 +21,37 @@ public class CallableFuturePOCTest {
     void testBasicCallableFuture_ShouldReturnExpectedResult() {
         try {
             var result = callableFuturePOC.basicCallableFuture();
-            var expectedResultValue = "It was executed by thread: pool-1-thread-1";
+            var expectedBeginValue = "It was executed by thread: pool-";
+            var expectedEndValue = "-thread-1";
 
             Assertions.assertNotNull(result, "Future result should not be null");
             Assertions.assertTrue(result.isDone(), "Future should be done.");
             Assertions.assertFalse(result.isCancelled(), "Future should not be cancelled.");
-            Assertions.assertEquals(expectedResultValue, result.get(), "Future result should match expected output.");
+            Assertions.assertTrue(result.get().startsWith(expectedBeginValue), "Future result should match expected output.");
+            Assertions.assertTrue(result.get().endsWith(expectedEndValue), "Future result should match expected output.");
+        } catch (Exception e) {
+            Assertions.fail("Exception thrown during test execution: " + e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Test operations of CallableFuturePOC: basicTimeoutAndCancellation")
+    void testBasicTimeoutAndCancellation_ShouldReturnExpectedResults() {
+        try {
+            var results = callableFuturePOC.basicTimeoutAndCancellation();
+
+            Assertions.assertNotNull(results, "Results list should not be null");
+            Assertions.assertEquals(2, results.size(), "Results list should contain 2 futures");
+
+            for (int i = 0; i < results.size(); i++) {
+                var future = results.get(i);
+
+                Assertions.assertNotNull(future, "Future at index " + i + " should not be null");
+                Assertions.assertTrue(future.isDone(), "Future at index " + i + " should be done.");
+                Assertions.assertTrue(future.isCancelled(), "Future at index " + i + " should be cancelled.");
+                Assertions.assertThrowsExactly(CancellationException.class, future::get,
+                        "Future at index " + i + " should throw CancellationException when get() is called.");
+            }
         } catch (Exception e) {
             Assertions.fail("Exception thrown during test execution: " + e.getMessage());
         }
