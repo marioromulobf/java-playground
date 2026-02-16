@@ -1,10 +1,14 @@
 package com.mariofernandes.javapoc.concurrency;
 
+import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class CallableFuturePOC {
     public CallableFuturePOC() {}
@@ -37,6 +41,53 @@ public class CallableFuturePOC {
         return resultFuture;
     }
 
+    public List<Future<String>> basicTimeoutAndCancellation() throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        // Task 1 - Slow task that will be timeout
+        Callable<String> slowTask = () -> {
+            Thread.sleep(5000); // 5 seconds
+            return "Slow task completed";
+        };
+
+        // Task 2 - Long task that will be cancelled
+        Callable<String> longTask = () -> {
+            for (int i = 0; i < 10; i++) {
+                if (Thread.currentThread().isInterrupted()) {
+                    return "Long task was interrupted";
+                }
+                Thread.sleep(500);
+            }
+            return "Long task completed";
+        };
+
+        Future<String> slowFuture = executor.submit(slowTask);
+        try {
+            String slowResult = slowFuture.get(2, TimeUnit.SECONDS);
+            System.out.println("Slow task result: " + slowResult);
+        } catch (TimeoutException e) {
+            boolean cancelled = slowFuture.cancel(true);
+            System.out.println("Slow task timed out:");
+            System.out.println(" - cancelled: " + cancelled);
+            System.out.println(" - isCancelled: " + slowFuture.isCancelled());
+        }
+
+        Future<String> longFuture = executor.submit(longTask);
+        Thread.sleep(1500);
+        boolean cancelled = longFuture.cancel(true);
+        try {
+            String longResult = longFuture.get();
+            System.out.println("Long task result: " + longResult);
+        } catch (CancellationException e) {
+            System.out.println("Long task was cancelled:");
+            System.out.println(" - cancelled: " + cancelled);
+            System.out.println(" - isCancelled: " + longFuture.isCancelled());
+        }
+        executor.close();
+
+        return List.of(slowFuture, longFuture);
+    }
+
     public static void run() {
         CallableFuturePOC poc = new CallableFuturePOC();
         try {
@@ -48,6 +99,25 @@ public class CallableFuturePOC {
             System.out.println(" - Result: " + result.get());
         } catch (Exception e) {
             System.out.println("Error executing basicCallableFuture task: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basic timeout and cancellation ...");
+            List<Future<String>> result = poc.basicTimeoutAndCancellation();
+                result.forEach(future -> {
+                    System.out.println("Future status:");
+                    System.out.println(" - Is done: " + future.isDone());
+                    System.out.println(" - Is cancelled: " + future.isCancelled());
+                    try {
+                        System.out.println(" - Result: " + future.get());
+                    } catch (CancellationException e) {
+                        System.out.println(" - Error getting result: " + e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Error executing basicTimeoutAndCancellation task: " + e.getMessage());
+                    }
+                });
+        } catch (Exception e) {
+            System.out.println("Error executing basicTimeoutAndCancellation task: " + e.getMessage());
         }
     }
 }
