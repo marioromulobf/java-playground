@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.concurrency;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
@@ -88,6 +89,28 @@ public class CallableFuturePOC {
         return List.of(slowFuture, longFuture);
     }
 
+    public List<Future<String>> basicInvokeAllWithTimeout() throws InterruptedException {
+        final int LIMIT = 3;
+        List<Callable<String>> tasks = new ArrayList<>();
+        ExecutorService executor = Executors.newFixedThreadPool(LIMIT);
+
+        for (int i = 1; i <= LIMIT; i++) {
+            final int taskId = i;
+            tasks.add(() -> {
+                Thread.sleep(taskId * 1500);
+                return "Completed task " + taskId;
+            });
+        }
+
+        List<Future<String>> result = executor.invokeAll(tasks, 2, TimeUnit.SECONDS);
+        result.forEach(future -> {
+            System.out.println("Future status: " + future.state());
+        });
+
+        executor.close();
+        return result;
+    }
+
     public static void run() {
         CallableFuturePOC poc = new CallableFuturePOC();
         try {
@@ -118,6 +141,25 @@ public class CallableFuturePOC {
                 });
         } catch (Exception e) {
             System.out.println("Error executing basicTimeoutAndCancellation task: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basic invoke all with timeout ...");
+            List<Future<String>> result = poc.basicInvokeAllWithTimeout();
+            for (int i = 0; i < result.size(); i++) {
+                Future<String> future = result.get(i);
+                System.out.println("Future " + (i + 1) + " status:");
+                System.out.println(" - Is done: " + future.isDone());
+                System.out.println(" - Is cancelled: " + future.isCancelled());
+                System.out.println(" - State: " + future.state());
+                try {
+                    System.out.println(" - Result: " + future.get());
+                } catch (CancellationException e) {
+                    System.out.println(" - Error getting result: " + e.getMessage());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error executing basicInvokeAllWithTimeout task: " + e.getMessage());
         }
     }
 }
