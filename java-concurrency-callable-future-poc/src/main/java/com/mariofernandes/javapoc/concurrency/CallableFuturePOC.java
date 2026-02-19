@@ -111,6 +111,35 @@ public class CallableFuturePOC {
         return result;
     }
 
+    public List<String> basicInvokeAnyWithTimeout() throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+
+        List<Callable<String>> tasks = List.of(
+                () -> {
+                    Thread.sleep(3000);
+                    return "Slow task completed";
+                },
+                () -> {
+                    Thread.sleep(1000);
+                    return "Medium task completed";
+                },
+                () -> {
+                    Thread.sleep(500);
+                    return "Fast task completed";
+                }
+        );
+
+        List<String> results = new ArrayList<>();
+        results.add(executor.invokeAny(tasks));
+
+        try {
+            results.add(executor.invokeAny(tasks, 200, TimeUnit.MILLISECONDS));
+        } catch (TimeoutException e) {
+            System.out.println("invokeAny timed out: " + e.getMessage());
+        }
+        executor.close();
+        return results;
+    }
     public static void run() {
         CallableFuturePOC poc = new CallableFuturePOC();
         try {
@@ -160,6 +189,16 @@ public class CallableFuturePOC {
             }
         } catch (Exception e) {
             System.out.println("Error executing basicInvokeAllWithTimeout task: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basic invoke any with timeout ...");
+            var result = poc.basicInvokeAnyWithTimeout();
+            result.forEach(res -> {
+                System.out.println("Result: " + res);
+            });
+        } catch (Exception e) {
+            System.out.println("Error executing basicInvokeAnyWithTimeout task: " + e.getMessage());
         }
     }
 }
