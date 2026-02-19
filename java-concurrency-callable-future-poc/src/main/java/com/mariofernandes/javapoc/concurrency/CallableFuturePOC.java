@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -140,6 +142,20 @@ public class CallableFuturePOC {
         executor.close();
         return results;
     }
+
+    public ScheduledFuture<String> basicScheduledCallable() {
+        ScheduledExecutorService scheduled = Executors.newScheduledThreadPool(2);
+        long startTime = System.currentTimeMillis();
+
+        Callable<String> task = () -> {
+            return "Scheduled task -> " + (System.currentTimeMillis() - startTime);
+        };
+
+        ScheduledFuture<String> result = scheduled.schedule(task, 2, TimeUnit.SECONDS);
+        scheduled.close();
+
+        return result;
+    }
     public static void run() {
         CallableFuturePOC poc = new CallableFuturePOC();
         try {
@@ -199,6 +215,19 @@ public class CallableFuturePOC {
             });
         } catch (Exception e) {
             System.out.println("Error executing basicInvokeAnyWithTimeout task: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basic scheduled callable ...");
+            ScheduledFuture<String> result = poc.basicScheduledCallable();
+            System.out.println("ScheduledFuture status:");
+            System.out.println(" - Is done: " + result.isDone());
+            System.out.println(" - Is cancelled: " + result.isCancelled());
+            System.out.println(" - Result: " + result.get());
+            System.out.println(" - State: " + result.state());
+            System.out.println(" - Delay: " + result.getDelay(TimeUnit.MILLISECONDS) + " ms");
+        } catch (Exception e) {
+            System.out.println("Error executing basicScheduledCallable task: " + e.getMessage());
         }
     }
 }
