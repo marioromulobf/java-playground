@@ -94,4 +94,19 @@ public class CallableFuturePOCTest {
             Assertions.fail("Exception thrown during test execution: " + e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Test operations of CallableFuturePOC: basicInvokeAnyWithTimeout")
+    void testBasicInvokeAnyWithTimeout_ShouldReturnExpectedResults() {
+        try {
+            var results = callableFuturePOC.basicInvokeAnyWithTimeout();
+            var expectedResults = List.of("Fast task completed");
+
+            Assertions.assertNotNull(results, "Results list should not be null");
+            Assertions.assertEquals(expectedResults.size(), results.size(), "Results list should contain 1 result");
+            Assertions.assertEquals(expectedResults, results, "Results should match expected output");
+        } catch (Exception e) {
+            Assertions.fail("Exception thrown during test execution: " + e.getMessage());
+        }
+    }
 }
