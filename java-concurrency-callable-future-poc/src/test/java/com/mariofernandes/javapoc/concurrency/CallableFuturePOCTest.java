@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledFuture;
 
 public class CallableFuturePOCTest {
 
@@ -105,6 +106,24 @@ public class CallableFuturePOCTest {
             Assertions.assertNotNull(results, "Results list should not be null");
             Assertions.assertEquals(expectedResults.size(), results.size(), "Results list should contain 1 result");
             Assertions.assertEquals(expectedResults, results, "Results should match expected output");
+        } catch (Exception e) {
+            Assertions.fail("Exception thrown during test execution: " + e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Test operations of CallableFuturePOC: basicScheduledCallable")
+    void testBasicScheduledCallable_ShouldReturnExpectedResult() {
+        try {
+            var result = callableFuturePOC.basicScheduledCallable();
+            var expectedBeginValue = "Scheduled task -> 200";
+
+            Assertions.assertNotNull(result, "Future result should not be null");
+            Assertions.assertTrue(result.isDone(), "Future should be done.");
+            Assertions.assertFalse(result.isCancelled(), "Future should not be cancelled.");
+            Assertions.assertTrue(result.get().startsWith(expectedBeginValue),
+                    "Future result should match expected output.");
+            Assertions.assertEquals(Future.State.SUCCESS, result.state(), "Future should have state SUCCESS.");
         } catch (Exception e) {
             Assertions.fail("Exception thrown during test execution: " + e.getMessage());
         }
