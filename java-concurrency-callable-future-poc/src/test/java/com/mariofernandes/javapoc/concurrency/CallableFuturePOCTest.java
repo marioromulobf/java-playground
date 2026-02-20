@@ -128,4 +128,19 @@ public class CallableFuturePOCTest {
             Assertions.fail("Exception thrown during test execution: " + e.getMessage());
         }
     }
+
+    @Test
+    @DisplayName("Test operations of CallableFuturePOC: basicCompletableFutureComparison")
+    void testBasicCompletableFutureComparison_ShouldReturnExpectedResults() {
+        try {
+            var result = callableFuturePOC.basicCompletableFutureComparison();
+            var expectedResults = List.of("666", "CHAIN CF RESULT: 333");
+
+            Assertions.assertNotNull(result, "Results list should not be null");
+            Assertions.assertEquals(expectedResults.size(), result.size(), "Results list should contain 2 results");
+            Assertions.assertEquals(expectedResults, result, "Results should match expected output");
+        } catch (Exception e) {
+            Assertions.fail("Exception thrown during test execution: " + e.getMessage());
+        }
+    }
 }
