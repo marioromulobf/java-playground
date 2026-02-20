@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -156,6 +157,47 @@ public class CallableFuturePOC {
 
         return result;
     }
+
+    public List<String> basicCompletableFutureComparison() throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(2);
+
+        // Future - requires blocking
+        Future<Integer> future = executor.submit(() -> {
+           Thread.sleep(1000);
+           return 666;
+        });
+
+        // Must block to get result
+        Integer result = future.get();
+        System.out.println("Future result: " + result);
+
+        // CompletableFuture - non-blocking
+        CompletableFuture<Integer> cf = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            return 999;
+        }, executor);
+
+        // Chain operations without blocking
+        CompletableFuture<String> cfResult = cf
+                .thenApply(value -> value / 3)
+                .thenApply(value -> "Chain cf result: " + value)
+                .thenApply(String::toUpperCase);
+
+        // Get the final result (blocks only here)
+        System.out.println(cfResult.get());
+
+        executor.close();
+
+        return List.of(
+                future.get() + "",
+                cfResult.get()
+        );
+    }
+
     public static void run() {
         CallableFuturePOC poc = new CallableFuturePOC();
         try {
@@ -228,6 +270,16 @@ public class CallableFuturePOC {
             System.out.println(" - Delay: " + result.getDelay(TimeUnit.MILLISECONDS) + " ms");
         } catch (Exception e) {
             System.out.println("Error executing basicScheduledCallable task: " + e.getMessage());
+        }
+
+        try {
+            System.out.println("\nRunning basic CompletableFuture comparison ...");
+            List<String> result = poc.basicCompletableFutureComparison();
+            result.forEach(res -> {
+                System.out.println("Result: " + res);
+            });
+        } catch (Exception e) {
+            System.out.println("Error executing basicCompletableFutureComparison task: " + e.getMessage());
         }
     }
 }
