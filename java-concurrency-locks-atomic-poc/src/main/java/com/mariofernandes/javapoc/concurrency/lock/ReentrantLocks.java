@@ -19,20 +19,11 @@ public class ReentrantLocks {
         }
     }
 
-    public void setCounter(int counter) {
-        fairLock.lock();
-        try {
-            this.counter = counter;
-        } finally {
-            fairLock.unlock();
-        }
-    }
-
     public int getSharedResource() {
         return sharedResource;
     }
 
-    public void increment() {
+    private void increment() {
         //System.out.println("Hold count: " + fairLock.getHoldCount() + ", Is held by current thread: " + fairLock.isHeldByCurrentThread());
         fairLock.lock(); // last statement before the try block, always before try prevents unlocking something you never locked
         try {
@@ -48,8 +39,31 @@ public class ReentrantLocks {
         }
     }
 
+    public Integer checkRaceCondition() {
+        final int size = 10;
+        var threads = new Thread[size];
+
+        for(int i = 0; i < size; i++) {
+            threads[i] = Thread.ofVirtual().start(() -> {
+                for (int j = 0; j < 1000; j++) {
+                    increment();
+                }
+            });
+        }
+
+        try {
+            for (var thread : threads) thread.join();
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
+
+        System.out.println("Expected 10666, got final counter value: " + getCounter());
+
+        return getCounter();
+    }
+
     // High-priority: must get lock or skip update
-    public boolean urgentUpdate(int value) {
+    private boolean urgentUpdate(int value) {
         // no waiting, now or never
         if (unfairLock.tryLock()) {
             try {
@@ -64,7 +78,7 @@ public class ReentrantLocks {
     }
 
     // Normal-priority: will wait up to 200ms
-    public boolean normalUpdate(int value) throws InterruptedException {
+    private boolean normalUpdate(int value) throws InterruptedException {
         if (unfairLock.tryLock(200, TimeUnit.MILLISECONDS)) {
             try {
                 sharedResource += value;
@@ -78,7 +92,7 @@ public class ReentrantLocks {
     }
 
     // Low-priority: will wait indefinitely
-    public void backgroundUpdate(int value) throws InterruptedException {
+    private void backgroundUpdate(int value) throws InterruptedException {
         unfairLock.lockInterruptibly(); // waiting indefinitely, but can be interrupted
         try {
             sharedResource -= value;
@@ -87,30 +101,10 @@ public class ReentrantLocks {
         }
     }
 
-    public static void run() {
-        final int size = 10;
-        ReentrantLocks poc = new ReentrantLocks();
-        var threads = new Thread[size];
-
-        for(int i = 0; i < size; i++) {
-            threads[i] = Thread.ofVirtual().start(() -> {
-                for (int j = 0; j < 1000; j++) {
-                    poc.increment();
-                }
-            });
-        }
-
-        try {
-            for (var thread : threads) thread.join();
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-        }
-
-        System.out.println("Expected 10666, got final counter value: " + poc.counter);
-
+    public Integer checkDeadlocks() {
         var holderThread = Thread.ofVirtual().start(() -> {
             try {
-                poc.backgroundUpdate(50);
+                backgroundUpdate(50);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println("Background update interrupted.");
@@ -118,12 +112,12 @@ public class ReentrantLocks {
         });
 
         var urgentThread = Thread.ofVirtual().start(() -> {
-            System.out.println("Urgent update: " + poc.urgentUpdate(999));
+            System.out.println("Urgent update: " + urgentUpdate(999));
         });
 
         var normalThread = Thread.ofVirtual().start(() -> {
             try {
-                System.out.println("Normal update: " + poc.normalUpdate(100));
+                System.out.println("Normal update: " + normalUpdate(100));
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.out.println("Normal update interrupted.");
@@ -136,9 +130,16 @@ public class ReentrantLocks {
             normalThread.join();
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
-        } finally {
-            System.out.println("Final shared resource value: " + poc.getSharedResource());
         }
+
+        return getSharedResource();
+    }
+
+    public static void run() {
+        ReentrantLocks poc = new ReentrantLocks();
+        System.out.println("=== ReentrantLock with Fair and Unfair Locks ===");
+        System.out.println("Result of counter increment with fair lock: " + poc.checkRaceCondition());
+        System.out.println("Result of updates with unfair lock: " + poc.checkDeadlocks());
     }
 
 }
