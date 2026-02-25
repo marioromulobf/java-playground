@@ -21,4 +21,13 @@ public class ReentrantLocksTest {
 
         Assertions.assertEquals(expectedValue, result, "Result value should match with expected counter value.");
     }
+
+    @Test
+    @DisplayName("Test operations of ReentrantLocks: checkDeadlocks")
+    void testCheckDeadlocks_ShouldReturnExpectedValue() {
+        var result = reentrantLocks.checkDeadlocks();
+        var expectedValue = 1099;
+
+        Assertions.assertEquals(expectedValue, result, "Result value should match with expected value.");
+    }
 }
