@@ -2,6 +2,7 @@ package com.mariofernandes.javapoc.concurrency;
 
 import com.mariofernandes.javapoc.concurrency.lock.ReadWriteLocks;
 import com.mariofernandes.javapoc.concurrency.lock.ReentrantLocks;
+import com.mariofernandes.javapoc.concurrency.lock.StampedLocks;
 
 public class Main {
 
@@ -9,5 +10,6 @@ public class Main {
         System.out.println("=== Java Concurrency - Java Locks and Atomic Variables POC ===\n");
         ReentrantLocks.run();
         ReadWriteLocks.run();
+        StampedLocks.run();
     }
 }
