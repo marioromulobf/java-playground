@@ -48,7 +48,7 @@ public class Conditions {
         }
     }
 
-    public List<String> basicPublishSubscribe() throws InterruptedException{
+    public List<String> basicProduceConsumerCondition() throws InterruptedException{
         List<String> consumedData = new LinkedList<>();
         var producer = Thread.ofVirtual().start(() -> {
             try {
@@ -82,7 +82,7 @@ public class Conditions {
         Conditions conditions = new Conditions();
         System.out.println("=== Conditions ===");
         try {
-            var result = conditions.basicPublishSubscribe();
+            var result = conditions.basicProduceConsumerCondition();
             System.out.println("Consumed data: " + result);
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());

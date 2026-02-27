@@ -16,10 +16,10 @@ public class ConditionsTest {
     }
 
     @Test
-    @DisplayName("Test operations of Conditions: basicPublishSubscribe")
-    void testBasicPublishSubscribe_ShouldReturnExpectedConsumedData() {
+    @DisplayName("Test operations of Conditions: basicProduceConsumerCondition")
+    void testBasicProduceConsumerCondition_ShouldReturnExpectedConsumedData() {
         try {
-            var result = conditions.basicPublishSubscribe();
+            var result = conditions.basicProduceConsumerCondition();
             var expectedResult = List.of(
                     "Data 0", "Data 1", "Data 2", "Data 3", "Data 4", "Data 5", "Data 6", "Data 7", "Data 8", "Data 9");
 
@@ -27,7 +27,7 @@ public class ConditionsTest {
             Assertions.assertEquals(expectedResult.size(), result.size(), "Result size should match with expected consumed data size.");
             Assertions.assertEquals(expectedResult, result, "Result should match with expected consumed data.");
         } catch (Exception e) {
-            Assertions.fail("An error occurred during the testBasicPublishSubscribe execution: " + e.getMessage());
+            Assertions.fail("An error occurred during the testBasicProduceConsumerCondition execution: " + e.getMessage());
         }
     }
 }
