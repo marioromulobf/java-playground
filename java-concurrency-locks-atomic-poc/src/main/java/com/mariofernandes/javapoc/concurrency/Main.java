@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.concurrency;
 
+import com.mariofernandes.javapoc.concurrency.atomic.AtomicIntegers;
 import com.mariofernandes.javapoc.concurrency.lock.Conditions;
 import com.mariofernandes.javapoc.concurrency.lock.ReadWriteLocks;
 import com.mariofernandes.javapoc.concurrency.lock.ReentrantLocks;
@@ -13,5 +14,6 @@ public class Main {
         ReadWriteLocks.run();
         StampedLocks.run();
         Conditions.run();
+        AtomicIntegers.run();
     }
 }
