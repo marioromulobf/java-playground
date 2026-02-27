@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.concurrency;
 
+import com.mariofernandes.javapoc.concurrency.lock.Conditions;
 import com.mariofernandes.javapoc.concurrency.lock.ReadWriteLocks;
 import com.mariofernandes.javapoc.concurrency.lock.ReentrantLocks;
 import com.mariofernandes.javapoc.concurrency.lock.StampedLocks;
@@ -11,5 +12,6 @@ public class Main {
         ReentrantLocks.run();
         ReadWriteLocks.run();
         StampedLocks.run();
+        Conditions.run();
     }
 }
