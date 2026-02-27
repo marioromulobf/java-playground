@@ -1,6 +1,5 @@
 package com.mariofernandes.javapoc.concurrency.lock;
 
-import java.math.BigDecimal;
 import java.util.concurrent.locks.StampedLock;
 
 public class StampedLocks {
