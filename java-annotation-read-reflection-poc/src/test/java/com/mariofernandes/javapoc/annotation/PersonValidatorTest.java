@@ -36,4 +36,18 @@ public class PersonValidatorTest {
         Assertions.assertEquals(expectedViolations.size(), exception.getViolations().size(), "Number of violations should be 4");
         Assertions.assertEquals(expectedViolations, exception.getViolations(), "Violations should be equal to expected values");
     }
+
+    @Test
+    @DisplayName("Test Operations of Annotations Validator: ShouldThrowsValidationExceptionWithOneViolation")
+    void testPersonValidator_ShouldThrowsValidationExceptionWithOneViolation() {
+        var expectedMessage = "Validation failed: [LuckyNumber should be valid (expected: 0..2147483647, got: -1)]";
+        var expectedViolations = List.of("LuckyNumber should be valid (expected: 0..2147483647, got: -1)");
+
+        Person person = new Person("Mario", "Brazil", 30, -1);
+        ValidationException exception = Assertions.assertThrowsExactly(ValidationException.class, () -> Validator.validate(person));
+
+        Assertions.assertEquals(expectedMessage, exception.getMessage(), "Exception message should be equal to expected value");
+        Assertions.assertEquals(expectedViolations.size(), exception.getViolations().size(), "Number of violations should be 1");
+        Assertions.assertEquals(expectedViolations, exception.getViolations(), "Violations should be equal to expected values");
+    }
 }
