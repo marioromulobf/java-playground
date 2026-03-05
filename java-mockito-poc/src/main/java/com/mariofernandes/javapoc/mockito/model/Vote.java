@@ -49,6 +49,49 @@ public class Vote {
         this.timestamp = timestamp;
     }
 
+    public static class Builder {
+        private Long id;
+        private Long personId;
+        private String option;
+        private String session;
+        private Long timestamp;
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPersonId(Long personId) {
+            this.personId = personId;
+            return this;
+        }
+
+        public Builder withOption(String option) {
+            this.option = option;
+            return this;
+        }
+
+        public Builder withSession(String session) {
+            this.session = session;
+            return this;
+        }
+
+        public Builder withTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+        }
+
+        public Vote build() {
+            Vote vote = new Vote();
+            vote.setId(id);
+            vote.setPersonId(personId);
+            vote.setOption(option);
+            vote.setSession(session);
+            vote.setTimestamp(timestamp);
+            return vote;
+        }
+    }
+
     public String toString() {
         return "Vote{id=" + id + ", personId=" + personId + ", option='" + option + "', session='" + session + "', timestamp=" + timestamp + "}";
     }
