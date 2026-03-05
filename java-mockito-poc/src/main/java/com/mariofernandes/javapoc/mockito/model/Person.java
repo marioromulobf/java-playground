@@ -105,4 +105,88 @@ public class Person {
         this.educationLevel = educationLevel;
     }
 
+    public static class Builder {
+        private Long id;
+        private String name;
+        private Integer age;
+        private String country;
+        private String email;
+        private String phoneNumber;
+        private String occupation;
+        private BigDecimal regularIncome;
+        private BigDecimal irregularIncome;
+        private String maritalStatus;
+        private String educationLevel;
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withAge(Integer age) {
+            this.age = age;
+            return this;
+        }
+
+        public Builder withCountry(String country) {
+            this.country = country;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder withPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder withOccupation(String occupation) {
+            this.occupation = occupation;
+            return this;
+        }
+
+        public Builder withRegularIncome(BigDecimal regularIncome) {
+            this.regularIncome = regularIncome;
+            return this;
+        }
+
+        public Builder withIrregularIncome(BigDecimal irregularIncome) {
+            this.irregularIncome = irregularIncome;
+            return this;
+        }
+
+        public Builder withMaritalStatus(String maritalStatus) {
+            this.maritalStatus = maritalStatus;
+            return this;
+        }
+
+        public Builder withEducationLevel(String educationLevel) {
+            this.educationLevel = educationLevel;
+            return this;
+        }
+
+        public Person build() {
+            Person person = new Person();
+            person.setId(id);
+            person.setName(name);
+            person.setAge(age);
+            person.setCountry(country);
+            person.setEmail(email);
+            person.setPhoneNumber(phoneNumber);
+            person.setOccupation(occupation);
+            person.setRegularIncome(regularIncome);
+            person.setIrregularIncome(irregularIncome);
+            person.setMaritalStatus(maritalStatus);
+            person.setEducationLevel(educationLevel);
+            return person;
+        }
+    }
 }
