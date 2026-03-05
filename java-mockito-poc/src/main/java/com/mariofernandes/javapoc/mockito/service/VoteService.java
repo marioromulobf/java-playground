@@ -16,7 +16,7 @@ public class VoteService {
         this.deduplicationService = deduplicationService;
     }
 
-    String processVote(Vote vote) {
+    public String processVote(Vote vote) {
         validateVote(vote);
         if (personRepository.findById(vote.getPersonId()).isEmpty()) {
             throw new IllegalArgumentException("Person with id " + vote.getPersonId() + " does not exist");
