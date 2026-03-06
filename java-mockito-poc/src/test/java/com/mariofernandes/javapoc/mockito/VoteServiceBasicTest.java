@@ -15,10 +15,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -62,4 +64,14 @@ public class VoteServiceBasicTest {
         verify(voteRepository).insertVote(any(Vote.class));
     }
 
+    @Test
+    void testBasicMockito_MockList() {
+        List<String> mockedList = mock(List.class);
+
+        mockedList.add("new item");
+        mockedList.clear();
+
+        verify(mockedList).add("new item");
+        verify(mockedList).clear();
+    }
 }
