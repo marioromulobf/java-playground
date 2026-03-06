@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,5 +74,23 @@ public class VoteServiceBasicTest {
 
         verify(mockedList).add("new item");
         verify(mockedList).clear();
+    }
+
+    @Test
+    void testBasicMockito_Stubbing() {
+        LinkedList<String> mockedList = mock(LinkedList.class);
+
+        //stubbing
+        when(mockedList.get(0)).thenReturn("my item");
+        when(mockedList.get(1)).thenThrow(new RuntimeException("My exception"));
+
+        Assertions.assertEquals("my item", mockedList.get(0));
+        RuntimeException exception = Assertions.assertThrowsExactly(RuntimeException.class, ()  -> mockedList.get(1));
+        Assertions.assertEquals("My exception", exception.getMessage());
+        Assertions.assertNull(mockedList.get(666));
+
+        verify(mockedList).get(0);
+        verify(mockedList).get(1);
+        verify(mockedList).get(666);
     }
 }
