@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.hamcrest.MockitoHamcrest;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.LinkedList;
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -92,5 +96,35 @@ public class VoteServiceBasicTest {
         verify(mockedList).get(0);
         verify(mockedList).get(1);
         verify(mockedList).get(666);
+    }
+
+    @Test
+    void testBasicMockito_ArgumentMatchers() {
+        List<String> mockedList = mock(List.class);
+
+        // anyInt() matches any int value
+        when(mockedList.get(anyInt())).thenReturn("my element");
+
+        // custom argument matcher
+        when(mockedList.contains(argThat(isValid()))).thenReturn(true);
+
+        mockedList.add("any string");
+
+        Assertions.assertEquals("my element", mockedList.get(666));
+        Assertions.assertFalse(mockedList.contains(666));
+        Assertions.assertTrue(mockedList.contains("It's me, Mario!"));
+
+        // verify with argument matchers
+        verify(mockedList).get(anyInt());
+        verify(mockedList).add(argThat(str -> str.length() > 5));
+    }
+
+    private ArgumentMatcher<Object> isValid() {
+        return arg -> {
+            if (arg instanceof String str) {
+                return str.contains("Mario");
+            }
+            return false;
+        };
     }
 }
