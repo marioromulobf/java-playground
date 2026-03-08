@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -22,12 +23,14 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.atMostOnce;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -155,6 +158,36 @@ public class VoteServiceBasicTest {
         verify(mockedList, atMostOnce()).add("only one");
         verify(mockedList, atLeast(2)).add("should be 3");
         verify(mockedList, atMost(5)).add("should be 3");
+    }
+
+
+    @Test
+    void testBasicMockito_VerificationInOrder() {
+        List<String> mockedList = mock(List.class);
+
+        mockedList.add("first item");
+        mockedList.add("second item");
+        mockedList.add("last item");
+
+        InOrder inOrder = inOrder(mockedList);
+        inOrder.verify(mockedList).add("first item");
+        inOrder.verify(mockedList).add("last item"); // last interaction
+        inOrder.verifyNoMoreInteractions(); // verify that there are no more interactions after the last one
+
+        List<String> firstMock = mock(List.class);
+        List<String> secondMock = mock(List.class);
+        List<String> lastMock = mock(List.class);
+
+        firstMock.add("was called first");
+        secondMock.add("was called second");
+        lastMock.add("was called last");
+
+        InOrder inOrderManyMocks = inOrder(firstMock, secondMock, lastMock);
+        inOrderManyMocks.verify(firstMock).add(anyString());
+        inOrderManyMocks.verify(secondMock).add(argThat(arg -> arg.contains("second")));
+        // if we verify no more interactions before verifying the last mock, it will fail
+        //inOrderManyMocks.verifyNoMoreInteractions(); // it will fail
+        inOrderManyMocks.verify(lastMock).add("was called last");
     }
 
     private ArgumentMatcher<Object> isValid() {
