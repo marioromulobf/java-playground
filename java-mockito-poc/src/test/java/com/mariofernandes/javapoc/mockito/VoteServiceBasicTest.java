@@ -14,7 +14,6 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.hamcrest.MockitoHamcrest;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.LinkedList;
@@ -25,7 +24,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -117,6 +122,39 @@ public class VoteServiceBasicTest {
         // verify with argument matchers
         verify(mockedList).get(anyInt());
         verify(mockedList).add(argThat(str -> str.length() > 5));
+    }
+
+
+    @Test
+    void testBasicMockito_ExactNumberOfInvocations() {
+        List<String> mockedList = mock(List.class);
+
+        mockedList.add("only one");
+
+        mockedList.add("twice");
+        mockedList.add("twice");
+
+        mockedList.add("should be 3");
+        mockedList.add("should be 3");
+        mockedList.add("should be 3");
+
+        // times(1) is default, so we can omit it
+        verify(mockedList).add("only one");
+        verify(mockedList, times(1)).add("only one");
+
+        // verify exact number of invocations
+        verify(mockedList, times(2)).add("twice");
+        verify(mockedList, times(3)).add("should be 3");
+
+        // never() is an alias for times(0)
+        verify(mockedList, times(0)).add("never called");
+        verify(mockedList, never()).add("never called");
+
+        // verify at least/most
+        verify(mockedList, atLeastOnce()).add("only one");
+        verify(mockedList, atMostOnce()).add("only one");
+        verify(mockedList, atLeast(2)).add("should be 3");
+        verify(mockedList, atMost(5)).add("should be 3");
     }
 
     private ArgumentMatcher<Object> isValid() {
