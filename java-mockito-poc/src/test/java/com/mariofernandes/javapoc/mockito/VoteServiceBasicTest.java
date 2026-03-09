@@ -190,6 +190,36 @@ public class VoteServiceBasicTest {
         inOrderManyMocks.verify(lastMock).add("was called last");
     }
 
+    @Test
+    void testBasicMockito_StubbingConsecutiveCalls() {
+        List<String> mockedList = mock(List.class);
+
+        when(mockedList.get(666)).thenThrow(new RuntimeException("First call"))
+                .thenReturn("Second call");
+
+        // first call
+        RuntimeException exception = Assertions.assertThrowsExactly(RuntimeException.class, () -> mockedList.get(666));
+        Assertions.assertEquals("First call", exception.getMessage());
+
+        // second call
+        Assertions.assertEquals("Second call", mockedList.get(666));
+
+        // next calls
+        Assertions.assertEquals("Second call", mockedList.get(666));
+
+        // shorter syntax
+        when(mockedList.remove(666)).thenReturn("First remove", "Second remove", "Third remove");
+        Assertions.assertEquals("First remove", mockedList.remove(666));
+        Assertions.assertEquals("Second remove", mockedList.remove(666));
+        Assertions.assertEquals("Third remove", mockedList.remove(666));
+        Assertions.assertEquals("Third remove", mockedList.remove(666));
+
+        // overriding previous stubbing
+        when(mockedList.size()).thenReturn(13);
+        when(mockedList.size()).thenReturn(33);
+        Assertions.assertEquals(33, mockedList.size());
+    }
+
     private ArgumentMatcher<Object> isValid() {
         return arg -> {
             if (arg instanceof String str) {
