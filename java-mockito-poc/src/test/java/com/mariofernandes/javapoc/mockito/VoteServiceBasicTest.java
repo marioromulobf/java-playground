@@ -15,7 +15,9 @@ import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.Answer;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -218,6 +220,22 @@ public class VoteServiceBasicTest {
         when(mockedList.size()).thenReturn(13);
         when(mockedList.size()).thenReturn(33);
         Assertions.assertEquals(33, mockedList.size());
+    }
+
+    @Test
+    void testBasicMockito_StubbingWithCallbacks() {
+        List<String> mockedList = mock(List.class);
+
+        when(mockedList.get(anyInt())).thenAnswer(new Answer<Object>() {
+            public Object answer(InvocationOnMock invocation) {
+                Object[] args = invocation.getArguments();
+                Integer index = (Integer) args[0];
+                return "Element at index " + index;
+            }
+        });
+
+        Assertions.assertEquals("Element at index -5", mockedList.get(-5));
+        Assertions.assertEquals("Element at index 666", mockedList.get(666));
     }
 
     private ArgumentMatcher<Object> isValid() {
