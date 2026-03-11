@@ -19,6 +19,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,7 @@ import static org.mockito.Mockito.atMostOnce;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -236,6 +238,23 @@ public class VoteServiceBasicTest {
 
         Assertions.assertEquals("Element at index -5", mockedList.get(-5));
         Assertions.assertEquals("Element at index 666", mockedList.get(666));
+    }
+
+    @Test
+    void testBasicMockito_SpyingRealObjects() {
+        List<String> realList = new ArrayList<>();
+        List<String> spyList = spy(realList);
+
+        when(spyList.size()).thenReturn(666);
+
+        spyList.add("one");
+        spyList.add("two");
+
+        Assertions.assertEquals(666, spyList.size());
+        Assertions.assertEquals("one", spyList.getFirst());
+
+        verify(spyList).add("one");
+        verify(spyList).add("two");
     }
 
     private ArgumentMatcher<Object> isValid() {
