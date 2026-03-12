@@ -271,6 +271,20 @@ public class VoteServiceBasicTest {
         Assertions.assertEquals("my bdd element", result);
     }
 
+    @Test
+    void testBasicMockito_ArgumentCaptor() {
+        List<String> mockedList = mock(List.class);
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+
+        mockedList.add("my argument captured");
+        mockedList.add("my argument captured 2");
+
+        verify(mockedList, times(2)).add(captor.capture());
+
+        Assertions.assertEquals("my argument captured 2", captor.getValue());
+        Assertions.assertEquals(List.of("my argument captured", "my argument captured 2"), captor.getAllValues());
+    }
+
     private ArgumentMatcher<Object> isValid() {
         return arg -> {
             if (arg instanceof String str) {
