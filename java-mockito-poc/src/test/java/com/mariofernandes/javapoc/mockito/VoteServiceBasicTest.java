@@ -29,6 +29,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.atMost;
@@ -255,6 +257,18 @@ public class VoteServiceBasicTest {
 
         verify(spyList).add("one");
         verify(spyList).add("two");
+    }
+
+    @Test
+    void testBasicMockito_BDDStyle() {
+        List<String> mockedList = mock(List.class);
+
+        given(mockedList.get(anyInt())).willReturn("my bdd element");
+
+        String result = mockedList.get(666);
+
+        then(mockedList).should(times(1)).get(anyInt());
+        Assertions.assertEquals("my bdd element", result);
     }
 
     private ArgumentMatcher<Object> isValid() {
