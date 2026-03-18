@@ -32,6 +32,7 @@ revert("Hello") -> "olleH"
 10. Line 22 (main): the output "Reverted: olumoR oiraM" is printed to the console.
 
 ## Table Test - Implementation 3
+
 1. Line 18 (main): the DPK01Impl3 class is instantiated.
 2. Line 19 (main): the input string "Mario Romulo" is defined.
 3. Line 21 (main): the `revertString` method is called with the input string.
@@ -43,4 +44,19 @@ revert("Hello") -> "olleH"
 9. Line 14 (revertString): after the loop completes, a new string is created from the `reverted` char array and returned. In this case, it will return "olumoR oiraM".
 10. Line 23 (main): the output "Original: Mario Romulo" is printed to the console.
 11. Line 24 (main): the output "Reverted: olumoR oiraM" is printed to the console.
+
+## Table Test - Implementation 4
+
+1. Line 18 (main): the DPK01Impl4 class is instantiated.
+2. Line 19 (main): the input string "Mario Romulo" is defined.
+3. Line 21 (main): the `revertString` method is called with the input string.
+4. Line 5 (revertString): a variable `reverted` is initialized as an empty string.
+5. Line 6 (revertString): a variable `count` of type int is initialized with 1.
+6. Line 8 (revertString): a while loop runs until `count` reaches the length of the input string.
+7. Line 9 (revertString): during each iteration, the (input length minus `count`) character of the input string is appended to the `reverted` variable.
+8. Line 10 (revertString): during each iteration, the `count` variable is incremented by 1.
+9. Line 13 (revertString): after the loop completes, the `reverted` string is returned. In this case, it will return "olumoR oiraM".
+10. Line 23 (main): the output "Original: Mario Romulo" is printed to the console.
+11. Line 24 (main): the output "Reverted: olumoR oiraM" is printed to the console.
+
 
