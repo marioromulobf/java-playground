@@ -13,10 +13,10 @@ public class DPK01Impl5 {
 
     public static void main(String[] args) {
         System.out.println("--> DPK 01 - Implementation 05 <--");
-        DPK01Impl5 dpk01Impl4 = new DPK01Impl5();
+        DPK01Impl5 dpk01Impl5 = new DPK01Impl5();
         String str = "Mario Romulo";
 
-        String reverted = dpk01Impl4.revertString(str);
+        String reverted = dpk01Impl5.revertString(str);
 
         System.out.println("Original: " + str);
         System.out.println("Reverted: " + reverted);
