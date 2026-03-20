@@ -129,3 +129,20 @@ revert("Hello") -> "olleH"
 12. Line 19 (revertString): after the loop completes, a new string is created from the `reverted` char array and returned. In this case, it will return "olumoR oiraM".
 13. Line 29 (main): the output "Original: Mario Romulo" is printed to the console.
 14. Line 30 (main): the output "Reverted: olumoR oiraM" is printed to the console.
+
+## Table Test - Implementation 10
+
+1. Line 24 (main): the DPK01Impl10 class is instantiated.
+2. Line 25 (main): the input string "Mario Romulo" is defined.
+3. Line 27 (main): the `revertString` method is called with the input string.
+4. Line 5-7 (revertString): if the input string is null or its length is less than or equal to 1, it is returned as is.
+5. Line 9 (revertString): a variable `begin` of type int is initialized with the length of the input divided by 2.
+6. Line 10 (revertString): a variable `lengthMinusOne` of type int is initialized with the value of input string length minus 1.
+7. Line 11 (revertString): a variable `reverted` of type char array is initialized with the char array of the input string.
+8. Line 13 (revertString): a for loop iterates over the array, starting from `begin` to value of input string length.
+9. Line 14 (revertString): during each iteration, a viable `auxChar` of type char is initialized with the i-th character of the `reverted` array.
+10. Line 15 (revertString): during each iteration, the i-th position of the array is assigned the character at the `lengthMinusOne - i` position.
+11. Line 16 (revertString): during each iteration, the `lengthMinusOne - i` position of the array is assigned the value of `auxChar`.
+12. Line 19 (revertString): after the loop completes, a new string is created from the `reverted` char array and returned. In this case, it will return "olumoR oiraM".
+13. Line 29 (main): the output "Original: Mario Romulo" is printed to the console.
+14. Line 30 (main): the output "Reverted: olumoR oiraM" is printed to the console.
