@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIf;
 import org.junit.jupiter.api.condition.EnabledIf;
 
-public class CustomConditionsTess {
+public class CustomConditionsTests {
 
     @Test
     @EnabledIf("myCustomCondition")
