@@ -11,9 +11,9 @@ public class DPK02Impl8 {
 
         var result = new ArrayList<>(list);
         int max = list.size() / 2;
-        for (int i = 1; i < max; i++) {
+        for (int i = 1; i <= max; i++) {
             var aux = list.get(i - 1);
-            result.set(i, list.get(list.size() - i));
+            result.set(i - 1, list.get(list.size() - i));
             result.set(list.size() - i, aux);
         }
 
