@@ -76,19 +76,32 @@ revert([1,2,3,4,5]) -> [5,4,3,2,1]
 5. Line 7-9 (revert): if the input list is null or its size is less than or equal to 1, the input list is returned as is.
 6. Line 12 (revert): a variable `result` of type list is instantiated.
 7. Line 13 (revert): a for loop runs as long as `result` size is less than the input list size.
-8. Line 14 (revert): during each iteration, the value at the `i-th` position of input is added to `result`
+8. Line 14 (revert): during each iteration, the value at the `i-th` position of input is added to `result`.
 9. Line 17 (revert): after the loop completes, the `result` list is returned. In this case, it will return "[5, 4, 3, 2, 1]".
 10. Line 29 (main): the output "After revert: [5, 4, 3, 2, 1]" is printed to the console.
 
 ## Table Test - Implementation 6
 
-1. Line 22 (main): the DPK02Impl5 class is instantiated.
+1. Line 22 (main): the DPK02Impl6 class is instantiated.
 2. Line 24 (main): the input list [1, 2, 3, 4, 5] is defined.
 3. Line 25 (main): the output "Before revert: [1, 2, 3, 4, 5]" is printed to the console.
 4. Line 27 (main): the `revert` method is called with the input list.
 5. Line 7-9 (revert): if the input list is null or its size is less than or equal to 1, the input list is returned as is.
 6. Line 12 (revert): a variable `result` of type list is instantiated.
 7. Line 13 (revert): a for loop iterates over the input in reverse order, starting the index value from the input list size minus one down to zero.
-8. Line 14 (revert): during each iteration, the value at the `i-th` position of input is added to `result`
+8. Line 14 (revert): during each iteration, the value at the `i-th` position of input is added to `result`.
+9. Line 17 (revert): after the loop completes, the `result` list is returned. In this case, it will return "[5, 4, 3, 2, 1]".
+10. Line 29 (main): the output "After revert: [5, 4, 3, 2, 1]" is printed to the console.
+
+## Table Test - Implementation 7
+
+1. Line 22 (main): the DPK02Impl7 class is instantiated.
+2. Line 24 (main): the input list [1, 2, 3, 4, 5] is defined.
+3. Line 25 (main): the output "Before revert: [1, 2, 3, 4, 5]" is printed to the console.
+4. Line 27 (main): the `revert` method is called with the input list.
+5. Line 7-9 (revert): if the input list is null or its size is less than or equal to 1, the input list is returned as is.
+6. Line 12 (revert): a variable `result` of type list is instantiated.
+7. Line 13 (revert): a for loop iterates over the input in crescent order, starting the index value from one to the input list size.
+8. Line 14 (revert): during each iteration, the value at `input size - i` position of input is added to `result`.
 9. Line 17 (revert): after the loop completes, the `result` list is returned. In this case, it will return "[5, 4, 3, 2, 1]".
 10. Line 29 (main): the output "After revert: [5, 4, 3, 2, 1]" is printed to the console.
