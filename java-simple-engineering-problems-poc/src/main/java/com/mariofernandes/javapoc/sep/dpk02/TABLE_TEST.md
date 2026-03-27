@@ -117,7 +117,21 @@ revert([1,2,3,4,5]) -> [5,4,3,2,1]
 7. Line 13 (revert): a variable `max` of type int is initialized with the input size divided by 2.
 8. Line 14 (revert): a for loop iterates over the input list, starting from 0 to value of `max`.
 9. Line 15 (revert): during each iteration, a viable `aux` is initialized with the `(i-1)-th` element of input list.
-10. Line 16 (revert): during each iteration, the element at the `i-th - 1` position of `result` is replaced with the element at the `input size - i` position of input list.
+10. Line 16 (revert): during each iteration, the element at the `(i-1)-th` position of `result` is replaced with the element at the `input size - i` position of input list.
 11. Line 17 (revert): during each iteration, the element at the `input size - i` position of `result` is replaced with `aux`.
 12. Line 20 (revert): after the loop completes, the `result` list is returned. In this case, it will return "[5, 4, 3, 2, 1]".
 13. Line 32 (main): the output "After revert: [5, 4, 3, 2, 1]" is printed to the console.
+
+## Table Test - Implementation 9
+
+1. Line 22 (main): the DPK02Impl9 class is instantiated.
+2. Line 24 (main): the input list [1, 2, 3, 4, 5] is defined with the `Arrays.asList` method.
+3. Line 25 (main): the output "Before revert: [1, 2, 3, 4, 5]" is printed to the console.
+4. Line 27 (main): the `revert` method is called with the input list.
+5. Line 8-10 (revert): if the input list is null or its size is less than or equal to 1, the flow is stopped with a return.
+6. Line 12 (revert): a variable `max` of type int is initialized with the input size divided by 2.
+7. Line 13 (revert): a for loop iterates over the input list, starting from 0 to value of `max`.
+8. Line 14 (revert): during each iteration, a viable `aux` is initialized with the `(i-1)-th` element of input list.
+9. Line 15 (revert): during each iteration, the element at the `(i-1)-th` position is replaced with the element at the `input size - i` position of input list.
+10. Line 16 (revert): during each iteration, the element at the `input size - i` position of input is replaced with `aux`.
+11. Line 29 (main): the output "After revert: [5, 4, 3, 2, 1]" is printed to the console.
