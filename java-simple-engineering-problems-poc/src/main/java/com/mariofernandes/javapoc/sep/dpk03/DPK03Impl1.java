@@ -10,11 +10,12 @@ public class DPK03Impl1 {
     private final Map<String, Person> mapByMail = new HashMap<>();
 
     public void add(Person person) {
-        if (person != null) {
-            map.put(person.id(), person);
-            mapByName.put(person.name(), person);
-            mapByMail.put(person.email(), person);
+        if (person == null) {
+            return;
         }
+        map.put(person.id(), person);
+        mapByName.put(person.name(), person);
+        mapByMail.put(person.email(), person);
     }
 
     public Person lookup(int id) {
@@ -37,12 +38,13 @@ public class DPK03Impl1 {
         dkp03Impl1.add(new Person(3, "Romulo", "romulo@mail.com"));
 
         var result = dkp03Impl1.lookup(1);
-        var resultByName = dkp03Impl1.lookupByName("John");
-        var resultByMail = dkp03Impl1.lookupByMail("john@john.john.com");
-
         System.out.println("lookup(1) -> " + result.name());
-        System.out.println("lookup(\"John\") -> " + resultByName.email());
-        System.out.println("lookup(\"john@john.john.com\") -> " + resultByMail.name());
+
+        var resultByName = dkp03Impl1.lookupByName("John");
+        System.out.println("lookupByName(\"John\") -> " + resultByName.email());
+
+        var resultByMail = dkp03Impl1.lookupByMail("john@john.john.com");
+        System.out.println("lookupByMail(\"john@john.john.com\") -> " + resultByMail.name());
     }
 
     public record Person(int id, String name, String email) {}
