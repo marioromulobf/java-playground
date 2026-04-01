@@ -58,3 +58,24 @@ lookup("john@john.jhon.com") -> "John"
 17. Line 41 (main): the `lookup` method is called with the input `john@john.john.com`.
 18. Line 25 (lookup): returns the value associated with the input `email`, as a key, in the variable `mapStringKey` of type Map.
 19. Line 42 (main): the output "lookup(john@john.john.com) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
+
+## Table Test - Implementation 3
+
+1. Line 8: a variable `map` of type Map is instantiated.
+2. Line 29 (main): the DPK03Impl3 class is instantiated.
+3. Line 30 (main): the `add` method is called with an instance of Person with `id=1`, `name=John` and, `email=john@john.john.com`.
+4. Line 31 (main): the `add` method is called with an instance of Person with `id=2`, `name=Mario` and, `email=mario@mail.com`.
+5. Line 32 (main): the `add` method is called with an instance of Person with `id=3`, `name=Romulo` and, `email=romulo@mail.com`.
+6. Line 11-13 (add): if the input person is null, the flow is stopped with a return.
+7. Line 14 (add): associates the input person as value with the person id as key in the variable `map` of type Map.
+8. Line 15 (add): associates the input person as value with the person name as key in the variable `map` of type Map.
+9. Line 16 (add): associates the input person as value with the person email as key in the variable `map` of type Map.
+10. Line 34 (main): the `lookup` method is called with the input `1`.
+11. Line 20 (lookup): returns the value associated with the input `id`, as a key, in the variable `map` of type Map.
+12. Line 35 (main): the output "lookup(1) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
+13. Line 37 (main): the `lookup` method is called with the input `John`.
+14. Line 24 (lookup): returns the value associated with the input `name`, as a key, in the variable `map` of type Map.
+15. Line 38 (main): the output "lookup(John) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
+16. Line 40 (main): the `lookup` method is called with the input `john@john.john.com`.
+17. Line 24 (lookup): returns the value associated with the input `email`, as a key, in the variable `map` of type Map.
+18. Line 41 (main): the output "lookup(john@john.john.com) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
