@@ -10,23 +10,20 @@ public class SkipLists {
 
     private final Node header;
     private int currentLevel;
-    private final RandomGenerator random;
-    private long seed = -5292398372388667826L;
+    private static final ScopedValue<RandomGenerator> RANDOM = ScopedValue.newInstance();
+    private final RandomGenerator defaultRandom;
 
     public SkipLists(int maxLevel) {
         this.MAX_LEVEL = maxLevel;
         header = new Node(-1, Long.MIN_VALUE, MAX_LEVEL);
         currentLevel = INITIAL_LEVEL;
-        random = RandomGenerator.getDefault();
-        seed = random.nextLong();
-        //random.setSeed(seed);
+        defaultRandom = RandomGenerator.getDefault();
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
         sb.append("SkipLists{");
-        sb.append("\n\tRandom seed: ").append(seed);
         for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
             sb.append("\n\tLevel ").append(i).append(": ");
             var currentNode = header.nextInLevel(i);
@@ -63,13 +60,15 @@ public class SkipLists {
         var currentNode = header;
 
         for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
-            while (currentNode.nextInLevel(i) != null && currentNode.nextInLevel(i).key() < key) {
-                currentNode = currentNode.nextInLevel(i);
+            var next = currentNode.nextInLevel(i);
+            while (next != null && next.key() < key) {
+                currentNode = next;
+                next = currentNode.nextInLevel(i);
             }
             update[i] = currentNode;
         }
 
-        currentNode = currentNode != null ? currentNode.nextInLevel(INITIAL_LEVEL) : null;
+        currentNode = currentNode.nextInLevel(INITIAL_LEVEL);
 
         if (currentNode != null && currentNode.key() == key) {
             // do nothing, because i'm using record
@@ -96,8 +95,10 @@ public class SkipLists {
         var currentNode = header;
 
         for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
-            while (currentNode.nextInLevel(i) != null && currentNode.nextInLevel(i).key() < key) {
-                currentNode = currentNode.nextInLevel(i);
+            var next = currentNode.nextInLevel(i);
+            while (next != null && next.key() < key) {
+                currentNode = next;
+                next = currentNode.nextInLevel(i);
             }
             update[i] = currentNode;
         }
@@ -117,12 +118,13 @@ public class SkipLists {
     }
 
     private int getRandomLevel() {
-        var newLevel = INITIAL_LEVEL;
+        return ScopedValue.where(RANDOM, defaultRandom).call(() -> {
+            var newLevel = INITIAL_LEVEL;
 
-        while (newLevel < MAX_LEVEL && random.nextDouble() < P_FRACTION) {
-            newLevel++;
-        }
-
-        return newLevel;
+            while (newLevel < MAX_LEVEL && RANDOM.get().nextDouble() < P_FRACTION) {
+                newLevel++;
+            }
+            return newLevel;
+        });
     }
 }

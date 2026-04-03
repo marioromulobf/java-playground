@@ -1,16 +1,18 @@
 package com.mariofernandes.javapoc.skiplists.v2;
 
-public record Node(int key, long value, Node[] forward) {
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
+public record Node(int key, long value, AtomicReferenceArray<Node> forward) {
     public Node(int key, long value, int level) {
-        this(key, value, new Node[level + 1]);
+        this(key, value, new AtomicReferenceArray<>(level + 1));
     }
 
     public Node nextInLevel(int level) {
-        return forward[level];
+        return forward.get(level);
     }
 
     public void setNextInLevel(int level, Node node) {
-        forward[level] = node;
+        forward.set(level, node);
     }
 
     @Override
