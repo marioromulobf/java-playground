@@ -1,4 +1,4 @@
-package com.mariofernandes.javapoc.skiplists;
+package com.mariofernandes.javapoc.skiplists.v1;
 
 public class Node {
     private int key;

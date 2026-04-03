@@ -1,9 +1,12 @@
 package com.mariofernandes.javapoc.skiplists;
 
+import com.mariofernandes.javapoc.skiplists.v2.SkipLists;
+
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("=== Java Skip Lists POC ===\n");
+        // 16 is appropriate for data structures containing up to 2^16 elements.
         SkipLists skipLists = new SkipLists(16);
         skipLists.insert(3, 3L);
         skipLists.insert(6, 6L);
@@ -13,6 +16,7 @@ public class Main {
         skipLists.insert(19, 19L);
         skipLists.insert(17, 17L);
         skipLists.insert(26, 26L);
+        skipLists.insert(21, 21L);
         skipLists.insert(21, 21L);
         skipLists.insert(25, 25L);
         System.out.println(skipLists);

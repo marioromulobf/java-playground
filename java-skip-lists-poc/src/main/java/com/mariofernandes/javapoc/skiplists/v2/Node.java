@@ -5,11 +5,16 @@ public record Node(int key, long value, Node[] forward) {
         this(key, value, new Node[level + 1]);
     }
 
-    public Node next(int level) {
+    public Node nextInLevel(int level) {
         return forward[level];
     }
 
-    public void setNext(int level, Node node) {
+    public void setNextInLevel(int level, Node node) {
         forward[level] = node;
+    }
+
+    @Override
+    public String toString() {
+        return "{ key=" + key + ", value=" + value + " }";
     }
 }
