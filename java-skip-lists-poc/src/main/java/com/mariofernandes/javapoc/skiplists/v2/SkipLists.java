@@ -37,7 +37,7 @@ public class SkipLists {
         return sb.toString();
     }
 
-    public OptionalLong search(Integer key) {
+    public OptionalLong search(int key) {
         var currentNode = header;
 
         for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
@@ -55,39 +55,41 @@ public class SkipLists {
                 : OptionalLong.empty();
     }
 
-    public void insert(int key, Long value) {
-        var update = new Node[MAX_LEVEL + 1];
-        var currentNode = header;
+    public void insert(int key, long value) {
+        ScopedValue.where(RANDOM, defaultRandom).run(() -> {
+            var update = new Node[MAX_LEVEL + 1];
+            var currentNode = header;
 
-        for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
-            var next = currentNode.nextInLevel(i);
-            while (next != null && next.key() < key) {
-                currentNode = next;
-                next = currentNode.nextInLevel(i);
-            }
-            update[i] = currentNode;
-        }
-
-        currentNode = currentNode.nextInLevel(INITIAL_LEVEL);
-
-        if (currentNode != null && currentNode.key() == key) {
-            // do nothing, because i'm using record
-        } else {
-            var newLevel = getRandomLevel();
-
-            if (newLevel > currentLevel) {
-                for (int i = currentLevel + 1; i <= newLevel; i++) {
-                    update[i] = header;
+            for (int i = currentLevel; i >= INITIAL_LEVEL; i--) {
+                var next = currentNode.nextInLevel(i);
+                while (next != null && next.key() < key) {
+                    currentNode = next;
+                    next = currentNode.nextInLevel(i);
                 }
-                currentLevel = newLevel;
+                update[i] = currentNode;
             }
 
-            var newNode = new Node(key, value, newLevel);
-            for (int i = INITIAL_LEVEL; i <= newLevel; i++) {
-                newNode.setNextInLevel(i, update[i].nextInLevel(i));
-                update[i].setNextInLevel(i, newNode);
+            currentNode = currentNode.nextInLevel(INITIAL_LEVEL);
+
+            if (currentNode != null && currentNode.key() == key) {
+                // do nothing, because i'm using record
+            } else {
+                var newLevel = getRandomLevel();
+
+                if (newLevel > currentLevel) {
+                    for (int i = currentLevel + 1; i <= newLevel; i++) {
+                        update[i] = header;
+                    }
+                    currentLevel = newLevel;
+                }
+
+                var newNode = new Node(key, value, newLevel);
+                for (int i = INITIAL_LEVEL; i <= newLevel; i++) {
+                    newNode.setNextInLevel(i, update[i].nextInLevel(i));
+                    update[i].setNextInLevel(i, newNode);
+                }
             }
-        }
+        });
     }
 
     public void delete(int key) {
@@ -118,13 +120,12 @@ public class SkipLists {
     }
 
     private int getRandomLevel() {
-        return ScopedValue.where(RANDOM, defaultRandom).call(() -> {
-            var newLevel = INITIAL_LEVEL;
+        var newLevel = INITIAL_LEVEL;
 
-            while (newLevel < MAX_LEVEL && RANDOM.get().nextDouble() < P_FRACTION) {
-                newLevel++;
-            }
-            return newLevel;
-        });
+        while (newLevel < MAX_LEVEL && RANDOM.get().nextDouble() < P_FRACTION) {
+            newLevel++;
+        }
+
+        return newLevel;
     }
 }
