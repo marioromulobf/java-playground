@@ -20,6 +20,10 @@ public class SkipLists {
         defaultRandom = RandomGenerator.getDefault();
     }
 
+    public Node getHeader() {
+        return header;
+    }
+
     @Override
     public String toString() {
         var sb = new StringBuilder();
