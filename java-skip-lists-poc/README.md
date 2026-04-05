@@ -2,6 +2,11 @@
 
 **Skip Lists implementation with performance benchmarking using JMH**
 
+![How skip lists works](SkipList-work.png)
+
+*Image source:  Pugh, W. (1990). ["Skip lists: A probabilistic alternative to balanced trees"](https://ftp.cs.umd.edu/pub/skipLists/skiplists.pdf). *
+
+
 ### Tech Stack
 * Java 25 (LTS)
 * Maven 3.x
