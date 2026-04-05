@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.random.RandomGenerator;
 
-public class SkipListsFunctionalTests {
+public class SkipListsTests {
 
     private SkipLists skipLists;
     private static final int MAX_LEVEL = 5;

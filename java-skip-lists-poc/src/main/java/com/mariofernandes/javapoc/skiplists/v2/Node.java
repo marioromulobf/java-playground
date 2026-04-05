@@ -15,6 +15,10 @@ public record Node(int key, long value, AtomicReferenceArray<Node> forward) {
         forward.set(level, node);
     }
 
+    public boolean compareAndSetNextInLevel(int level, Node observedNext, Node node) {
+        return forward.compareAndSet(level, observedNext, node);
+    }
+
     @Override
     public String toString() {
         return "{ key=" + key + ", value=" + value + " }";
