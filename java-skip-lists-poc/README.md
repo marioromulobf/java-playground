@@ -35,12 +35,12 @@ Comparisons are made against:
 
 #### 📊 Run Benchmarks (JMH)
 ```bash
-java -jar target/java-skip-lists-poc-1.0.jar
+java -jar target/java-skip-lists-poc-1.0-shaded.jar
 ```
 
 #### 🔎 Run specific benchmark
 ```bash
-java -jar target/java-skip-lists-poc-1.0.jar SkipListsSearchBenchmark
+java -jar target/java-skip-lists-poc-1.0-shaded.jar SkipListsSearchBenchmark
 ```
 
 #### 📈 Benchmark Results

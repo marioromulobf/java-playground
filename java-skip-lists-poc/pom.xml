@@ -20,6 +20,7 @@
         <junit.version>6.0.3</junit.version>
         <maven.surefire.version>3.5.5</maven.surefire.version>
         <maven.compiler.version>3.15.0</maven.compiler.version>
+        <maven.shade.version>3.6.2</maven.shade.version>
     </properties>
 
     <dependencies>
@@ -71,7 +72,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>${maven.shade.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -79,12 +80,13 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>shaded</shadedClassifierName>
                             <transformers>
-
-                                <!-- ESSENCIAL para JMH -->
+                                <!-- good for JMH -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
 
-                                <!-- ESSENCIAL para BenchmarkList -->
+                                <!-- good for BenchmarkList -->
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
                                     <resource>META-INF/BenchmarkList</resource>
                                 </transformer>
@@ -97,7 +99,6 @@
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>org.openjdk.jmh.Main</mainClass>
                                 </transformer>
-
                             </transformers>
                         </configuration>
                     </execution>
