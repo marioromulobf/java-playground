@@ -127,3 +127,30 @@ lookup("john@john.jhon.com") -> "John"
 19. Line 44 (main): the `lookup` method is called with the input `john@john.john.com`.
 20. Line 25 (lookup): returns the value associated with the input `mail`, as a key, in the variable `mapStringKey` of type Map.
 21. Line 45 (main): the output "lookup(john@john.john.com) -> John" is printed to the console.
+
+## Table Test - Implementation 6
+
+1. Line 8: a variable `mapIntegerKey` of type Map is instantiated.
+2. Line 9: a variable `mapStringKey` of type Map is instantiated.
+3. Line 29 (main): the DPK03Impl6 class is instantiated.
+4. Line 30 (main): the `add` method is called with the input `1`, and `John`.
+5. Line 12 (add): associates the input id as key with the input name as value in the variable `mapIntegerKey` of type Map.
+6. Line 31 (main): the `add` method is called with the input `John`, and `john@john.john.com`.
+7. Line 16 (add): associates the input name as key with the input mail as value in the variable `mapStringKey` of type Map.
+8. Line 32 (main): the `add` method is called with the input `john@john.john.com`, and `John`.
+9. Line 16 (add): associates the input mail as key with the input name as value in the variable `mapStringKey` of type Map.
+10. Line 33 (main): the `add` method is called with the input `2`, and `Mario`.
+11. Line 34 (main): the `add` method is called with the input `Mario`, and `mario@mail.com`.
+12. Line 35 (main): the `add` method is called with the input `mario@mail.com`, and `Mario`.
+13. Line 36 (main): the `add` method is called with the input `3`, and `Romulo`.
+14. Line 37 (main): the `add` method is called with the input `Romulo`, and `romulo@mail.com`.
+15. Line 38 (main): the `add` method is called with the input `romulo@mail.com`, and `Romulo`.
+16. Line 40 (main): the `lookup` method is called with the input `1`.
+17. Line 20 (lookup): returns the value associated with the input `id`, as a key, in the variable `mapIntegerKey` of type Map.
+18. Line 41 (main): the output "lookup(1) -> John" is printed to the console.
+19. Line 43 (main): the `lookup` method is called with the input `John`.
+20. Line 24 (lookup): returns the value associated with the input `name`, as a key, in the variable `mapStringKey` of type Map.
+21. Line 44 (main): the output "lookup(John) -> john@john.john.com" is printed to the console.
+22. Line 46 (main): the `lookup` method is called with the input `john@john.john.com`.
+23. Line 24 (lookup): returns the value associated with the input `mail`, as a key, in the variable `mapStringKey` of type Map.
+24. Line 47 (main): the output "lookup(john@john.john.com) -> John" is printed to the console.
