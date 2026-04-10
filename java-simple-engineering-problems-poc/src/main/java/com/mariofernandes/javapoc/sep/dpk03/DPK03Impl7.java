@@ -35,7 +35,7 @@ public class DPK03Impl7 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 03 - Implementation 04 <--");
+        System.out.println("--> DPK 03 - Implementation 07 <--");
         DPK03Impl7 dpk03Impl7 = new DPK03Impl7();
         dpk03Impl7.add(1, "John");
         dpk03Impl7.add("John", "john@john.john.com");

@@ -25,7 +25,7 @@ public class DPK03Impl6 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 03 - Implementation 04 <--");
+        System.out.println("--> DPK 03 - Implementation 06 <--");
         DPK03Impl6 dpk03Impl6 = new DPK03Impl6();
         dpk03Impl6.add(1, "John");
         dpk03Impl6.add("John", "john@john.john.com");
