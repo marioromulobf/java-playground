@@ -242,3 +242,28 @@ lookup("john@john.jhon.com") -> "John"
 25. Line 29 (lookup): if the condition above is true, the current iteration key is returned as output of the method.
 26. Line 34 (lookup): if there is no match in the for loop, null is returned as output of the method.
 27. Line 47 (main): the output "lookup(john@john.john.com) -> John" is printed to the console.
+
+## Table Test - Implementation 10
+
+1. Line 8: a variable `map` of type Map is instantiated.
+2. Line 41 (main): the DPK03Impl10 class is instantiated.
+3. Line 42 (main): the `add` method is called with an instance of Person with `id=1`, `name=John` and, `email=john@john.john.com`.
+4. Line 43 (main): the `add` method is called with an instance of Person with `id=2`, `name=Mario` and, `email=mario@mail.com`.
+5. Line 44 (main): the `add` method is called with an instance of Person with `id=3`, `name=Romulo` and, `email=romulo@mail.com`.
+6. Line 11-13 (add): if the input person is null, the flow is stopped with a return.
+7. Line 14 (add): associates the input person as value with the person id as key in the variable `map` of type Map.
+8. Line 46 (main): the `lookup` method is called with the input `1`.
+9. Line 18 (lookup): returns the value associated with the input `id`, as a key, in the variable `map` of type Map.
+10. Line 47 (main): the output "lookup(1) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
+11. Line 49 (main): the `lookupByName` method is called with the input `John`.
+12. Line 22 (lookupByName): a for loop iterates over the `map` entrySet.
+13. Line 23 (lookupByName): checks if the entry value name of the current iteration is equals to the input `name`.
+14. Line 24 (lookupByName): if the condition above is true, the current iteration value is returned as output of the method.
+15. Line 27 (lookupByName): if there is no match in the for loop, null is returned as output of the method.
+16. Line 50 (main): the output "lookup(John) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
+17. Line 52 (main): the `lookupByMail` method is called with the input `john@john.john.com`.
+18. Line 31 (lookupByMail): a for loop iterates over the `map` entrySet.
+19. Line 32 (lookupByMail): checks if the entry value email of the current iteration is equals to the input `mail`.
+20. Line 33 (lookupByMail): if the condition above is true, the current iteration value is returned as output of the method.
+21. Line 36 (lookupByMail): if there is no match in the for loop, null is returned as output of the method.
+22. Line 53 (main): the output "lookup(john@john.john.com) -> Person[id=1, name=John, email=john@john.john.com]" is printed to the console.
