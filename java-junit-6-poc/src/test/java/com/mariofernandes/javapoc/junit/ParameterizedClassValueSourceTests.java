@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 @ParameterizedClass
 @ValueSource(strings = {"racecar", "radar", "able was I ere I saw elba"})
-
 public class ParameterizedClassValueSourceTests {
 
     @Parameter
