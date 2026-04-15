@@ -1,6 +1,5 @@
 package com.mariofernandes.javapoc.sep.dpk04;
 
-import java.util.Optional;
 import java.util.stream.Stream;
 
 public class DPK04Impl1 {
@@ -22,7 +21,7 @@ public class DPK04Impl1 {
         DPK04Impl1 dkp04Impl1 = new DPK04Impl1();
 
         var result = dkp04Impl1.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 }
 
