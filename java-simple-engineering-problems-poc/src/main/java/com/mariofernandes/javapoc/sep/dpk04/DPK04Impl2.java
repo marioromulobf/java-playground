@@ -22,7 +22,7 @@ public class DPK04Impl2 {
         DPK04Impl2 dkp04Impl2 = new DPK04Impl2();
 
         var result = dkp04Impl2.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 }
 
