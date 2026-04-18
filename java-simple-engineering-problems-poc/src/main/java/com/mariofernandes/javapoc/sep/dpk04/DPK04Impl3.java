@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class DPK04Impl3 {
-
     List<String> countries = List.of("Usa", "Brazil", "Spain", "Italy", "France", "Germany");
     List<String> languages = List.of("English", "Portuguese", "Spanish", "Italian", "French", "German");
 
