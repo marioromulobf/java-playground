@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class DPK04Impl5 {
-
     List<String> countries = List.of("Usa", "Brazil", "Spain", "Italy", "France", "Germany");
     List<String> languages = List.of("English", "Portuguese", "Spanish", "Italian", "French", "German");
 
@@ -21,7 +20,7 @@ public class DPK04Impl5 {
         DPK04Impl5 dkp04Impl5 = new DPK04Impl5();
 
         var result = dkp04Impl5.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 }
 
