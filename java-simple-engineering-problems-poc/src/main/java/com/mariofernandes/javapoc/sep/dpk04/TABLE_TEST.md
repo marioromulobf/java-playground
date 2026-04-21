@@ -146,3 +146,21 @@ pattern_matcher("Usa") -> "English"
 13. Line 19 (patternMatcher): the first match is returned as the output.
 14. Line 20 (patternMatcher): if no match is found, `Unknown` is returned.
 15. Line 28 (main): the output "patternMatcher("Usa") -> English" is printed to the console.
+
+## Table Test - Implementation 10
+
+1. Line 6: a variable `countries` of type List of Country is initialized with six Country objects, each containing a country name and its corresponding language.
+2. Line 7: the first Country object is created with the name "Usa" and language "English".
+3. Line 8: the second Country object is created with the name "Brazil" and language "Portuguese".
+4. Line 9: the third Country object is created with the name "Spain" and language "Spanish".
+5. Line 10: the fourth Country object is created with the name "Italy" and language "Italian".
+6. Line 11: the fifth Country object is created with the name "France" and language "French".
+7. Line 12: the sixth Country object is created with the name "Germany" and language "German".
+8. Line 25 (main): the DPK04Impl10 class is instantiated.
+9. Line 27 (main): the `patternMatcher` method is called with the input `Usa`.
+10. Line 16 (patternMatcher): generate a sequential stream from the `countries` list of Country objects.
+11. Line 17 (patternMatcher): the current object in the stream is filtered using a predicate that checks whether the name of the Country object matches the input `country`.
+12. Line 18 (patternMatcher): if a match is found, the language of the Country object is mapped.
+13. Line 19 (patternMatcher): the first match is returned as the output.
+14. Line 20 (patternMatcher): if no match is found, `Unknown` is returned.
+15. Line 28 (main): the output "patternMatcher("Usa") -> English" is printed to the console.
