@@ -15,7 +15,7 @@ public class DPK04Impl8 {
 
     public String patternMatcher(String country) {
         return Stream.iterate(0, i -> i < countries.size(), i -> i + 1)
-                .filter(i -> countries.get(i).country().equals(country))
+                .filter(i -> countries.get(i).name().equals(country))
                 .map(i -> countries.get(i).language())
                 .findFirst()
                 .orElse("Unknown");
@@ -26,9 +26,9 @@ public class DPK04Impl8 {
         DPK04Impl8 dkp04Impl8 = new DPK04Impl8();
 
         var result = dkp04Impl8.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 
-    public record Country(String country, String language) {}
+    public record Country(String name, String language) {}
 }
 
