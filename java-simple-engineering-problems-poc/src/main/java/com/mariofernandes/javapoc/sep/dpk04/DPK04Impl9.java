@@ -14,7 +14,7 @@ public class DPK04Impl9 {
 
     public String patternMatcher(String country) {
         return Stream.of(countries)
-                .filter(item -> item.country().equals(country))
+                .filter(item -> item.name().equals(country))
                 .map(Country::language)
                 .findFirst()
                 .orElse("Unknown");
@@ -25,9 +25,9 @@ public class DPK04Impl9 {
         DPK04Impl9 dkp04Impl9 = new DPK04Impl9();
 
         var result = dkp04Impl9.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 
-    public record Country(String country, String language) {}
+    public record Country(String name, String language) {}
 }
 
