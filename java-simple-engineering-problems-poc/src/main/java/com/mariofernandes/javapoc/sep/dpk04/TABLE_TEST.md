@@ -87,3 +87,16 @@ pattern_matcher("Usa") -> "English"
 8. Line 14 (patternMatcher): the first match is returned as the output.
 9. Line 15 (patternMatcher): if no match is found, `Unknown` is returned.
 10. Line 23 (main): the output "patternMatcher("Usa") -> English" is printed to the console.
+
+## Table Test - Implementation 6
+
+1. Line 4: a variable `countryLanguage` of type String is initialized with "UsaEnglish,BrazilPortuguese,SpainSpanish,ItalyItalian,FranceFrench,GermanyGerman".
+2. Line 18 (main): the DPK04Impl6 class is instantiated.
+3. Line 20 (main): the `patternMatcher` method is called with the input `Usa`.
+4. Line 7 (patternMatcher): a variable `index` of type int is initialized with the index of the first occurrence of the input `country` in the `countryLanguage` string.
+5. Line 8 (patternMatcher): return the substring of `countryLanguage` starting from beginIndex (inclusive) to endIndex (exclusive). 
+6. Line 9 (patternMatcher): the beginIndex is calculated as the index of the input `country` plus the length of the input `country`.
+7. Line 10 (patternMatcher): check if the index of "," after the variable `index` is different from -1.
+8. Line 11 (patternMatcher): if true, the endIndex is set to the index of "," after the variable `index`.
+9. Line 12 (patternMatcher): if false, the endIndex is set to the length of the `countryLanguage` string.
+10. Line 21 (main): the output "patternMatcher("Usa") -> English" is printed to the console.

@@ -1,7 +1,6 @@
 package com.mariofernandes.javapoc.sep.dpk04;
 
 public class DPK04Impl6 {
-
     String countryLanguage = "UsaEnglish,BrazilPortuguese,SpainSpanish,ItalyItalian,FranceFrench,GermanyGerman";
 
     public String patternMatcher(String country) {
@@ -19,7 +18,7 @@ public class DPK04Impl6 {
         DPK04Impl6 dkp04Impl6 = new DPK04Impl6();
 
         var result = dkp04Impl6.patternMatcher("Usa");
-        System.out.println("pattern_matcher(\"Usa\") -> " + result);
+        System.out.println("patternMatcher(\"Usa\") -> " + result);
     }
 }
 
