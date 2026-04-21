@@ -100,3 +100,13 @@ pattern_matcher("Usa") -> "English"
 8. Line 11 (patternMatcher): if true, the endIndex is set to the index of "," after the variable `index`.
 9. Line 12 (patternMatcher): if false, the endIndex is set to the length of the `countryLanguage` string.
 10. Line 21 (main): the output "patternMatcher("Usa") -> English" is printed to the console.
+
+## Table Test - Implementation 7
+
+1. Line 6: a variable `countriesFirstCharacter` of type String is initialized with the first character of each country concatenated together, resulting in "UBSIFG".
+2. Line 7: a variable `languages` of type List of String is initialized with ["English", "Portuguese", "Spanish", "Italian", "French", "German"].
+3. Line 16 (main): the DPK04Impl7 class is instantiated.
+4. Line 18 (main): the `patternMatcher` method is called with the input `Usa`.
+5. Line 10 (patternMatcher): a variable `index` of type int is initialized with the index of the first occurrence of the first character of the input `country` in the `countriesFirstCharacter` string.
+6. Line 11 (patternMatcher): return the language at the same index as the variable `index` in the `languages` list.
+7. Line 19 (main): the output "patternMatcher("Usa") -> English" is printed to the console.
