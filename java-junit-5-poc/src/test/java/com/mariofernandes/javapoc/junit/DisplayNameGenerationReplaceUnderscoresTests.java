@@ -1,0 +1,29 @@
+package com.mariofernandes.javapoc.junit;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+/**
+ *
+ * Expected output:
+ * DisplayNameGenerationReplaceUnderscoresTests ✔
+ * ├─ if it is zero ✔
+ * └─ A negative value for year is not supported by the leap year computation. ✔
+ *    ├─ For example, year -1 is not supported. ✔
+ *    └─ For example, year -4 is not supported. ✔
+ *
+ */
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+public class DisplayNameGenerationReplaceUnderscoresTests {
+    @Test
+    void if_it_is_zero() {}
+
+    @DisplayName("A negative value for year is not supported by the leap year computation.")
+    @ParameterizedTest(name = "For example, year {0} is not supported.")
+    @ValueSource(ints = { -1, -4 })
+    void if_it_is_negative(int year) {}
+}
