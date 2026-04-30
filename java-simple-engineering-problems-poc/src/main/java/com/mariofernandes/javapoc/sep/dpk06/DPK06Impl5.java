@@ -8,8 +8,12 @@ public class DPK06Impl5 {
     public List<String> tokenize(String data, String token) {
         List<String> result = new ArrayList<>();
 
-        if (data == null || data.isEmpty() || token == null || token.isEmpty()) {
-            return result;
+        if (data == null || token == null || token.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (data.isEmpty()) {
+            return List.of("");
         }
 
         int start = 0;
