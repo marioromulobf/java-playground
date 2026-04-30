@@ -3,13 +3,17 @@ package com.mariofernandes.javapoc.sep.dpk06;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DPK06Impl5 {
+public class DPK06Impl6 {
 
     public List<String> tokenize(String data, String token) {
         List<String> result = new ArrayList<>();
 
-        if (data == null || data.isEmpty() || token == null || token.isEmpty()) {
-            return result;
+        if (data == null || token == null || token.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        if (data.isEmpty()) {
+            return List.of("");
         }
 
         int start = 0;
@@ -48,19 +52,19 @@ public class DPK06Impl5 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 06 - Implementation 05 <--");
-        DPK06Impl5 dpk06Impl5 = new DPK06Impl5();
+        System.out.println("--> DPK 06 - Implementation 06 <--");
+        DPK06Impl6 dpk06Impl6 = new DPK06Impl6();
 
-        var result = dpk06Impl5.tokenize("Hello,World,How,Are,You", ",");
+        var result = dpk06Impl6.tokenize("Hello,World,How,Are,You", ",");
         System.out.println("tokenize(\"Hello,World,How,Are,You\", \",\") -> " + result);
 
-        result = dpk06Impl5.tokenize("Hello World How Are You", " ");
+        result = dpk06Impl6.tokenize("Hello World How Are You", " ");
         System.out.println("tokenize(\"Hello World How Are You\", \" \") -> " + result);
 
-        result = dpk06Impl5.tokenize("Hello-World-How-Are-You", "-");
+        result = dpk06Impl6.tokenize("Hello-World-How-Are-You", "-");
         System.out.println("tokenize(\"Hello-World-How-Are-You\", \"-\") -> " + result);
 
-        result = dpk06Impl5.tokenize("Hello--World--How--Are--You", "--");
+        result = dpk06Impl6.tokenize("Hello--World--How--Are--You", "--");
         System.out.println("tokenize(\"Hello--World--How--Are--You\", \"--\") -> " + result);
     }
 }
