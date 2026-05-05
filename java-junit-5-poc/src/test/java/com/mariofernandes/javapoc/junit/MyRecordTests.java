@@ -7,7 +7,7 @@ record MyRecordTests() {
 
     @Test
     void addition() {
-        Assertions.assertEquals(2, new Calcularor().add(1, 1));
+        Assertions.assertEquals(2, new Calculator().add(1, 1));
     }
 
 }
