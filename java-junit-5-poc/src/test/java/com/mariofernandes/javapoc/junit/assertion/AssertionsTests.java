@@ -1,4 +1,4 @@
-package com.mariofernandes.javapoc.junit.assertions;
+package com.mariofernandes.javapoc.junit.assertion;
 
 import com.mariofernandes.javapoc.junit.Calculator;
 import com.mariofernandes.javapoc.junit.Person;
