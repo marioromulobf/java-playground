@@ -78,3 +78,22 @@ group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","
 16. Line 38 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
 17. Line 40 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
 18. Line 41 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
+
+## Table Test - Implementation 4
+
+1. Line 30 (main): the DPK07Impl4 class is instantiated.
+2. Line 32 (main): the `groupBy` method is called with the list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] and the `sizeGroup` 3.
+3. Line 9 (groupBy): checks whether the input list `items` is null or the input `groupSize` is less than or equal to zero.
+4. Line 10 (groupBy): if the condition is true, a throw statement is executed.
+5. Lines 13 (groupBy): a variable `result` of type List of List is initialized.
+6. Line 14 (groupBy): a variable named `group` of type List is initialized with the size `groupSize`.
+7. Line 16 (groupBy): a for loop iterates over each item in the input list.
+8. Line 17 (groupBy): during each iteration, it checks whether the size of the `group` is equal to the input `groupSize`.
+9. Line 18 (groupBy): if the condition is true, `group` is added to the `result` variable.
+10. Line 19 (groupBy): and `group` is reinitialized with the size `sizeGroup`.
+11. Line 21 (groupBy): after the conditional block, the item in the current iteration is added to `group`.
+12. Line 23 (groupBy): after the loop block, `group` is added to the `result` variable.
+13. Line 25 (groupBy): the `result` variable is returned, containing the grouped list of items.
+14. Line 33 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
+15. Line 35 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
+16. Line 36 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
