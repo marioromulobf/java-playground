@@ -5,24 +5,24 @@ import java.util.List;
 
 public class DPK07Impl1 {
 
-    public<T> List<List<T>> groupBy(List<T> number, int sizeGroup) {
+    public<T> List<List<T>> groupBy(List<T> items, int sizeGroup) {
         List<List<T>> result = new ArrayList<>();
 
-        if (number.size() <= sizeGroup) {
-            result.add(number);
+        if (items.size() <= sizeGroup) {
+            result.add(items);
             return result;
         }
 
         List<T> subList = new ArrayList<>(sizeGroup);
         int countBySizeGroup = 0;
-        for (int i = 0; (countBySizeGroup + i) < number.size(); i++) {
+        for (int i = 0; (countBySizeGroup + i) < items.size(); i++) {
             if (subList.size() == sizeGroup) {
                 result.add(subList);
                 subList = new ArrayList<>(sizeGroup);
                 i = 0;
                 countBySizeGroup = result.size() * sizeGroup;
             }
-            subList.add(number.get(countBySizeGroup + i));
+            subList.add(items.get(countBySizeGroup + i));
         }
 
         if (subList.size() > 0) {
