@@ -117,3 +117,21 @@ group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","
 15. Line 37 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
 16. Line 39 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
 17. Line 40 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
+
+## Table Test - Implementation 6
+
+1. Line 35 (main): the DPK07Impl6 class is instantiated.
+2. Line 37 (main): the `groupBy` method is called with the list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] and the `sizeGroup` 3.
+3. Line 9 (groupBy): checks whether the input list `items` is null or the input `groupSize` is less than or equal to zero.
+4. Line 10 (groupBy): if the condition is true, a throw statement is executed.
+5. Lines 13 (groupBy): a variable `result` of type List of List is initialized.
+6. Line 15 (groupBy): a for loop iterates over the input list, starting from 0 and incrementing by `groupSize` until it reaches the size of the list. 
+7. Line 16 (groupBy): during each iteration, a variable named `group` of type List is initialized with the size `groupSize`.
+8. Line 18-21 (groupBy): and a variable `end` of type int is initialized with the minimum value between the sum of `i` and `groupSize` and the size of the input list.
+9. Line 23 (groupBy): and a for loop iterates over the input list, starting from the current value of `i` up to the value of `end`.
+10. Line 24 (groupBy): during each iteration, the item at position `j` in the input `items` is added to `group`.
+11. Line 27 (groupBy): after the innermost loop block, `group` is added to the `result` variable.
+12. Line 30 (groupBy): the `result` variable is returned, containing the grouped list of items.
+13. Line 38 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
+14. Line 40 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
+15. Line 41 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
