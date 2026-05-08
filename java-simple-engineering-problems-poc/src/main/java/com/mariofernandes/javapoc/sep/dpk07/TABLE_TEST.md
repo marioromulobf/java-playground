@@ -135,3 +135,23 @@ group_by(["a","b","c","d","e","f","g","h","i","j"], 3) -> [["a","b","c"], ["d","
 13. Line 38 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
 14. Line 40 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
 15. Line 41 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
+
+## Table Test - Implementation 7
+
+1. Line 42 (main): the DPK07Impl7 class is instantiated.
+2. Line 44 (main): the `groupBy` method is called with the list [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] and the `sizeGroup` 3.
+3. Line 9 (groupBy): checks whether the input list `items` is null or the input `groupSize` is less than or equal to zero.
+4. Line 10 (groupBy): if the condition is true, a throw statement is executed.
+5. Lines 13 (groupBy): a variable `result` of type List of List is initialized.
+6. Line 14 (groupBy): a variable `numberOfGroups` of type int is initialized with the result of dividing the sum of the size of the input list and `groupSize` minus one by `groupSize`.
+7. Line 16 (groupBy): a for loop iterates over the input list, starting from 0 up to `numberOfGroups`. 
+8. Line 17 (groupBy): during each iteration, a variable named `srtatPosition` of type int is initialized with the result of multiplying the index `i` by `groupSize`. 
+9. Line 18-19 (groupBy): and the result of `getGroup` method is added to the `result` variable, passing the input list, `srtatPosition`, and `groupSize` as arguments.
+10. Line 26 (getGroup): a variable named `group` of type List is initialized with the size `groupSize`.
+11. Line 27-31 (getGroup): a variable `end` of type int is initialized with the minimum value between the sum of `startPosition` and `groupSize` and the size of the input list.
+12. Line 33-35 (getGroup): in each iteration of the loop from `startPosition` to `end`, the item at position `j` in the input `items` is added to `group`.
+13. Line 37 (getGroup): after the loop block, the `group` variable is returned.
+14. Line 22 (groupBy): after the loop block, the `result` variable is returned, containing the grouped list of items.
+15. Line 45 (main): the output of the `groupBy` method is printed, showing the list [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]].
+16. Line 47 (main): the `groupBy` method is called again with the list ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] and the `sizeGroup` 3.
+17. Line 48 (main): the output of the `groupBy` method is printed, showing the list [["a", "b", "c"], ["d", "e", "f"], ["g", "h", "i"], ["j"]].
