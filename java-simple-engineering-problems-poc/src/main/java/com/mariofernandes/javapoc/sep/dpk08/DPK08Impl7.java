@@ -39,13 +39,13 @@ public class DPK08Impl7 {
     }
 
     private<I> void validateItems(Collection<I> items) {
-        if (items == null || items.isEmpty()) {
+        if (items == null) {
             throw new IllegalArgumentException();
         }
     }
 
     private<I> void validateItems(I[] items) {
-        if (items == null || items.length == 0) {
+        if (items == null) {
             throw new IllegalArgumentException();
         }
     }
