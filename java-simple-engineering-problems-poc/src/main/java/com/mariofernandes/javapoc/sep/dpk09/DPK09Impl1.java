@@ -10,7 +10,7 @@ public class DPK09Impl1 {
         boolean test(T t);
     }
 
-    public<T> Collection<T> map(Collection<T> items, Filter<T> filter) {
+    public<T> Collection<T> filter(Collection<T> items, Filter<T> filter) {
         Collection<T> result = new ArrayList<>();
         for (T item : items) {
             if (filter.test(item)) {
@@ -20,7 +20,7 @@ public class DPK09Impl1 {
         return result;
     }
 
-    public<T> Collection<T> map(T[] items, Filter<T> filter) {
+    public<T> Collection<T> filter(T[] items, Filter<T> filter) {
         Collection<T> result = new ArrayList<>();
         for (T item : items) {
             if (filter.test(item)) {
@@ -34,15 +34,15 @@ public class DPK09Impl1 {
         System.out.println("--> DPK 09 - Implementation 01 <--");
         DPK09Impl1 dpk09Impl1 = new DPK09Impl1();
 
-        var result = dpk09Impl1.map(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), (x) -> x % 2 == 0);
-        System.out.println("map([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (x) -> x % 2 == 0) -> " + result);
+        var result = dpk09Impl1.filter(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), (x) -> x % 2 == 0);
+        System.out.println("filter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (x) -> x % 2 == 0) -> " + result);
 
         // char to decimal: 'a': 97; 'b': 98'; c': 99'; d': 100'; e': 101'; f': 102'; g': 103'; h': 104'; i': 105'; j': 106
-        var result2 = dpk09Impl1.map(
+        var result2 = dpk09Impl1.filter(
                 new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"},
                 (term) -> term.charAt(0) % 2 == 0
         );
-        System.out.println("map([\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\"], (term) -> term.charAt(0) % 2 == 0) -> " + result2);
+        System.out.println("filter([\"a\",\"b\",\"c\",\"d\",\"e\",\"f\",\"g\",\"h\",\"i\",\"j\"], (term) -> term.charAt(0) % 2 == 0) -> " + result2);
     }
 }
 
