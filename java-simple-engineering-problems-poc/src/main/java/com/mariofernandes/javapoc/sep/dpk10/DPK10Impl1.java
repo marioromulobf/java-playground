@@ -27,7 +27,7 @@ public class DPK10Impl1 {
         // char to decimal: 'a': 97; 'b': 98'; c': 99'; d': 100'; e': 101'
         var input2 = new String[]{"a", "b", "c", "d", "e"};
         var result2 = dpk10Impl1.reduce(input2, (acc, x) -> acc + x, "");
-        System.out.println("filter([\"a\",\"b\",\"c\",\"d\",\"e\"], (acc, x) -> acc + x, \"\") -> " + result2);
+        System.out.println("reduce([\"a\",\"b\",\"c\",\"d\",\"e\"], (acc, x) -> acc + x, \"\") -> " + result2);
     }
 }
 
