@@ -1,4 +1,5 @@
 package com.mariofernandes.javapoc.junit.interfaces;
 
-public interface Testable {
+public interface Testable<T> {
+    T createValue();
 }
