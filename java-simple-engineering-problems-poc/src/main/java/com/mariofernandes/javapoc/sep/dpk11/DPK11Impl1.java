@@ -6,7 +6,7 @@ public class DPK11Impl1 {
         char[] chars = new char[string.length()];
         char newChar = newToken.charAt(0);
         char oldChar = oldToken.charAt(0);
-        int discount = 0;
+        int removedCharsCount = 0;
 
         int tokenLength = oldToken.length() - 1;
         if (tokenLength > 0 && oldToken.charAt(tokenLength) != oldChar) {
@@ -14,14 +14,14 @@ public class DPK11Impl1 {
         }
 
         for (int i = 0; i < string.length(); i++) {
-            chars[i - discount] = string.charAt(i);
-            if (chars[i - discount] == oldChar) {
-                if (isDelimiterAt(string, oldToken, i)) {
-                    discount += tokenLength;
+            chars[i - removedCharsCount] = string.charAt(i);
+            if (chars[i - removedCharsCount] == oldChar) {
+                if (matchesAt(string, oldToken, i)) {
+                    removedCharsCount += tokenLength;
                     i += tokenLength;
-                    chars[i - discount] = newChar;
+                    chars[i - removedCharsCount] = newChar;
                 } else {
-                    chars[i - discount] = newChar;
+                    chars[i - removedCharsCount] = newChar;
                 }
             }
         }
@@ -29,7 +29,7 @@ public class DPK11Impl1 {
         return new String(chars);
     }
 
-    private boolean isDelimiterAt(String input, String delimiter, int start) {
+    private boolean matchesAt(String input, String delimiter, int start) {
         if (delimiter.length() == 1) {
             return false;
         }
