@@ -52,6 +52,10 @@ public class DPK11Impl4 {
         if (source == null || oldToken == null || newToken == null) {
             throw new IllegalArgumentException();
         }
+
+        if (oldToken.length() == 0) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public static void main(String[] args) {
