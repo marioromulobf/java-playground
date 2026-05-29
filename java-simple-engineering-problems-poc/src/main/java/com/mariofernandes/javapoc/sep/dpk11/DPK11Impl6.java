@@ -45,19 +45,6 @@ public class DPK11Impl6 {
         return result.toString();
     }
 
-    private boolean matchesAt(String source, String token, int start) {
-        if (start + token.length() > source.length()) {
-            return false;
-        }
-
-        for (int i = 0; i < token.length(); i++) {
-            if (source.charAt(start + i) != token.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private void validate(String source, String oldToken, String newToken) {
         if (source == null || oldToken == null || newToken == null) {
             throw new IllegalArgumentException();
