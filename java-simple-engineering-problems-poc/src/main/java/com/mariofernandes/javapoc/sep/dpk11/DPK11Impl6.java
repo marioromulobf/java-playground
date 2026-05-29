@@ -12,7 +12,7 @@ public class DPK11Impl6 {
         boolean matchesAt(String source, String token, int start);
     }
 
-    public static class ExtractTokenMatcher implements TokenMatcher {
+    public static class ExactTokenMatcher implements TokenMatcher {
         @Override
         public boolean matchesAt(String source, String token, int start) {
             if (start + token.length() > source.length()) {
@@ -57,7 +57,7 @@ public class DPK11Impl6 {
 
     public static void main(String[] args) {
         System.out.println("--> DPK 11 - Implementation 06 <--");
-        DPK11Impl6 dpk11Impl6 = new DPK11Impl6(new ExtractTokenMatcher());
+        DPK11Impl6 dpk11Impl6 = new DPK11Impl6(new ExactTokenMatcher());
 
         var input1 = "Hello,World,How,Are,You";
         var result1 = dpk11Impl6.replace(input1, ",", "-");
