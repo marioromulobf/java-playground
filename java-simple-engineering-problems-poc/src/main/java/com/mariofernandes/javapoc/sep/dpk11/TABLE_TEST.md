@@ -1,5 +1,5 @@
 # Problem
-This is a table test for *DPK10 - Replace*:
+This is a table test for *DPK11 - Replace*:
 
 **Create a function that can replace a given token in a string.**
 ```
