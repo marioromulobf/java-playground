@@ -43,15 +43,15 @@ public class DPK11Impl5 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 11 - Implementation 04 <--");
-        DPK11Impl5 dpk11Impl4 = new DPK11Impl5();
+        System.out.println("--> DPK 11 - Implementation 05 <--");
+        DPK11Impl5 dpk11Impl5 = new DPK11Impl5();
 
         var input1 = "Hello,World,How,Are,You";
-        var result1 = dpk11Impl4.replace(input1, ",", "-");
+        var result1 = dpk11Impl5.replace(input1, ",", "-");
         System.out.println("replace(\"Hello,World,How,Are,You\", \",\", \"-\") -> " + result1);
 
-        var result2 = dpk11Impl4.replace(input1, ",World,", "-");
-        result2 = dpk11Impl4.replace(result2, ",", "-");
+        var result2 = dpk11Impl5.replace(input1, ",World,", "-");
+        result2 = dpk11Impl5.replace(result2, ",", "-");
         System.out.println("replace(\"Hello,World,How,Are,You\", \",World,\", \"-\") -> " + result2);
     }
 }
