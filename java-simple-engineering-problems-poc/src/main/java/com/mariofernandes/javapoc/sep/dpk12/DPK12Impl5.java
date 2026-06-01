@@ -9,7 +9,6 @@ public class DPK12Impl5 {
         int size();
         int get(int index);
         void set(int index, int value);
-        String toString();
     }
 
     public static class ArraySortable implements Sortable {
@@ -51,21 +50,26 @@ public class DPK12Impl5 {
 
     static class ListSortable implements Sortable {
         private final List<Integer> items;
+
         public ListSortable(List<Integer> items) {
             this.items = items;
         }
+
         @Override
         public int size() {
             return items.size();
         }
+
         @Override
         public int get(int index) {
             return items.get(index);
         }
+
         @Override
         public void set(int index, int value) {
             items.set(index, value);
         }
+
         @Override
         public String toString() {
             return "" +  items;
