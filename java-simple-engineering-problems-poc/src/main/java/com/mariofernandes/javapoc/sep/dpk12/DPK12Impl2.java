@@ -37,27 +37,27 @@ public class DPK12Impl2 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 12 - Implementation 01 <--");
-        DPK12Impl2 dpk12Impl1 = new DPK12Impl2();
+        System.out.println("--> DPK 12 - Implementation 02 <--");
+        DPK12Impl2 dpk12Impl2 = new DPK12Impl2();
 
         var input1 = new int[]{5,4,3,2,1};
         System.out.print("bubbleSort(" + DPK12Impl2.toString(input1) + ") -> ");
         var startTime = System.nanoTime();
-        dpk12Impl1.bubbleSort(input1);
+        dpk12Impl2.bubbleSort(input1);
         var endTime = System.nanoTime();
         System.out.println(DPK12Impl2.toString(input1) + " - " + (endTime - startTime) + " nanoseconds");
 
         var input2 = new int[]{1,4,3,2,5};
         System.out.print("bubbleSort(" + DPK12Impl2.toString(input2) + ") -> ");
         startTime = System.nanoTime();
-        dpk12Impl1.bubbleSort(input2);
+        dpk12Impl2.bubbleSort(input2);
         endTime = System.nanoTime();
         System.out.println(DPK12Impl2.toString(input2) + " - " + (endTime - startTime) + " nanoseconds");
 
         var input3 = new int[]{1,2,3,4,5};
         System.out.print("bubbleSort(" + DPK12Impl2.toString(input3) + ") -> ");
         startTime = System.nanoTime();
-        dpk12Impl1.bubbleSort(input3);
+        dpk12Impl2.bubbleSort(input3);
         endTime = System.nanoTime();
         System.out.println(DPK12Impl2.toString(input3) + " - " + (endTime - startTime) + " nanoseconds");
     }
