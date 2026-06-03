@@ -37,13 +37,13 @@ public class DPK13Impl2 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 13 - Implementation 01 <--");
-        DPK13Impl2 dpk13Impl1 = new DPK13Impl2();
+        System.out.println("--> DPK 13 - Implementation 02 <--");
+        DPK13Impl2 dpk13Impl2 = new DPK13Impl2();
 
-        var result = dpk13Impl1.fizzbuzz();
+        var result = dpk13Impl2.fizzbuzz();
         System.out.println("fizzbuzz() -> " + result);
 
-        var result2 = dpk13Impl1.fizzbuzz(10);
+        var result2 = dpk13Impl2.fizzbuzz(10);
         System.out.println("fizzbuzz(10) -> " + result2);
     }
 }
