@@ -52,7 +52,7 @@ public class DPK13Impl7 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 13 - Implementation 06 <--");
+        System.out.println("--> DPK 13 - Implementation 07 <--");
 
         var startTime = System.nanoTime();
         var result = DPK13Impl7.fizzbuzz(5);
