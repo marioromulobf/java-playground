@@ -2,6 +2,7 @@ package com.mariofernandes.javapoc.sep.dpk13;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class DPK13Impl9 {
 
@@ -16,19 +17,17 @@ public class DPK13Impl9 {
         return fizzbuzz(DEFAULT_SIZE);
     }
 
-    interface Converter<I, R> {
-        R apply(I input);
-    }
-
     public static List<Object> fizzbuzz(int size) {
         validate(size);
-
         updateCache(size, DPK13Impl9::convert);
+        return copyFromCache(size);
+    }
 
+    private static List<Object> copyFromCache(int size) {
         return new ArrayList<>(CACHE.subList(0, size));
     }
 
-    private static void updateCache(int size, Converter<Integer, Object> converter) {
+    private static void updateCache(int size, Function<Integer, Object> converter) {
         while (CACHE.size() < size) {
             int value = CACHE.size() + 1;
             CACHE.add(converter.apply(value));
@@ -57,7 +56,7 @@ public class DPK13Impl9 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 13 - Implementation 09 <--");
+        System.out.println("--> DPK 13 - Implementation 10 <--");
 
         var startTime = System.nanoTime();
         var result = DPK13Impl9.fizzbuzz(5);
