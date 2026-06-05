@@ -17,7 +17,7 @@ public class DPK14Impl1 {
         minRow = 0;
 
         int[] newPosition = initialPosition;
-        int[] oldPosition = new int[]{ initialPosition[0], initialPosition[1] };
+        int[] oldPosition = new int[2];
         for (String currentMove : moves) {
             oldPosition[0] = newPosition[0];
             oldPosition[1] = newPosition[1];
@@ -72,7 +72,7 @@ public class DPK14Impl1 {
         var moves = new String[]{"up", "left", "down", "right"};
 
         var result = dpk14Impl1.move(grid, initialPosition, moves);
-        System.out.println("move() -> " + result);
+        System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result);
     }
 }
 
