@@ -16,18 +16,17 @@ public class DPK14Impl1 {
         minCol = 0;
         minRow = 0;
 
-        int[] newPosition = initialPosition;
-        int[] oldPosition = new int[2];
+        String fighter = grid[initialPosition[0]][initialPosition[1]];
+        int[] currentPosition = initialPosition;
         for (String currentMove : moves) {
-            oldPosition[0] = newPosition[0];
-            oldPosition[1] = newPosition[1];
+            grid[currentPosition[0]][currentPosition[1]] = "";
 
-            if (oldPosition[0] != initialPosition[0] || oldPosition[1] != initialPosition[1]) {
-                result.add(grid[newPosition[0]][newPosition[1]]);
-                grid[newPosition[0]][newPosition[1]] = "";
+            currentPosition = getNewPosition(currentPosition[0], currentPosition[1], currentMove);
+            if (grid[currentPosition[0]][currentPosition[1]] != "") {
+                result.add(grid[currentPosition[0]][currentPosition[1]]);
             }
 
-            newPosition = getNewPosition(newPosition[0], newPosition[1], currentMove);
+            grid[currentPosition[0]][currentPosition[1]] = fighter;
         }
 
         return result;
@@ -60,6 +59,21 @@ public class DPK14Impl1 {
         return new int[]{row, col};
     }
 
+    public static void printGrid(String[][] grid) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < grid.length; i++) {
+            sb.append("[");
+            for  (int j = 0; j < grid[i].length; j++) {
+                if (j > 0) {
+                    sb.append(", ");
+                }
+                sb.append(grid[i][j]);
+            }
+            sb.append("]\n");
+        }
+        System.out.println(sb.toString());
+    }
+
     public static void main(String[] args) {
         System.out.println("--> DPK 14 - Implementation 01 <--");
         DPK14Impl1 dpk14Impl1 = new DPK14Impl1();
@@ -71,8 +85,10 @@ public class DPK14Impl1 {
         var initialPosition = new int[]{0, 0};
         var moves = new String[]{"up", "left", "down", "right"};
 
+        printGrid(grid);
         var result = dpk14Impl1.move(grid, initialPosition, moves);
-        System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result);
+        System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result + "\n");
+        printGrid(grid);
     }
 }
 
