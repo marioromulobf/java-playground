@@ -3,7 +3,9 @@ package com.mariofernandes.javapoc.sep.dpk14;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DPK14Impl5 {
+public class DPK14Impl6 {
+    private static final String EMPTY = "";
+
     public List<String> move(String[][] grid, int[] initialPosition, String[] moves) {
         validate(grid, initialPosition, moves);
 
@@ -15,7 +17,7 @@ public class DPK14Impl5 {
         int row = initialPosition[0];
         int col = initialPosition[1];
         for (String currentMove : moves) {
-            grid[row][col] = "";
+            grid[row][col] = EMPTY;
 
             if ("up".equals(currentMove)) {
                 row--;
@@ -30,10 +32,8 @@ public class DPK14Impl5 {
             row = wrap(row, maxRow);
             col = wrap(col, maxCol);
 
-            String opponent = grid[row][col];
-            if (!"".equals(opponent)) {
-                result.add(opponent);
-            }
+            addDefeated(result, grid[row][col]);
+
             grid[row][col] = fighter;
         }
 
@@ -51,6 +51,12 @@ public class DPK14Impl5 {
 
         if (initialPosition[0] > grid.length || initialPosition[1] > grid[0].length) {
             throw new IllegalArgumentException();
+        }
+    }
+
+    private void addDefeated(List<String> result, String defeatedFighter) {
+        if (!EMPTY.equals(defeatedFighter)) {
+            result.add(defeatedFighter);
         }
     }
 
@@ -82,8 +88,8 @@ public class DPK14Impl5 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 14 - Implementation 05 <--");
-        DPK14Impl5 dpk14Impl5 = new DPK14Impl5();
+        System.out.println("--> DPK 14 - Implementation 06 <--");
+        DPK14Impl6 dpk14Impl6 = new DPK14Impl6();
 
         var grid = new String[][]{
                 { "Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega" },
@@ -93,7 +99,7 @@ public class DPK14Impl5 {
         var moves = new String[]{"up", "left", "down", "right"};
 
         printGrid(grid);
-        var result = dpk14Impl5.move(grid, initialPosition, moves);
+        var result = dpk14Impl6.move(grid, initialPosition, moves);
         System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result + "\n");
         printGrid(grid);
     }
