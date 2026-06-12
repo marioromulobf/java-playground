@@ -4,17 +4,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DPK14Impl7 {
+public class DPK14Impl8 {
 
-    private int row;
-    private int col;
     private static final String EMPTY = "";
-    private final Map<String, Runnable> MOVEMENTS = Map.of(
-        "up", () -> row--,
-        "down", () -> row++,
-        "left", () -> col--,
-        "right", () -> col++
+    private static final Map<String, Movement> MOVEMENTS = Map.of(
+        "up", p -> new GridPosition(p.row() - 1, p.col()),
+        "down", p -> new GridPosition(p.row() + 1, p.col()),
+        "left", p -> new GridPosition(p.row(), p.col() - 1),
+        "right", p -> new GridPosition(p.row(), p.col() + 1)
     );
+
+    public interface Position {
+        int row();
+        int col();
+    }
+
+    public interface Movement {
+        Position move(Position position);
+    }
+
+    public static class GridPosition implements Position {
+        private final int row;
+        private final int col;
+
+        public GridPosition(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public int row() {
+            return row;
+        }
+
+        @Override
+        public int col() {
+            return col;
+        }
+    }
 
     public List<String> move(String[][] grid, int[] initialPosition, String[] moves) {
         validate(grid, initialPosition, moves);
@@ -24,23 +51,20 @@ public class DPK14Impl7 {
         int maxRow = grid.length - 1;
 
         String fighter = grid[initialPosition[0]][initialPosition[1]];
-        row = initialPosition[0];
-        col = initialPosition[1];
+        Position position = new GridPosition(initialPosition[0], initialPosition[1]);
 
         for (String currentMove : moves) {
-            grid[row][col] = EMPTY;
+            grid[position.row()][position.col()] = EMPTY;
 
             var movement = MOVEMENTS.get(currentMove);
             if  (movement != null) {
-                movement.run();
+                position = movement.move(position);
+                position = wrap(position, maxRow, maxCol);
             }
 
-            row = wrap(row, maxRow);
-            col = wrap(col, maxCol);
+            addDefeated(result, grid[position.row()][position.col()]);
 
-            addDefeated(result, grid[row][col]);
-
-            grid[row][col] = fighter;
+            grid[position.row()][position.col()] = fighter;
         }
 
         return result;
@@ -55,7 +79,7 @@ public class DPK14Impl7 {
             throw new IllegalArgumentException();
         }
 
-        if (initialPosition[0] > grid.length || initialPosition[1] > grid[0].length) {
+        if (initialPosition[0] >= grid.length || initialPosition[1] >= grid[0].length) {
             throw new IllegalArgumentException();
         }
     }
@@ -78,6 +102,13 @@ public class DPK14Impl7 {
         return value;
     }
 
+    private Position wrap(Position position, int maxRow, int maxCol) {
+        return new GridPosition(
+                wrap(position.row(), maxRow),
+                wrap(position.col(), maxCol)
+        );
+    }
+
     public static void printGrid(String[][] grid) {
         StringBuilder sb = new StringBuilder();
         for (String[] strings : grid) {
@@ -94,8 +125,8 @@ public class DPK14Impl7 {
     }
 
     public static void main(String[] args) {
-        System.out.println("--> DPK 14 - Implementation 07 <--");
-        DPK14Impl7 dpk14Impl7 = new DPK14Impl7();
+        System.out.println("--> DPK 14 - Implementation 08 <--");
+        DPK14Impl8 dpk14Impl8 = new DPK14Impl8();
 
         var grid = new String[][]{
                 { "Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega" },
@@ -105,7 +136,7 @@ public class DPK14Impl7 {
         var moves = new String[]{"up", "left", "down", "right"};
 
         printGrid(grid);
-        var result = dpk14Impl7.move(grid, initialPosition, moves);
+        var result = dpk14Impl8.move(grid, initialPosition, moves);
         System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result + "\n");
         printGrid(grid);
     }
