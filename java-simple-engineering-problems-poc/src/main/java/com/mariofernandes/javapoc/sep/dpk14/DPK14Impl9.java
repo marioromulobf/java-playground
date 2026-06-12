@@ -1,0 +1,148 @@
+package com.mariofernandes.javapoc.sep.dpk14;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class DPK14Impl9 {
+
+    private static final String EMPTY = "";
+    private static final Map<String, Movement> MOVEMENTS = Map.of(
+        "up", p -> new GridPosition(p.row() - 1, p.col()),
+        "down", p -> new GridPosition(p.row() + 1, p.col()),
+        "left", p -> new GridPosition(p.row(), p.col() - 1),
+        "right", p -> new GridPosition(p.row(), p.col() + 1)
+    );
+
+    public interface Position {
+        int row();
+        int col();
+    }
+
+    public interface Movement {
+        Position move(Position position);
+    }
+
+    public static class GridPosition implements Position {
+        private final int row;
+        private final int col;
+
+        public GridPosition(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+
+        @Override
+        public int row() {
+            return row;
+        }
+
+        @Override
+        public int col() {
+            return col;
+        }
+    }
+
+    public List<String> move(String[][] grid, int[] initialPosition, String[] moves) {
+        validate(grid, initialPosition, moves);
+
+        var result = new ArrayList<String>();
+        int maxCol = grid[0].length - 1;
+        int maxRow = grid.length - 1;
+
+        String fighter = grid[initialPosition[0]][initialPosition[1]];
+        Position position = new GridPosition(initialPosition[0], initialPosition[1]);
+
+        for (String currentMove : moves) {
+            grid[position.row()][position.col()] = EMPTY;
+
+            var movement = MOVEMENTS.get(currentMove);
+            if  (movement != null) {
+                position = movement.move(position);
+                position = wrap(position, maxRow, maxCol);
+            }
+
+            addDefeated(result, grid[position.row()][position.col()]);
+
+            grid[position.row()][position.col()] = fighter;
+        }
+
+        return result;
+    }
+
+    private void validate(String[][] grid, int[] initialPosition, String[] moves) {
+        if (null == grid || null == initialPosition || null == moves){
+            throw new IllegalArgumentException();
+        }
+
+        if (initialPosition.length != 2) {
+            throw new IllegalArgumentException();
+        }
+
+        if (initialPosition[0] >= grid.length || initialPosition[1] >= grid[0].length) {
+            throw new IllegalArgumentException();
+        }
+
+        if (initialPosition[0] < 0 || initialPosition[1] < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void addDefeated(List<String> result, String defeatedFighter) {
+        if (!EMPTY.equals(defeatedFighter)) {
+            result.add(defeatedFighter);
+        }
+    }
+
+    private int wrap(int value, int maxValue) {
+        if (0 > value) {
+            return maxValue;
+        }
+
+        if (maxValue < value) {
+            return 0;
+        }
+
+        return value;
+    }
+
+    private Position wrap(Position position, int maxRow, int maxCol) {
+        return new GridPosition(
+                wrap(position.row(), maxRow),
+                wrap(position.col(), maxCol)
+        );
+    }
+
+    public static void printGrid(String[][] grid) {
+        StringBuilder sb = new StringBuilder();
+        for (String[] strings : grid) {
+            sb.append("[");
+            for (int j = 0; j < strings.length; j++) {
+                if (j > 0) {
+                    sb.append(", ");
+                }
+                sb.append(strings[j]);
+            }
+            sb.append("]\n");
+        }
+        System.out.println(sb.toString());
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--> DPK 14 - Implementation 09 <--");
+        DPK14Impl9 dpk14Impl9 = new DPK14Impl9();
+
+        var grid = new String[][]{
+                { "Ryu", "E.Honda", "Blanka", "Guile", "Balrog", "Vega" },
+                { "Ken", "Chun Li", "Zangief", "Dhalsim", "Sagat", "M.Bison" }
+        };
+        var initialPosition = new int[]{0, 0};
+        var moves = new String[]{"up", "left", "down", "right"};
+
+        printGrid(grid);
+        var result = dpk14Impl9.move(grid, initialPosition, moves);
+        System.out.println("move(grid, [0,0], [\"up\", \"left\", \"down\", \"right\"]) -> " + result + "\n");
+        printGrid(grid);
+    }
+}
+
