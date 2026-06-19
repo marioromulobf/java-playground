@@ -42,11 +42,11 @@ public class DPK15Impl5 {
             return friendships.removeFriend(friend);
         }
 
-        public Optional<Person> getMyOldestFriend() {
+        public Optional<Person> getOldestFriend() {
             return friendships.getOldestFriend();
         }
 
-        public int getMyFriendCount() {
+        public int getFriendCount() {
             return friendships.getFriendCount();
         }
 
@@ -104,7 +104,7 @@ public class DPK15Impl5 {
             }
 
             return people.stream()
-                    .max((p1, p2) -> Integer.compare(p1.getMyFriendCount(), p2.getMyFriendCount()))
+                    .max((p1, p2) -> Integer.compare(p1.getFriendCount(), p2.getFriendCount()))
                     .orElse(null);
         }
 
@@ -114,7 +114,7 @@ public class DPK15Impl5 {
             }
 
             return people.stream()
-                    .min((p1, p2) -> Integer.compare(p1.getMyFriendCount(), p2.getMyFriendCount()))
+                    .min((p1, p2) -> Integer.compare(p1.getFriendCount(), p2.getFriendCount()))
                     .orElse(null);
         }
 
@@ -125,8 +125,8 @@ public class DPK15Impl5 {
 
             return people.stream()
                     .max((p1, p2) -> Integer.compare(
-                            p1.getMyOldestFriend().map(Person::getAge).orElse(-1),
-                            p2.getMyOldestFriend().map(Person::getAge).orElse(-1)
+                            p1.getOldestFriend().map(Person::getAge).orElse(-1),
+                            p2.getOldestFriend().map(Person::getAge).orElse(-1)
                     ))
                     .orElse(null);
         }
