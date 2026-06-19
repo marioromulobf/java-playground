@@ -135,13 +135,17 @@ public class DPK15Impl6 {
                     .orElse(null);
         }
 
-        public void showFriends() {
-            people.forEach(person -> {
-                System.out.println(person.getName() + " - " +  person.getAge() + ": ");
-                person.getFriends().forEach(friend -> System.out.println("  - " + friend.getName()));
-                System.out.println(" --//-- ");
-            });
+        public List<Person> getPeople() {
+            return List.copyOf(people);
         }
+    }
+
+    public static void showFriends(List<Person> people) {
+        people.forEach(person -> {
+            System.out.println(person.getName() + " - " +  person.getAge() + ": ");
+            person.getFriends().forEach(friend -> System.out.println("  - " + friend.getName()));
+            System.out.println(" --//-- ");
+        });
     }
 
     public static void main(String[] args) {
@@ -202,6 +206,6 @@ public class DPK15Impl6 {
         System.out.println("Person with more friends: " + personWithMoreFriends.getName());
         System.out.println("Person with less friends: " + personWithLessFriends.getName());
         System.out.println("Person with oldest friend: " + personWithOldestFriend.getName());
-        socialNetwork.showFriends();
+        showFriends(socialNetwork.getPeople());
     }
 }
