@@ -75,5 +75,7 @@ public class DateTests {
     }
 
     @Test
-    void test() {}
+    void test() {
+
+    }
 }
