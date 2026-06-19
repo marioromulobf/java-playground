@@ -1,5 +1,6 @@
 package com.mariofernandes.javapoc.sep.dpk15;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -44,6 +45,10 @@ public class DPK15Impl4 {
         public int getFriendCount() {
             return friendships.getFriendCount();
         }
+
+        public List<Person> getFriends() {
+            return friendships.getFriends();
+        }
     }
 
     static class Friendships {
@@ -69,6 +74,10 @@ public class DPK15Impl4 {
 
         public int getFriendCount() {
             return friends.size();
+        }
+
+        public List<Person> getFriends() {
+            return new ArrayList<>(friends);
         }
     }
 
