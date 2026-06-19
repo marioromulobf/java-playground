@@ -37,11 +37,11 @@ public class DPK15Impl4 {
             }
         }
 
-        public Optional<Person> getMyOldestFriend() {
+        public Optional<Person> getOldestFriend() {
             return friendships.getOldestFriend();
         }
 
-        public int getMyFriendCount() {
+        public int getFriendCount() {
             return friendships.getFriendCount();
         }
     }
@@ -82,7 +82,7 @@ public class DPK15Impl4 {
             }
 
             for (Person person : people) {
-                int friendCount = person.getMyFriendCount();
+                int friendCount = person.getFriendCount();
                 if (friendCount > maxFriends) {
                     maxFriends = friendCount;
                     personWithMoreFriends = person;
@@ -101,7 +101,7 @@ public class DPK15Impl4 {
             }
 
             for (Person person : people) {
-                int friendCount = person.getMyFriendCount();
+                int friendCount = person.getFriendCount();
                 if (friendCount < minFriends) {
                     minFriends = friendCount;
                     personWithLessFriends = person;
@@ -120,7 +120,7 @@ public class DPK15Impl4 {
             }
 
             for (Person person : people) {
-                Optional<Person> optionalOldestFriend = person.getMyOldestFriend();
+                Optional<Person> optionalOldestFriend = person.getOldestFriend();
                 if (optionalOldestFriend.isPresent() && optionalOldestFriend.get().getAge() > maxAge) {
                     maxAge = optionalOldestFriend.get().getAge();
                     personWithOldestFriend = person;
