@@ -73,9 +73,4 @@ public class DateTests {
         }
         Assertions.assertEquals(timeStampBefore + 2,  sharedDate.getTime());
     }
-
-    @Test
-    void test() {
-
-    }
 }
