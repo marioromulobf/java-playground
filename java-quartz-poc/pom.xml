@@ -19,7 +19,7 @@
         <maven.compiler.target>25</maven.compiler.target>
         <maven.compiler.release>25</maven.compiler.release>
         <junit.version>6.1.2</junit.version>
-        <!-- <mockito.version>5.22.0</mockito.version> -->
+        <spring.boot.version>4.1.0</spring.boot.version>
     </properties>
 
     <dependencies>
@@ -29,20 +29,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--
+
+        <!-- Quartz -->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
