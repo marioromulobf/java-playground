@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -33,5 +36,22 @@ public class StaticFactoryMethodsTests {
         Assertions.assertNotNull(booleanFalse);
         Assertions.assertTrue(booleanTrue);
         Assertions.assertFalse(booleanFalse);
+        Assertions.assertEquals(Boolean.TRUE, booleanTrue);
+        Assertions.assertEquals(Boolean.FALSE, booleanFalse);
+    }
+
+    @Test
+    void testStaticFactoryMethodsCollectionsThirdAdvantage() {
+        // Static factory methods can return instances of different classes that implement the same interface,
+        // allowing for more flexibility in the implementation.
+        var list = new ArrayList<>(List.of("Joao", "Ana", "Mario"));
+
+        Collections.sort(list);
+
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(3, list.size());
+        Assertions.assertEquals("Ana", list.get(0));
+        Assertions.assertEquals("Joao", list.get(1));
+        Assertions.assertEquals("Mario", list.get(2));
     }
 }
