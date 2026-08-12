@@ -22,4 +22,16 @@ public class StaticFactoryMethodsTests {
         Assertions.assertTrue(bigInteger.isProbablePrime(bigInteger.intValueExact()));
         Assertions.assertTrue(Util.isPrime(bigInteger.intValueExact()));
     }
+
+    @Test
+    void testStaticFactoryMethodsBooleanValueOf() {
+        // Static factory methods can return existing instances, which can improve performance and memory usage.
+        Boolean booleanTrue = Boolean.valueOf(true);
+        Boolean booleanFalse = Boolean.valueOf(false);
+
+        Assertions.assertNotNull(booleanTrue);
+        Assertions.assertNotNull(booleanFalse);
+        Assertions.assertTrue(booleanTrue);
+        Assertions.assertFalse(booleanFalse);
+    }
 }
