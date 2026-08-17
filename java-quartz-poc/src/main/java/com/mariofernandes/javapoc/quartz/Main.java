@@ -12,13 +12,17 @@ import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
 
+@SpringBootApplication
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public void run() throws SchedulerException {
+        // first example of scheduling a job with Quartz
         log.info("------- Initializing ----------------------");
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
@@ -55,9 +59,8 @@ public class Main {
         log.info("------- Shutdown Complete -----------------");
     }
 
-    public static void main(String[] args) throws SchedulerException {
+    static void main(String[] args) throws SchedulerException {
         System.out.println("=== Java - Quartz POC ===\n");
-        Main main = new Main();
-        main.run();
+        SpringApplication.run(Main.class, args);
     }
 }
