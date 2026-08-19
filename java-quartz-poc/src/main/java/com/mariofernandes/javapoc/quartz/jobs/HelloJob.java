@@ -16,7 +16,7 @@ public class HelloJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         // This method is called when the job is executed by the Quartz scheduler.
         log.info("Hello World! {} - {} - {}",
-                context.getJobDetail().getKey(), context.getJobDetail().getDescription(), LocalDateTime.now());
+                context.getTrigger().getKey(), context.getJobDetail().getKey(), LocalDateTime.now());
     }
 
 }

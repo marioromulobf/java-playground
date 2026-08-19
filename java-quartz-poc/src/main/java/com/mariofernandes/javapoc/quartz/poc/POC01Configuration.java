@@ -24,18 +24,49 @@ public class POC01Configuration {
     }
 
     @Bean
-    public Trigger helloTrigger() {
+    public Trigger helloTriggerA(JobDetail helloJobDetail) {
         // Define a Trigger that will fire the HelloJob at a regular interval.
         // The trigger is associated with the helloJobDetail defined above,
         // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
         // The schedule is defined to repeat every 5 seconds indefinitely.
         return TriggerBuilder.newTrigger()
-                .forJob(helloJobDetail())
-                .withIdentity("helloTrigger", "poc01")
+                .forJob(helloJobDetail)
+                .withIdentity("helloTrigger.A", "poc01")
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                         .withIntervalInSeconds(5)
                         .repeatForever())
+                .build();
+    }
+
+    @Bean
+    public Trigger helloTriggerB(JobDetail helloJobDetail) {
+        // Define a Trigger that will fire the HelloJob at a regular interval.
+        // The trigger is associated with the helloJobDetail defined above,
+        // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
+        // The schedule is defined to repeat every 5 seconds indefinitely.
+        return TriggerBuilder.newTrigger()
+                .forJob(helloJobDetail)
+                .withIdentity("helloTrigger.B", "poc01")
+                .startNow()
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(5)
+                        .withRepeatCount(2))
+                .build();
+    }
+
+    @Bean
+    public Trigger helloTriggerC(JobDetail helloJobDetail) {
+        // Define a Trigger that will fire the HelloJob at a regular interval.
+        // The trigger is associated with the helloJobDetail defined above,
+        // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
+        // The schedule is defined to repeat every 5 seconds indefinitely.
+        return TriggerBuilder.newTrigger()
+                .forJob(helloJobDetail)
+                .withIdentity("helloTrigger.C", "poc01")
+                .startNow()
+                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                        .withIntervalInSeconds(3))
                 .build();
     }
 }
