@@ -6,6 +6,7 @@ import org.quartz.JobDetail;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -24,7 +25,7 @@ public class POC01Configuration {
     }
 
     @Bean
-    public Trigger helloTriggerA(JobDetail helloJobDetail) {
+    public Trigger helloTriggerA(@Qualifier("helloJobDetail") JobDetail helloJobDetail) {
         // Define a Trigger that will fire the HelloJob at a regular interval.
         // The trigger is associated with the helloJobDetail defined above,
         // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
@@ -40,7 +41,7 @@ public class POC01Configuration {
     }
 
     @Bean
-    public Trigger helloTriggerB(JobDetail helloJobDetail) {
+    public Trigger helloTriggerB(@Qualifier("helloJobDetail") JobDetail helloJobDetail) {
         // Define a Trigger that will fire the HelloJob at a regular interval.
         // The trigger is associated with the helloJobDetail defined above,
         // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
@@ -56,7 +57,7 @@ public class POC01Configuration {
     }
 
     @Bean
-    public Trigger helloTriggerC(JobDetail helloJobDetail) {
+    public Trigger helloTriggerC(@Qualifier("helloJobDetail") JobDetail helloJobDetail) {
         // Define a Trigger that will fire the HelloJob at a regular interval.
         // The trigger is associated with the helloJobDetail defined above,
         // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
