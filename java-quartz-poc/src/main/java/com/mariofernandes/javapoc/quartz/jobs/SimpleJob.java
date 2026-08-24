@@ -17,9 +17,8 @@ public class SimpleJob implements Job {
         // This method is called when the job is executed by the Quartz scheduler.
         var triggerKey = context.getTrigger().getKey();
         var jobKey = context.getJobDetail().getKey();
-        var description = context.getJobDetail().getDescription();
 
-        log.info("ExecuteSimpleJob - {} - {} - {} - {}", triggerKey, jobKey, description, LocalDateTime.now());
+        log.info("P02.SimpleJob - {} - {} - {}", triggerKey, jobKey, LocalDateTime.now());
     }
 
 }

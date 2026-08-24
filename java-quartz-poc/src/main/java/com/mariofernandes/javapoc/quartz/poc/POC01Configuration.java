@@ -32,7 +32,7 @@ public class POC01Configuration {
         // The schedule is defined to repeat every 5 seconds indefinitely.
         return TriggerBuilder.newTrigger()
                 .forJob(helloJobDetail)
-                .withIdentity("helloTrigger.A", "poc01")
+                .withIdentity("helloTrigger.A.every5SecondsForever", "poc01")
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                         .withIntervalInSeconds(5)
@@ -48,7 +48,7 @@ public class POC01Configuration {
         // The schedule is defined to repeat every 5 seconds indefinitely.
         return TriggerBuilder.newTrigger()
                 .forJob(helloJobDetail)
-                .withIdentity("helloTrigger.B", "poc01")
+                .withIdentity("helloTrigger.B.every5SecondsEndIn3times", "poc01")
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                         .withIntervalInSeconds(5)
@@ -61,10 +61,10 @@ public class POC01Configuration {
         // Define a Trigger that will fire the HelloJob at a regular interval.
         // The trigger is associated with the helloJobDetail defined above,
         // has an identity of "helloTrigger" in the group "poc01", and is set to start immediately.
-        // The schedule is defined to repeat every 5 seconds indefinitely.
+        // The schedule is defined to repeat every 3 seconds indefinitely.
         return TriggerBuilder.newTrigger()
                 .forJob(helloJobDetail)
-                .withIdentity("helloTrigger.C", "poc01")
+                .withIdentity("helloTrigger.C.every3SecondsEndInOneTime", "poc01")
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                         .withIntervalInSeconds(3))
