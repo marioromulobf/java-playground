@@ -4,6 +4,8 @@ import org.quartz.Job;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
+
 public class CronJob implements Job {
     private static final Logger log = LoggerFactory.getLogger(CronJob.class);
 
@@ -16,6 +18,6 @@ public class CronJob implements Job {
         var scheduledFireTime = context.getScheduledFireTime();
         var actualFireTime = context.getFireTime();
 
-        log.info("P03.CronJob - {} - {} - {} - {} - {}", triggerKey, jobKey, scheduledFireTime, actualFireTime, java.time.LocalDateTime.now());
+        log.info("P03.CronJob - {} - {} - {} - {} - {}", triggerKey, jobKey, scheduledFireTime, actualFireTime, LocalDateTime.now());
     }
 }
