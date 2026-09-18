@@ -20,6 +20,7 @@
         <maven.compiler.release>25</maven.compiler.release>
         <junit.version>6.1.2</junit.version>
         <spring.boot.version>4.1.0</spring.boot.version>
+        <postgresql.version>42.7.13</postgresql.version>
     </properties>
 
     <dependencies>
@@ -35,6 +36,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
             <version>${spring.boot.version}</version>
+        </dependency>
+
+        <!-- jdbc -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency>
+
+        <!-- PostgreSQL JDBC Driver -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

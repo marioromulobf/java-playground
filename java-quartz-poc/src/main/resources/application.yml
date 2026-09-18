@@ -1,3 +1,18 @@
 spring:
   application:
     name: quartz-lab
+  datasource:
+    url: jdbc:postgresql://localhost:5432/quartz
+    username: quartz
+    password: quartz
+    driver-class-name: org.postgresql.Driver
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            useProperties: false
