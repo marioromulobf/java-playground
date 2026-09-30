@@ -8,8 +8,8 @@ spring:
     driver-class-name: org.postgresql.Driver
   quartz:
     job-store-type: jdbc
-    jdbc:
-      initialize-schema: always
+    #jdbc:
+    #  initialize-schema: always
     properties:
       org:
         quartz:

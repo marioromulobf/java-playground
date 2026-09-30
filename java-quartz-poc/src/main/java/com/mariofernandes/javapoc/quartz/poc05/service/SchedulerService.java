@@ -1,4 +1,4 @@
-package com.mariofernandes.javapoc.quartz.service;
+package com.mariofernandes.javapoc.quartz.poc05.service;
 
 import com.mariofernandes.javapoc.quartz.jobs.DynamicCronJob;
 import com.mariofernandes.javapoc.quartz.jobs.DynamicJob;
