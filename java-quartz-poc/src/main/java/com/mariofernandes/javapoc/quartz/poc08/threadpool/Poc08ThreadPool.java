@@ -2,12 +2,15 @@ package com.mariofernandes.javapoc.quartz.poc08.threadpool;
 
 import org.quartz.SchedulerConfigException;
 import org.quartz.spi.ThreadPool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 
 public class Poc08ThreadPool implements ThreadPool {
+    private static final Logger log = LoggerFactory.getLogger(Poc08ThreadPool.class);
     private boolean virtualThreads;
     private int threadCount = 10;
     private ExecutorService executor;
@@ -24,8 +27,10 @@ public class Poc08ThreadPool implements ThreadPool {
         availableThreads = new Semaphore(threadCount);
         if (virtualThreads) {
             executor = Executors.newVirtualThreadPerTaskExecutor();
+            log.info("Virtual thread pool started");
         } else {
             executor = Executors.newFixedThreadPool(threadCount);
+            log.info("Fixed thread pool started with {} threads", threadCount);
         }
     }
 

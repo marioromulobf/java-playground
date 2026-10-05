@@ -24,4 +24,4 @@ spring:
           threadPool:
             class: com.mariofernandes.javapoc.quartz.poc08.threadpool.Poc08ThreadPool
             threadCount: 10
-            virtualThreads: false
+            virtualThreads: true

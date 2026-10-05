@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Poc08SchedulerService {
     private static final Logger log = LoggerFactory.getLogger(Poc08SchedulerService.class);
-    private static final String POC08_GROUP = "Poc08JobGroup";
+    private static final String POC08_GROUP = "poc08";
     private final Scheduler scheduler;
 
     public Poc08SchedulerService(Scheduler scheduler) {
