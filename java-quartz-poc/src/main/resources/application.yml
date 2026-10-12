@@ -20,6 +20,12 @@ spring:
           jobStore:
             driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
             useProperties: false
+            isClustered: true
+            clusterCheckinInterval: 5000
+            misfireThreshold: 60000
+
+          scheduler:
+            instanceId: AUTO
 
           threadPool:
             class: com.mariofernandes.javapoc.quartz.poc08.threadpool.Poc08ThreadPool
