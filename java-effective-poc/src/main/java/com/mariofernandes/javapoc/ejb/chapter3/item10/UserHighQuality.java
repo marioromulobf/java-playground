@@ -50,6 +50,7 @@ public final class UserHighQuality {
 
     @Override
     public int hashCode() {
+        // it works but it is not the best implementation.
         return 666;
     }
 }
